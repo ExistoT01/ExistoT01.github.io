@@ -169,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/21/title/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/24/DEBUG%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -183,7 +183,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/11/21/title/" class="post-title-link" itemprop="url">机器数 真值 原码 反码 补码</a>
+            <a href="/2021/11/24/DEBUG%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">DEBUG命令</a>
         </h2>
 
         <div class="post-meta">
@@ -194,8 +194,105 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-11-21 11:35:25 / 修改时间：23:52:33" itemprop="dateCreated datePublished" datetime="2021-11-21T11:35:25+08:00">2021-11-21</time>
+              <time title="创建时间：2021-11-24 10:28:37 / 修改时间：14:34:18" itemprop="dateCreated datePublished" datetime="2021-11-24T10:28:37+08:00">2021-11-24</time>
             </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h1><p>cpu中寄存器用于存储内存中数据的物理地址</p>
+<h2 id="CS"><a href="#CS" class="headerlink" title="CS"></a>CS</h2><p>CS 为代码段寄存器，一般用于存放代码<br>通常和IP使用用于处理下一条执行的代码<br><code>cs:IP // 基地址：偏移地址</code><br>CS地址对应的数据，相当于c语言中的代码语句</p>
+<h2 id="DS"><a href="#DS" class="headerlink" title="DS"></a>DS</h2><p>DS 为数据段寄存器，一般用于存放数据<br>DS地址对应的数据，相当于c语言中的全局变量</p>
+<h2 id="SS"><a href="#SS" class="headerlink" title="SS"></a>SS</h2><h2 id="ES"><a href="#ES" class="headerlink" title="ES"></a>ES</h2><h1 id="DEBUG各命令"><a href="#DEBUG各命令" class="headerlink" title="DEBUG各命令"></a>DEBUG各命令</h1><h2 id="R命令"><a href="#R命令" class="headerlink" title="R命令"></a>R命令</h2><p>作用：观看和修改寄存器的值</p>
+<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202111241430794.png" alt="image-20211124112252095"></p>
+<p>可以使用R命令修改寄存器的值</p>
+<p>例如：将DS值改为000</p>
+<p>输入<code>R DS</code>，先返回DS当前地址，在“：”后输入新地址</p>
+<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202111241431867.png" alt="image-20211124112408187"></p>
+<h2 id="D命令"><a href="#D命令" class="headerlink" title="D命令"></a>D命令</h2><p>作用：显示内存区域的内容</p>
+<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202111241431599.png" alt="image-20211124104946980"></p>
+<p>最左边是内存的起始地址，中间以十六进制的形式显示内存值，最右边是以ASCII码的形式显示内存值。每行最多显示16个字节的内容</p>
+<h2 id="E命令"><a href="#E命令" class="headerlink" title="E命令"></a>E命令</h2><p>作用：改变内存单位的内容</p>
+<p>使用方式：<code>E [起始位置]</code></p>
+<p>在提示符“-”下输入以下命令：<code>E 1AF5:100</code></p>
+<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202111241431740.png" alt="image-20211124105356502"></p>
+<p>DEBUG首先显示[1AF5:0000]的内容00.，这时可以修改该字节的值。如果还要修改后续的内容，可以按空格键继续。当要跳过某个字节时，可以按连续的两个空格跳到后一个字节去</p>
+<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202111241431539.png" alt="image-20211124105526930"></p>
+<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202111241431795.png" alt="image-20211124105536540"></p>
+<h2 id="T命令"><a href="#T命令" class="headerlink" title="T命令"></a>T命令</h2><p>作用：执行汇编程序，单步跟踪</p>
+<p>使用方式：T命令的使用方式是T <code>[=地址] [指令数]</code>。如果忽略“地址”的话，T命令从CS:IP处开始运行。“指令数”是要单步执行的指令的数量。</p>
+<h2 id="U命令"><a href="#U命令" class="headerlink" title="U命令"></a>U命令</h2><p>作用：对机器代码反汇编显示</p>
+<p>使用方式：<code>U [范围]</code></p>
+<p>如果范围参数只输入了起始地址，则只对20H个字节的机器代码反汇编</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/21/%E6%9C%BA%E5%99%A8%E6%95%B0%20%E7%9C%9F%E5%80%BC%20%E5%8E%9F%E7%A0%81%20%E5%8F%8D%E7%A0%81%20%E8%A1%A5%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Existo">
+      <meta itemprop="description" content="Hello Nerd">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Existo's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/21/%E6%9C%BA%E5%99%A8%E6%95%B0%20%E7%9C%9F%E5%80%BC%20%E5%8E%9F%E7%A0%81%20%E5%8F%8D%E7%A0%81%20%E8%A1%A5%E7%A0%81/" class="post-title-link" itemprop="url">机器数 真值 原码 反码 补码</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-21 11:35:25" itemprop="dateCreated datePublished" datetime="2021-11-21T11:35:25+08:00">2021-11-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-22 22:52:46" itemprop="dateModified" datetime="2021-11-22T22:52:46+08:00">2021-11-22</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -237,6 +334,11 @@
 <p>即</p>
 <p><code>[-127 , 127]</code></p>
 <p>原码是人脑最容易理解和计算的表示方式</p>
+<h3 id="源码定点小数"><a href="#源码定点小数" class="headerlink" title="源码定点小数"></a>源码定点小数</h3><p>表示范围：**- ( 1 - 2^-n^ ) ~ + ( 1 - 2^-n^ )**</p>
+<p>8位字长原码表示的有符号定点小数真值范围：</p>
+<p><code>1.1111111b～0.1111111b</code></p>
+<p>即：</p>
+<p><code>-(127d/128)d～+(127/128）d</code></p>
 <h2 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h2><p>反码的表示方法是:</p>
 <p>正数的反码是其本身</p>
 <p>负数的反码是在其原码的基础上, <strong>符号位不变，其余各个位取反</strong>.</p>
@@ -249,6 +351,8 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[+1] = [00000001]原 = [00000001]反 = [00000001]补</span><br><span class="line"></span><br><span class="line">[-1] = [10000001]原 = [11111110]反 = [11111111]补</span><br></pre></td></tr></table></figure>
 
 <p>对于负数, 补码表示方式也是人脑无法直观看出其数值的. 通常也需要转换成原码在计算其数值.</p>
+<h3 id="移码"><a href="#移码" class="headerlink" title="移码"></a>移码</h3><p>定义：移码（又叫增码或偏置码）通常用于表示浮点数的阶码，其表示形式与补码相似，<strong>只是其符号位用“1”表示正数，用“0”表示负数</strong>，数值部分与补码相同。</p>
+<p>缘由：用补码表示阶码的时候，当阶码无限小，产生了下溢的时候，阶码变成了0，那么这个浮点数的值变为了1。而实际上这个数是无限接近于零的。那么我们就需要取出其中的 “-0“ 值作为机器零。</p>
 <h2 id="源码、反码、补码的意义"><a href="#源码、反码、补码的意义" class="headerlink" title="源码、反码、补码的意义"></a>源码、反码、补码的意义</h2><p>在开始深入学习前, 我的学习建议是先”死记硬背”上面的原码, 反码和补码的表示方式以及计算方法.</p>
 <p>现在我们知道了计算机可以有三种编码方式表示一个数. 对于正数因为三种编码方式的结果都相同:</p>
 <p><code>[+1] = [00000001]原 = [00000001]反 = [00000001]补</code></p>
@@ -1041,82 +1145,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/07/%E8%BF%91%E6%9D%A5%E7%9A%84%E4%B8%80%E4%BA%9B%E7%8A%B6%E5%86%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Existo">
-      <meta itemprop="description" content="Hello Nerd">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Existo's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/07/%E8%BF%91%E6%9D%A5%E7%9A%84%E4%B8%80%E4%BA%9B%E7%8A%B6%E5%86%B5/" class="post-title-link" itemprop="url">近来的一些状况</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-07 09:44:52" itemprop="dateCreated datePublished" datetime="2021-11-07T09:44:52+08:00">2021-11-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-08 13:00:54" itemprop="dateModified" datetime="2021-11-08T13:00:54+08:00">2021-11-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%97%A5%E5%BF%97/" itemprop="url" rel="index"><span itemprop="name">日志</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近发生了很多很多事情，让我感觉我的人生充满戏剧性，先码一下，把程序赶完再回来写</p>
-<p><strong>—11-08—</strong></p>
-<p>累，真的很累，当初想让自己忙起来，这样就可以不去想某些人，某些事，能让自己从痛苦中摆脱出来，但是现在唯一的感觉就是累，漫无目的的累，不明所以的累，在忙完自己所认定的一件事以后，收获的不是满足，反而是空虚，以及不知道该做什么的无奈。感觉有好多事要做，不知道从哪里下手，不知道该听谁的话，我只是觉得自己像一台机器，大脑中只存放指令，除此之外找不到像人的证据了。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1188,7 +1216,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1201,7 +1229,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
