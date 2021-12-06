@@ -76,7 +76,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -192,10 +196,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-12-06 23:31:12 / 修改时间：23:34:04" itemprop="dateCreated datePublished" datetime="2021-12-06T23:31:12+08:00">2021-12-06</time>
+              <time title="创建时间：2021-12-06 23:31:12" itemprop="dateCreated datePublished" datetime="2021-12-06T23:31:12+08:00">2021-12-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-07 00:15:11" itemprop="dateModified" datetime="2021-12-07T00:15:11+08:00">2021-12-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -220,6 +230,8 @@
           <p>把图床从github换成了 SM.MS<br>github不挂梯子有时候看不见图，挂梯子加载博客卡的一批<br>我懒得设白名单，好像之前上传到github上的图也改不了了<br>who cares?</p>
 <p>测试用图</p>
 <p><img src="https://s2.loli.net/2021/12/06/VvsfAHRFx95aiZj.png" alt="image-20211206233346806"></p>
+<p>结果我还是把之前的图片替换了，谁叫我闲呢</p>
+<p>我顺便更新了hexo的markdown渲染器，现在文章可以用latex的公式了</p>
 
       
     </div>
@@ -262,10 +274,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-12-06 17:05:09 / 修改时间：18:58:40" itemprop="dateCreated datePublished" datetime="2021-12-06T17:05:09+08:00">2021-12-06</time>
+              <time title="创建时间：2021-12-06 17:05:09" itemprop="dateCreated datePublished" datetime="2021-12-06T17:05:09+08:00">2021-12-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-07 00:06:20" itemprop="dateModified" datetime="2021-12-07T00:06:20+08:00">2021-12-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -290,7 +308,7 @@
           <h1 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h1><p>在Debug命令中我查了一些寄存器的相关知识，这篇文章仔细分析一下部分寄存器</p>
 <h2 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h2><p>AX BX CX DX</p>
 <p>用于存放数据</p>
-<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202112061708213.png" alt="image-20211206170750514"></p>
+<p><img src="https://s2.loli.net/2021/12/07/iZ8Wo146ucUtgvV.png" alt="image-20211207000546422"></p>
 <p>可见有2个字节byte</p>
 <p>2byte = 16bit ，所以都为<strong>16位寄存器</strong></p>
 <p>范围 <code>0 ~ 65535</code></p>
@@ -301,41 +319,45 @@
 <p><code>DX = DH + DL</code></p>
 <p>高低位寄存器运算是<strong>互相独立</strong>的，也就是说<strong>低位寄存器运算的溢出结果不会进入到高位</strong></p>
 <h2 id="地址寄存器"><a href="#地址寄存器" class="headerlink" title="地址寄存器"></a>地址寄存器</h2><p>DS ES SS CS</p>
-<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202112061733282.png" alt="image-20211206173313104"></p>
+<p><img src="https://s2.loli.net/2021/12/07/cDkRY5UEpfn7X3g.png" alt="image-20211207000610319"></p>
 <p>左为 <strong>段地址</strong>，右为 <strong>偏移地址</strong></p>
 <p><code>段地址 : 偏移地址</code></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">段地址寄存器</th>
-<th align="center">偏移地址寄存器</th>
+<th style="text-align:center">段地址寄存器</th>
+<th style="text-align:center">偏移地址寄存器</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">DS</td>
-<td align="center">SP</td>
+<tbody>
+<tr>
+<td style="text-align:center">DS</td>
+<td style="text-align:center">SP</td>
 </tr>
 <tr>
-<td align="center">ES</td>
-<td align="center">BP</td>
+<td style="text-align:center">ES</td>
+<td style="text-align:center">BP</td>
 </tr>
 <tr>
-<td align="center">SS</td>
-<td align="center">SI</td>
+<td style="text-align:center">SS</td>
+<td style="text-align:center">SI</td>
 </tr>
 <tr>
-<td align="center">CS</td>
-<td align="center">DI</td>
+<td style="text-align:center">CS</td>
+<td style="text-align:center">DI</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center">IP</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">IP</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center">BX</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">BX</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><em>物理地址 = 基础地址 + 偏移地址</em></p>
 <p><em>物理地址 = 段地址 × 16(10H) + 偏移地址</em></p>
 <h2 id="不同尺寸的数据"><a href="#不同尺寸的数据" class="headerlink" title="不同尺寸的数据"></a>不同尺寸的数据</h2><h3 id="字节型数据"><a href="#字节型数据" class="headerlink" title="字节型数据"></a>字节型数据</h3><p>1 byte  8bit - 8位寄存器中</p>
@@ -385,10 +407,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-12-05 16:41:28 / 修改时间：20:19:54" itemprop="dateCreated datePublished" datetime="2021-12-05T16:41:28+08:00">2021-12-05</time>
+              <time title="创建时间：2021-12-05 16:41:28" itemprop="dateCreated datePublished" datetime="2021-12-05T16:41:28+08:00">2021-12-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-07 00:03:54" itemprop="dateModified" datetime="2021-12-07T00:03:54+08:00">2021-12-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -767,7 +795,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-29 09:32:36" itemprop="dateModified" datetime="2021-11-29T09:32:36+08:00">2021-11-29</time>
+                <time title="修改时间：2021-12-07 00:12:57" itemprop="dateModified" datetime="2021-12-07T00:12:57+08:00">2021-12-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1217,6 +1245,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
