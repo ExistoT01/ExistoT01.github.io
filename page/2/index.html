@@ -169,6 +169,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/12/C-%E6%8E%A5%E5%8F%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Existo">
+      <meta itemprop="description" content="Hello Nerd">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Existo's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/11/12/C-%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">C#接口</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-12 09:58:17" itemprop="dateCreated datePublished" datetime="2021-11-12T09:58:17+08:00">2021-11-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-25 16:45:17" itemprop="dateModified" datetime="2021-11-25T16:45:17+08:00">2021-11-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="C-接口（Interface）"><a href="#C-接口（Interface）" class="headerlink" title="C#接口（Interface）"></a>C#接口（Interface）</h1><ul>
+<li><p>C#中的接口与抽象类十分类似，但是接口大多只是用在当<strong>只有少数方法由基类声明由派生类实现</strong>时</p>
+</li>
+<li><p>接口<strong>本身并不实现任何功能</strong></p>
+</li>
+<li><p>接口定义了<strong>属性、方法和事件</strong>，这些都是接口的成员。接口<strong>只包含了成员的声明</strong>。成员的定义是派生类的责任。</p>
+</li>
+<li><p>与抽象类一样，接口不能被<strong>实例化</strong>。</p>
+</li>
+</ul>
+<h2 id="接口的定义"><a href="#接口的定义" class="headerlink" title="接口的定义"></a>接口的定义</h2><ul>
+<li><p><strong>关键字</strong> <code>interface</code></p>
+</li>
+<li><p>默认为 <strong>public</strong></p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface myInterface()</span><br><span class="line">&#123;</span><br><span class="line">	void MethodToImplement();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="接口的继承"><a href="#接口的继承" class="headerlink" title="接口的继承"></a>接口的继承</h2><p>接口的继承与抽象类的继承类似</p>
+<p>如果一个接口继承其他接口，那么实现类或结构就需要实现所有接口的成员。</p>
+<p>继承的接口方法不用像抽象类用<code>override</code>覆写，重载即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class InterfaceImplementer: myInterface</span><br><span class="line">&#123;</span><br><span class="line">	//code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义泛型接口（Generic-Interface）"><a href="#自定义泛型接口（Generic-Interface）" class="headerlink" title="自定义泛型接口（Generic Interface）"></a>自定义泛型接口（Generic Interface）</h3><p>泛型接口类似于C++中的模板类</p>
+<p>定义泛型接口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">interface IMyInterface&lt;T&gt; //定义具有一个类型参数的泛型接口</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    void MyFunc(T obj); //声明参数为T的方法</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>声明泛型类继承自泛型接口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class MyClass&lt;T&gt; : IMyInterface&lt;T&gt;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    public void MyFunc(T obj)</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        //do…</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实例化：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//指定类型参数为string类型，创角泛型类的实例赋值给泛型接口的变量</span><br><span class="line">IMyInterface&lt;string&gt; iMyInterface = new MyClass&lt;string&gt;();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>下程序创建了一个泛型接口用于打印从参数列表获取的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">//创建泛型接口</span><br><span class="line">interface IMyInterface&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line">    void printMsg(T str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//声明泛型类继承泛型接口</span><br><span class="line">public class printClass&lt;T&gt; : IMyInterface&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line">    public void printMsg(T str)</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static void Main(string[] args)</span><br><span class="line">&#123;</span><br><span class="line">    //实例化打印string类型的泛型类</span><br><span class="line">    IMyInterface&lt;string&gt; strInterface = new printClass&lt;string&gt;();</span><br><span class="line"></span><br><span class="line">    strInterface.printMsg(&quot;That&#x27;s right&quot;);</span><br><span class="line"></span><br><span class="line">    //实例化打印int类型的泛型类</span><br><span class="line">    IMyInterface&lt;int&gt; intInterface = new printClass&lt;int&gt;();</span><br><span class="line"></span><br><span class="line">    intInterface.printMsg(605);</span><br><span class="line"></span><br><span class="line">    //实例化打印double类型的泛型类</span><br><span class="line">    IMyInterface&lt;double&gt; doubleInterface = new printClass&lt;double&gt;();</span><br><span class="line"></span><br><span class="line">    doubleInterface.printMsg(2.333);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/10/%E5%AD%A4%E7%8B%AC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -960,7 +1071,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
