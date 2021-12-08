@@ -229,13 +229,10 @@
 <li>parameter list : 参数列表</li>
 </ul>
 <p>例如 :<br><code>public delegate int MyDelegate (string s);</code></p>
-<p>该委托可被用于引用任何一个<strong>带有一个单一的 <em>string</em> 参数的方法</strong>，并返回一个 <em><strong>int</strong></em> 类型变量。</p>
+<p>该委托可被用于引用任何一个<strong>带有一个单一的 <em>string</em> 参数的方法</strong>，并返回一个 <strong><em>int</em></strong> 类型变量。</p>
 <h2 id="委托的实例化"><a href="#委托的实例化" class="headerlink" title="委托的实例化"></a>委托的实例化</h2><p>委托对象使用 <strong>new</strong> 关键字来创建，创建时<strong>委托的参数是一个特定的函数</strong>，这个特定的函数<strong>不用写参数</strong></p>
 <p>例如 : </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public delegate int MyDelegate (string s);</span><br><span class="line">...</span><br><span class="line">MyDelegate md1 = new MyDelegate(function1);</span><br><span class="line">MyDelegate md2 = new MyDelegate(function2);</span><br></pre></td></tr></table></figure>
-
-
-
 
     </div>
 

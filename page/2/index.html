@@ -224,12 +224,9 @@
           <h1 id="C-事件（Event）"><a href="#C-事件（Event）" class="headerlink" title="C#事件（Event）"></a>C#事件（Event）</h1><p>事件即一个操作比较像是 if(true){} 括号中的内容，只不过换成了函数<br>事件在一个类内定义，通常把这个类称为<strong>发布器</strong>，即<em>发布器类</em></p>
 <h2 id="基于委托定义事件"><a href="#基于委托定义事件" class="headerlink" title="基于委托定义事件"></a>基于委托定义事件</h2><p>即为先定义一个委托，再从这个委托的基础上定义一个事件<br>例如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class EventClass//发布器类</span><br><span class="line">&#123;</span><br><span class="line">    //定义委托</span><br><span class="line">    public delegate void FunctionHandler();</span><br><span class="line">    </span><br><span class="line">    //基于委托定义事件</span><br><span class="line">    public event FunctionHandler Function;</span><br><span class="line">    </span><br><span class="line">    //定义触发函数</span><br><span class="line">    public void TriggeredFunction()</span><br><span class="line">    &#123;</span><br><span class="line">        if(条件满足)</span><br><span class="line">            Function;</span><br><span class="line">        else</span><br><span class="line">            ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;	</span><br><span class="line"></span><br><span class="line">public class SubscribeClass//订阅器类</span><br><span class="line">&#123;</span><br><span class="line">    //注意此函数返回值类型一定要满足委托的参数类型</span><br><span class="line">    public void functionForTrigged();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
 <h2 id="实例化与注册"><a href="#实例化与注册" class="headerlink" title="实例化与注册"></a>实例化与注册</h2><p>在main函数中实例化，并将订阅器实例注册到事件中</p>
 <p>注册时使用 <strong>“+=”</strong> 符号</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">static void Main(string[] args)</span><br><span class="line">&#123;</span><br><span class="line">    //实例化</span><br><span class="line">    EventClass e = new EventClass();</span><br><span class="line">    SubscribeClass s = new SubscribeClass();</span><br><span class="line">    </span><br><span class="line">    //注册</span><br><span class="line">    e.Function += new EventClass.FunctionHandler(s.functionForTrigged);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -302,13 +299,10 @@
 <li>parameter list : 参数列表</li>
 </ul>
 <p>例如 :<br><code>public delegate int MyDelegate (string s);</code></p>
-<p>该委托可被用于引用任何一个<strong>带有一个单一的 <em>string</em> 参数的方法</strong>，并返回一个 <em><strong>int</strong></em> 类型变量。</p>
+<p>该委托可被用于引用任何一个<strong>带有一个单一的 <em>string</em> 参数的方法</strong>，并返回一个 <strong><em>int</em></strong> 类型变量。</p>
 <h2 id="委托的实例化"><a href="#委托的实例化" class="headerlink" title="委托的实例化"></a>委托的实例化</h2><p>委托对象使用 <strong>new</strong> 关键字来创建，创建时<strong>委托的参数是一个特定的函数</strong>，这个特定的函数<strong>不用写参数</strong></p>
 <p>例如 : </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public delegate int MyDelegate (string s);</span><br><span class="line">...</span><br><span class="line">MyDelegate md1 = new MyDelegate(function1);</span><br><span class="line">MyDelegate md2 = new MyDelegate(function2);</span><br></pre></td></tr></table></figure>
-
-
-
 
       
     </div>
@@ -399,25 +393,14 @@
 </li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface myInterface()</span><br><span class="line">&#123;</span><br><span class="line">	void MethodToImplement();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="接口的继承"><a href="#接口的继承" class="headerlink" title="接口的继承"></a>接口的继承</h2><p>接口的继承与抽象类的继承类似</p>
 <p>如果一个接口继承其他接口，那么实现类或结构就需要实现所有接口的成员。</p>
 <p>继承的接口方法不用像抽象类用<code>override</code>覆写，重载即可。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class InterfaceImplementer: myInterface</span><br><span class="line">&#123;</span><br><span class="line">	//code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="自定义泛型接口（Generic-Interface）"><a href="#自定义泛型接口（Generic-Interface）" class="headerlink" title="自定义泛型接口（Generic Interface）"></a>自定义泛型接口（Generic Interface）</h3><p>泛型接口类似于C++中的模板类</p>
-<p>定义泛型接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">interface IMyInterface&lt;T&gt; //定义具有一个类型参数的泛型接口</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    void MyFunc(T obj); //声明参数为T的方法</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>声明泛型类继承自泛型接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class MyClass&lt;T&gt; : IMyInterface&lt;T&gt;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    public void MyFunc(T obj)</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        //do…</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实例化：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//指定类型参数为string类型，创角泛型类的实例赋值给泛型接口的变量</span><br><span class="line">IMyInterface&lt;string&gt; iMyInterface = new MyClass&lt;string&gt;();</span><br></pre></td></tr></table></figure>
-
-
-
+<p>定义泛型接口：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">interface IMyInterface&lt;T&gt; //定义具有一个类型参数的泛型接口</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    void MyFunc(T obj); //声明参数为T的方法</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>声明泛型类继承自泛型接口：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class MyClass&lt;T&gt; : IMyInterface&lt;T&gt;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    public void MyFunc(T obj)</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        //do…</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>实例化：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//指定类型参数为string类型，创角泛型类的实例赋值给泛型接口的变量</span><br><span class="line">IMyInterface&lt;string&gt; iMyInterface = new MyClass&lt;string&gt;();</span><br></pre></td></tr></table></figure></p>
 <p>下程序创建了一个泛型接口用于打印从参数列表获取的信息</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">//创建泛型接口</span><br><span class="line">interface IMyInterface&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line">    void printMsg(T str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//声明泛型类继承泛型接口</span><br><span class="line">public class printClass&lt;T&gt; : IMyInterface&lt;T&gt;</span><br><span class="line">&#123;</span><br><span class="line">    public void printMsg(T str)</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static void Main(string[] args)</span><br><span class="line">&#123;</span><br><span class="line">    //实例化打印string类型的泛型类</span><br><span class="line">    IMyInterface&lt;string&gt; strInterface = new printClass&lt;string&gt;();</span><br><span class="line"></span><br><span class="line">    strInterface.printMsg(&quot;That&#x27;s right&quot;);</span><br><span class="line"></span><br><span class="line">    //实例化打印int类型的泛型类</span><br><span class="line">    IMyInterface&lt;int&gt; intInterface = new printClass&lt;int&gt;();</span><br><span class="line"></span><br><span class="line">    intInterface.printMsg(605);</span><br><span class="line"></span><br><span class="line">    //实例化打印double类型的泛型类</span><br><span class="line">    IMyInterface&lt;double&gt; doubleInterface = new printClass&lt;double&gt;();</span><br><span class="line"></span><br><span class="line">    doubleInterface.printMsg(2.333);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -650,105 +633,126 @@
 </ul>
 <h2 id="按位与-amp"><a href="#按位与-amp" class="headerlink" title="按位与 &amp;"></a>按位与 &amp;</h2><p><strong>同时为1结果才为1，其余都是0</strong></p>
 <p>真值表:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">&amp;</th>
-<th align="center">0</th>
-<th align="center">1</th>
+<th style="text-align:center">&amp;</th>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="按位或"><a href="#按位或" class="headerlink" title="按位或 |"></a>按位或 |</h2><p><strong>只要有1，结果就是1</strong></p>
 <p>真值表:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">|</th>
-<th align="center">0</th>
-<th align="center">1</th>
+<th style="text-align:center">\</th>
+<th style="text-align:center"></th>
+<th style="text-align:center">0</th>
+<th>1</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">1</td>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="按位异或"><a href="#按位异或" class="headerlink" title="按位异或 ^"></a>按位异或 ^</h2><p><strong>不同为1，相同为0</strong></p>
 <p>真值表:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">^</th>
-<th align="center">0</th>
-<th align="center">1</th>
+<th style="text-align:center">^</th>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">1</td>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="逻辑取反"><a href="#逻辑取反" class="headerlink" title="逻辑取反 !"></a>逻辑取反 !</h2><p><strong>当初写c++最常见的，对所有不为0的数结果为0，所有的0结果为1</strong></p>
 <p>真值表:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">操作符</th>
-<th align="center">0</th>
-<th align="center">1</th>
-<th align="center">2</th>
-<th align="center">……</th>
-<th align="center">n</th>
+<th style="text-align:center">操作符</th>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">……</th>
+<th style="text-align:center">n</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">！</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
+<tbody>
+<tr>
+<td style="text-align:center">！</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="按位取反"><a href="#按位取反" class="headerlink" title="按位取反 ~"></a>按位取反 ~</h2><p><strong>对每一位二进制位进行取反</strong></p>
 <p>真值表:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="center">操作符</th>
-<th align="center">0</th>
-<th align="center">1</th>
+<th style="text-align:center">操作符</th>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">~</td>
-<td align="center">1</td>
-<td align="center">0</td>
+<tbody>
+<tr>
+<td style="text-align:center">~</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 
       
     </div>
@@ -823,8 +827,7 @@
 
       
           <ol>
-<li><p>阅读理解</p>
-<ul>
+<li>阅读理解<ul>
 <li>快速阅读（阅读教程1-3）</li>
 <li>选词填空（综合教程1-3）</li>
 <li>深度阅读（2篇，1篇来自阅读教材1-3）</li>
@@ -840,8 +843,7 @@
 <li>一共6篇</li>
 </ul>
 </li>
-<li><p>听力<br>U校园重点内容做一遍</p>
-</li>
+<li>听力<br>U校园重点内容做一遍</li>
 </ol>
 <ul>
 <li>Unit 3<ul>
@@ -1004,7 +1006,7 @@
 
       
           <p>最近发生了很多很多事情，让我感觉我的人生充满戏剧性，先码一下，把程序赶完再回来写</p>
-<p><strong>—11-08—</strong></p>
+<p><strong>—-11-08—-</strong></p>
 <p>累，真的很累，当初想让自己忙起来，这样就可以不去想某些人，某些事，能让自己从痛苦中摆脱出来，但是现在唯一的感觉就是累，漫无目的的累，不明所以的累，在忙完自己所认定的一件事以后，收获的不是满足，反而是空虚，以及不知道该做什么的无奈。感觉有好多事要做，不知道从哪里下手，不知道该听谁的话，我只是觉得自己像一台机器，大脑中只存放指令，除此之外找不到像人的证据了。</p>
 
       
