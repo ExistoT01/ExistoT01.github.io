@@ -22,19 +22,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Hello Nerd">
-<meta property="og:type" content="website">
-<meta property="og:title" content="日历">
-<meta property="og:url" content="http://example.com/schedule/index.html">
+  <meta name="description" content="图的矩阵表示关联矩阵 M(D) M(G)有向图的关联矩阵无环有向图$D&#x3D;, V&#x3D;{v1,v2,…,vp},E&#x3D;{e1,e2,…,eq}$ $p×q$ 阶矩阵$M(D)&#x3D;(m_{ij}) _{p×q}$,其中 $m_{ij} &#x3D; \begin{cases}1 &amp; \text{若vi是ej的起点}\\-1 &amp; \text{若vi是ej的终点}\\0 &amp; \text{若vi不关联">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图的矩阵表示">
+<meta property="og:url" content="http://example.com/2021/12/15/%E5%9B%BE%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA/index.html">
 <meta property="og:site_name" content="Existo&#39;s Blog">
-<meta property="og:description" content="Hello Nerd">
+<meta property="og:description" content="图的矩阵表示关联矩阵 M(D) M(G)有向图的关联矩阵无环有向图$D&#x3D;, V&#x3D;{v1,v2,…,vp},E&#x3D;{e1,e2,…,eq}$ $p×q$ 阶矩阵$M(D)&#x3D;(m_{ij}) _{p×q}$,其中 $m_{ij} &#x3D; \begin{cases}1 &amp; \text{若vi是ej的起点}\\-1 &amp; \text{若vi是ej的终点}\\0 &amp; \text{若vi不关联">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-11-07T00:56:43.000Z">
-<meta property="article:modified_time" content="2021-11-07T00:59:32.842Z">
+<meta property="article:published_time" content="2021-12-15T05:37:03.000Z">
+<meta property="article:modified_time" content="2021-12-18T12:17:00.079Z">
 <meta property="article:author" content="Existo">
+<meta property="article:tag" content="图论">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/schedule/">
+<link rel="canonical" href="http://example.com/2021/12/15/%E5%9B%BE%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA/">
 
 
 <script id="page-configurations">
@@ -42,13 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>日历 | Existo's Blog
-</title>
+  <title>图的矩阵表示 | Existo's Blog</title>
   
 
 
@@ -169,200 +169,108 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">日历
-</h1>
-
-<div class="post-meta">
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/15/%E5%9B%BE%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA/">
 
-</div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Existo">
+      <meta itemprop="description" content="Hello Nerd">
+    </span>
 
-</header>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Existo's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图的矩阵表示
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-15 13:37:03" itemprop="dateCreated datePublished" datetime="2021-12-15T13:37:03+08:00">2021-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-18 20:17:00" itemprop="dateModified" datetime="2021-12-18T20:17:00+08:00">2021-12-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-      
-      
-      <div class="post-body">
-          <div class="event-list">
+        <h1 id="图的矩阵表示"><a href="#图的矩阵表示" class="headerlink" title="图的矩阵表示"></a>图的矩阵表示</h1><h2 id="关联矩阵-M-D-M-G"><a href="#关联矩阵-M-D-M-G" class="headerlink" title="关联矩阵 M(D) M(G)"></a>关联矩阵 M(D) M(G)</h2><h3 id="有向图的关联矩阵"><a href="#有向图的关联矩阵" class="headerlink" title="有向图的关联矩阵"></a>有向图的关联矩阵</h3><p>无环有向图$D=<V,E>, V={v1,v2,…,vp},E={e1,e2,…,eq}$</p>
+<p>$p×q$ 阶矩阵$M(D)=(m_{ij}) _{p×q}$,其中</p>
+<p>$m_{ij} = \begin{cases}<br>1 &amp; \text{若vi是ej的起点}\\<br>-1 &amp; \text{若vi是ej的终点}\\<br>0 &amp; \text{若vi不关联ej}<br>\end{cases}$</p>
+<p>称M(D)为G的<strong>关联矩阵</strong></p>
+<h3 id="无向图的关联矩阵"><a href="#无向图的关联矩阵" class="headerlink" title="无向图的关联矩阵"></a>无向图的关联矩阵</h3><p>无环无向图$G=<V,E>,V={v1,v2,…,vp},E={e1,e2,…,eq}$</p>
+<p>则矩阵$M(G)=[m_{ij}] _{p×q}$,其中</p>
+<p>$m_{ij} = \begin{cases}<br>1 &amp; \text{若vi关联ej}\\<br>0 &amp; \text{若vi不关联ej}\\<br>\end{cases}$</p>
+<p>称M(G)为<strong>关联矩阵</strong></p>
+<h2 id="邻接矩阵-A-D-A-G"><a href="#邻接矩阵-A-D-A-G" class="headerlink" title="邻接矩阵 A(D) A(G)"></a>邻接矩阵 A(D) A(G)</h2><h2 id="可达矩阵-P-D-P-G"><a href="#可达矩阵-P-D-P-G" class="headerlink" title="可达矩阵 P(D) P(G)"></a>可达矩阵 P(D) P(G)</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag"># 图论</a>
           </div>
-          <script>
-(function() {
-  // Initialization
-  var calendar = {
-    orderBy     : 'startTime',
-    showLocation: false,
-    offsetMax   : 72,
-    offsetMin   : 4,
-    showDeleted : false,
-    singleEvents: true,
-    maxResults  : 250
-  };
-
-  // Read config form theme config file
-  Object.assign(calendar, {"calendar_id":"<required>","api_key":"<required>","orderBy":"startTime","offsetMax":24,"offsetMin":4,"showDeleted":false,"singleEvents":true,"maxResults":250});
-
-  var now = new Date();
-  var timeMax = new Date();
-  var timeMin = new Date();
-
-  timeMax.setHours(now.getHours() + calendar.offsetMax);
-  timeMin.setHours(now.getHours() - calendar.offsetMin);
-
-  // Build URL
-  const params = {
-    key         : calendar.api_key,
-    orderBy     : calendar.orderBy,
-    timeMax     : timeMax.toISOString(),
-    timeMin     : timeMin.toISOString(),
-    showDeleted : calendar.showDeleted,
-    singleEvents: calendar.singleEvents,
-    maxResults  : calendar.maxResults
-  };
-
-  var request_url = 'https://www.googleapis.com/calendar/v3/calendars/' + calendar.calendar_id + '/events?' + Object.entries(params).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-
-  fetchData();
-  var fetchDataTimer = setInterval(fetchData, 60000);
-  window.addEventListener('pjax:send', () => {
-    clearInterval(fetchDataTimer);
-  });
-
-  function fetchData() {
-    var eventList = document.querySelector('.event-list');
-    if (!eventList) return;
-
-    fetch(request_url).then(response => {
-      return response.json();
-    }).then(data => {
-      if (data.items.length === 0) {
-        eventList.innerHTML = '<hr>';
-        return;
-      }
-      // Clean the event list
-      eventList.innerHTML = '';
-      var prevEnd = 0; // used to decide where to insert an <hr>
-
-      data.items.forEach(event => {
-        // Parse data
-        var utc   = new Date().getTimezoneOffset() * 60000;
-        var start = event.start.dateTime = new Date(event.start.dateTime || (new Date(event.start.date).getTime() + utc));
-        var end   = event.end.dateTime = new Date(event.end.dateTime || (new Date(event.end.date).getTime() + utc));
-
-        tense = judgeTense(now, start, end); // 0:now 1:future -1:past
-
-        if (tense === 1 && prevEnd < now) {
-          eventList.innerHTML += '<hr>';
-        }
-
-        eventDOM = buildEventDOM(tense, event);
-        eventList.innerHTML += eventDOM;
-
-        prevEnd = end;
-      });
-    });
-  }
-
-  function getRelativeTime(current, previous) {
-    var msPerMinute = 60 * 1000;
-    var msPerHour = msPerMinute * 60;
-    var msPerDay = msPerHour * 24;
-    var msPerMonth = msPerDay * 30;
-    var msPerYear = msPerDay * 365;
-
-    var elapsed = current - previous;
-    var tense = elapsed > 0 ? 'ago' : 'later';
-
-    elapsed = Math.abs(elapsed);
-
-    if      ( elapsed < msPerHour  ) {
-      return Math.round(elapsed / msPerMinute) + ' minutes ' + tense;
-    }
-    else if ( elapsed < msPerDay   ) {
-      return Math.round(elapsed / msPerHour) + ' hours ' + tense;
-    }
-    else if ( elapsed < msPerMonth ) {
-      return 'about ' + Math.round(elapsed / msPerDay) + ' days ' + tense;
-    }
-    else if ( elapsed < msPerYear  ) {
-      return 'about ' + Math.round(elapsed / msPerMonth) + ' months ' + tense;
-    }
-    else {
-      return 'about' + Math.round(elapsed / msPerYear) + ' years' + tense;
-    }
-  }
-
-  function judgeTense(now, eventStart, eventEnd) {
-    if      (eventEnd   < now) { return -1; }
-    else if (eventStart > now) { return  1; }
-    else                       { return  0; }
-  }
-
-  function buildEventDOM(tense, event) {
-    var tenseClass = '';
-    var start      = event.start.dateTime;
-    var end        = event.end.dateTime;
-    switch(tense) {
-      case 0 : // now
-        tenseClass = 'event-now';
-        break;
-      case 1 : // future
-        tenseClass = 'event-future';
-        break;
-      case -1: // past
-        tenseClass = 'event-past';
-        break;
-      default:
-        throw 'Time data error';
-    }
-    var durationFormat = {
-      weekday: 'short',
-      hour   : '2-digit',
-      minute : '2-digit'
-    };
-    var relativeTimeStr = (tense === 0) ? 'NOW' : getRelativeTime(now, start);
-    var durationStr = start.toLocaleTimeString([], durationFormat) + ' - ' + end.toLocaleTimeString([], durationFormat);
-
-    var locationDOM = '';
-    if (calendar.showLocation && event.location) {
-      locationDOM = '<span class="event-location event-details">' + event.location + '</span>';
-    }
-
-    var eventContent = `<div class="event ${tenseClass}">
-        <h2 class="event-summary">
-          ${event.summary}
-          <span class="event-relative-time">${relativeTimeStr}</span>
-        </h2>
-        ${locationDOM}
-        <span class="event-duration event-details">${durationStr}</span>
-      </div>`;
-    return eventContent;
-  }
-})();
-</script>
 
         
-      </div>
-      
-      
-      
-    </div>
-    
 
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/15/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E5%AE%9E%E9%AA%8C%E4%B8%80/" rel="prev" title="离散数学实验一">
+      <i class="fa fa-chevron-left"></i> 离散数学实验一
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/18/binary-bomb/" rel="next" title="binary bomb lab">
+      binary bomb lab <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
     
-    
-    
+  </article>
+  
+  
+  
+
 
 
           </div>
@@ -418,6 +326,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.</span> <span class="nav-text">图的矩阵表示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E7%9F%A9%E9%98%B5-M-D-M-G"><span class="nav-number">1.1.</span> <span class="nav-text">关联矩阵 M(D) M(G)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E5%90%91%E5%9B%BE%E7%9A%84%E5%85%B3%E8%81%94%E7%9F%A9%E9%98%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">有向图的关联矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E5%90%91%E5%9B%BE%E7%9A%84%E5%85%B3%E8%81%94%E7%9F%A9%E9%98%B5"><span class="nav-number">1.1.2.</span> <span class="nav-text">无向图的关联矩阵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5-A-D-A-G"><span class="nav-number">1.2.</span> <span class="nav-text">邻接矩阵 A(D) A(G)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%BE%BE%E7%9F%A9%E9%98%B5-P-D-P-G"><span class="nav-number">1.3.</span> <span class="nav-text">可达矩阵 P(D) P(G)</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -540,6 +449,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
