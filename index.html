@@ -196,10 +196,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-12-18 21:15:50 / 修改时间：21:23:25" itemprop="dateCreated datePublished" datetime="2021-12-18T21:15:50+08:00">2021-12-18</time>
+              <time title="创建时间：2021-12-18 21:15:50" itemprop="dateCreated datePublished" datetime="2021-12-18T21:15:50+08:00">2021-12-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-20 10:52:42" itemprop="dateModified" datetime="2021-12-20T10:52:42+08:00">2021-12-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -239,6 +245,95 @@
 <li>jnz</li>
 </ul>
 <p>jmp zf=0 zf为0时跳转</p>
+<ul>
+<li>jg</li>
+</ul>
+<p>jmp if  greater 前 &gt; 后</p>
+<ul>
+<li>jge</li>
+</ul>
+<p>jmp if greater or equal 前 &gt;= 后</p>
+<ul>
+<li>ja</li>
+</ul>
+<p>jmp above 大于转移</p>
+<ul>
+<li>jb</li>
+</ul>
+<p>jmp below 小于转移</p>
+<ul>
+<li>jl</li>
+</ul>
+<p>jmp low 小于转移</p>
+<h2 id="cmp指令"><a href="#cmp指令" class="headerlink" title="cmp指令"></a>cmp指令</h2><p>CMP（比较）指令执行从<strong>目的操作数中减去源操作数</strong>的隐含减法操作，并且不修改任何操作数</p>
+<p><code>CMP destination,source</code></p>
+<p>当实际的减法发生时，CMP 指令按照计算结果修改溢出、符号、零、进位、辅助进位和奇偶标志位。</p>
+<p>如果比较的是两个无符号数，则零标志位和进位标志位表示的两个操作数之间的关系如右表所示：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>CMP结果</th>
+<th>ZF</th>
+<th>CF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目的操作数 &lt; 源操作数</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>目的操作数 &gt; 源操作数</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>目的操作数 = 源操作数</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>如果比较的是两个有符号数，则符号标志位、零标志位和溢出标志位表示的两个操作数之间的关系如右表所示：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>CMP结果</th>
+<th>标志位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目的操作数 &lt; 源操作数</td>
+<td>SF ≠ OF</td>
+</tr>
+<tr>
+<td>目的操作数 &gt; 源操作数</td>
+<td>SF=OF</td>
+</tr>
+<tr>
+<td>目的操作数 = 源操作数</td>
+<td>ZF=1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="地址传送指令"><a href="#地址传送指令" class="headerlink" title="地址传送指令"></a>地址传送指令</h2><ul>
+<li>lea</li>
+</ul>
+<p>装入有效地址</p>
+<h2 id="移位指令"><a href="#移位指令" class="headerlink" title="移位指令"></a>移位指令</h2><ul>
+<li>sar</li>
+</ul>
+<p>算术右移 (每位右移，低位进 CF，高位不变)</p>
+<ul>
+<li>shr</li>
+</ul>
+<p>逻辑右移（每位右移，低位进 CF，高位补 0）</p>
 
       
     </div>
