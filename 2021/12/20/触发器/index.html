@@ -22,20 +22,30 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="图的矩阵表示关联矩阵 M(D) M(G)有向图的关联矩阵无环有向图$D&#x3D;, V&#x3D;{v1,v2,…,vp},E&#x3D;{e1,e2,…,eq}$ $p×q$ 阶矩阵$M(D)&#x3D;(m_{ij}) _{p×q}$,其中 $m_{ij} &#x3D; \begin{cases}1 &amp; \text{若vi是ej的起点}\\-1 &amp; \text{若vi是ej的终点}\\0 &amp; \text{若vi不关联">
+  <meta name="description" content="触发器 触发器有两个互补的输出端 $Q$ 和 $\overline{Q}$ 有两个稳定状态 1 和 0  1状态：$Q &#x3D; 1\quad\overline{Q} &#x3D; 0$ 0状态：$Q &#x3D; 0\quad\overline{Q} &#x3D; 1$   现态：输入信号作用前的状态  记作$Q$ 和 $\overline{Q}$   次态：输入信号作用后的状态  记作 $Q^{n+1}$ 和 $\overlin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图的矩阵表示">
-<meta property="og:url" content="http://example.com/2021/12/15/%E5%9B%BE%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA/index.html">
+<meta property="og:title" content="触发器">
+<meta property="og:url" content="http://example.com/2021/12/20/%E8%A7%A6%E5%8F%91%E5%99%A8/index.html">
 <meta property="og:site_name" content="Existo&#39;s Blog">
-<meta property="og:description" content="图的矩阵表示关联矩阵 M(D) M(G)有向图的关联矩阵无环有向图$D&#x3D;, V&#x3D;{v1,v2,…,vp},E&#x3D;{e1,e2,…,eq}$ $p×q$ 阶矩阵$M(D)&#x3D;(m_{ij}) _{p×q}$,其中 $m_{ij} &#x3D; \begin{cases}1 &amp; \text{若vi是ej的起点}\\-1 &amp; \text{若vi是ej的终点}\\0 &amp; \text{若vi不关联">
+<meta property="og:description" content="触发器 触发器有两个互补的输出端 $Q$ 和 $\overline{Q}$ 有两个稳定状态 1 和 0  1状态：$Q &#x3D; 1\quad\overline{Q} &#x3D; 0$ 0状态：$Q &#x3D; 0\quad\overline{Q} &#x3D; 1$   现态：输入信号作用前的状态  记作$Q$ 和 $\overline{Q}$   次态：输入信号作用后的状态  记作 $Q^{n+1}$ 和 $\overlin">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-15T05:37:03.000Z">
-<meta property="article:modified_time" content="2021-12-22T03:05:36.462Z">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20211220205402667.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20211220205511950.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20211220205633985.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20211220205923424.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20211220210111667.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20211220211625159.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20211220211900696.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20211220211942876.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20211220212035910.png">
+<meta property="article:published_time" content="2021-12-20T12:35:22.000Z">
+<meta property="article:modified_time" content="2021-12-20T13:56:09.775Z">
 <meta property="article:author" content="Existo">
-<meta property="article:tag" content="图论">
+<meta property="article:tag" content="数字电子技术">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20211220205402667.png">
 
-<link rel="canonical" href="http://example.com/2021/12/15/%E5%9B%BE%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA/">
+<link rel="canonical" href="http://example.com/2021/12/20/%E8%A7%A6%E5%8F%91%E5%99%A8/">
 
 
 <script id="page-configurations">
@@ -48,7 +58,7 @@
   };
 </script>
 
-  <title>图的矩阵表示 | Existo's Blog</title>
+  <title>触发器 | Existo's Blog</title>
   
 
 
@@ -177,7 +187,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/15/%E5%9B%BE%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/20/%E8%A7%A6%E5%8F%91%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -190,7 +200,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          图的矩阵表示
+          触发器
         </h1>
 
         <div class="post-meta">
@@ -199,16 +209,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-12-15 13:37:03" itemprop="dateCreated datePublished" datetime="2021-12-15T13:37:03+08:00">2021-12-15</time>
+              <time title="创建时间：2021-12-20 20:35:22 / 修改时间：21:56:09" itemprop="dateCreated datePublished" datetime="2021-12-20T20:35:22+08:00">2021-12-20</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-22 11:05:36" itemprop="dateModified" datetime="2021-12-22T11:05:36+08:00">2021-12-22</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -230,23 +234,75 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="图的矩阵表示"><a href="#图的矩阵表示" class="headerlink" title="图的矩阵表示"></a>图的矩阵表示</h1><h2 id="关联矩阵-M-D-M-G"><a href="#关联矩阵-M-D-M-G" class="headerlink" title="关联矩阵 M(D) M(G)"></a>关联矩阵 M(D) M(G)</h2><h3 id="有向图的关联矩阵"><a href="#有向图的关联矩阵" class="headerlink" title="有向图的关联矩阵"></a>有向图的关联矩阵</h3><p>无环有向图$D=<V,E>, V={v1,v2,…,vp},E={e1,e2,…,eq}$</p>
-<p>$p×q$ 阶矩阵$M(D)=(m_{ij}) _{p×q}$,其中</p>
-<p>$m_{ij} = \begin{cases}<br>1 &amp; \text{若vi是ej的起点}\\<br>-1 &amp; \text{若vi是ej的终点}\\<br>0 &amp; \text{若vi不关联ej}<br>\end{cases}$</p>
-<p>称M(D)为G的<strong>关联矩阵</strong></p>
-<h3 id="无向图的关联矩阵"><a href="#无向图的关联矩阵" class="headerlink" title="无向图的关联矩阵"></a>无向图的关联矩阵</h3><p>无环无向图$G=<V,E>,V={v1,v2,…,vp},E={e1,e2,…,eq}$</p>
-<p>则矩阵$M(G)=[m_{ij}] _{p×q}$,其中</p>
-<p>$m_{ij} = \begin{cases}<br>1 &amp; \text{若vi关联ej}\\<br>0 &amp; \text{若vi不关联ej}\\<br>\end{cases}$</p>
-<p>称M(G)为<strong>关联矩阵</strong></p>
-<h3 id="无向图基本关联矩阵的秩"><a href="#无向图基本关联矩阵的秩" class="headerlink" title="无向图基本关联矩阵的秩"></a>无向图基本关联矩阵的秩</h3><p>定理：$G$ 连通 ⇒ $r(M_f(G))=n-1$</p>
-<p>推论1：$G$ 有 $p$ 个连通分支 ⇒ $r(M_f(G))=n-p$</p>
-<p>推论2：$G$ 连通 ⇔ $r(M(G))=r(M_f(G))=n-1$</p>
-<h3 id="用关联矩阵求所有生成树"><a href="#用关联矩阵求所有生成树" class="headerlink" title="用关联矩阵求所有生成树"></a>用关联矩阵求所有生成树</h3><ul>
-<li>忽略环, 求关联矩阵 $M$</li>
-<li>任选参考点, 求基本关联矩阵 $M_f$</li>
-<li>求 $M_f$ 中的所有 $n-1$ 阶子方阵,计算行列式,行列式的值<strong>模2非0</strong>的是生成树</li>
+        <h1 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h1><ul>
+<li>触发器有两个互补的输出端 $Q$ 和 $\overline{Q}$</li>
+<li><p>有两个稳定状态 <code>1</code> 和 <code>0</code></p>
+<ul>
+<li><code>1</code>状态：$Q = 1\quad\overline{Q} = 0$</li>
+<li><code>0</code>状态：$Q = 0\quad\overline{Q} = 1$</li>
 </ul>
-<h2 id="邻接矩阵-A-D-A-G"><a href="#邻接矩阵-A-D-A-G" class="headerlink" title="邻接矩阵 A(D) A(G)"></a>邻接矩阵 A(D) A(G)</h2><h2 id="可达矩阵-P-D-P-G"><a href="#可达矩阵-P-D-P-G" class="headerlink" title="可达矩阵 P(D) P(G)"></a>可达矩阵 P(D) P(G)</h2>
+</li>
+<li><p>现态：输入信号作用前的状态</p>
+<ul>
+<li>记作$Q$ 和 $\overline{Q}$</li>
+</ul>
+</li>
+<li><p>次态：输入信号作用后的状态</p>
+<ul>
+<li>记作 $Q^{n+1}$ 和 $\overline{Q^{n+1}}$</li>
+</ul>
+</li>
+</ul>
+<h2 id="触发器常用的描述方法"><a href="#触发器常用的描述方法" class="headerlink" title="触发器常用的描述方法"></a>触发器常用的描述方法</h2><ul>
+<li>功能表</li>
+<li>状态表</li>
+<li>状态图</li>
+<li>次态方程</li>
+<li>激励表</li>
+<li>卡诺图</li>
+</ul>
+<h3 id="功能表"><a href="#功能表" class="headerlink" title="功能表"></a>功能表</h3><p>反映了触发器在不同输入下对应功能的表格</p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220205402667.png" alt="image-20211220205402667" style="zoom:50%;" /></p>
+<h3 id="状态表"><a href="#状态表" class="headerlink" title="状态表"></a>状态表</h3><p>反映了触发器在输入作用下现态和次态之间的转移关系</p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220205511950.png" alt="image-20211220205511950" style="zoom:50%;" /></p>
+<h3 id="激励表"><a href="#激励表" class="headerlink" title="激励表"></a>激励表</h3><p>反映了触发器从现态 $Q$ 转移到某种次态 $Q^{n+1}$ 时，对输入信号的要求</p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220205633985.png" alt="image-20211220205633985" style="zoom:50%;" /></p>
+<h3 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h3><p>反应触发器两种状态之间转移关系的有向图</p>
+<ul>
+<li>圆圈表示稳定状态</li>
+<li>有向线段表示状态转移的方向<ul>
+<li>起点：现态</li>
+<li>终点：次态</li>
+<li>触发条件</li>
+</ul>
+</li>
+</ul>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220205923424.png" alt="image-20211220205923424" style="zoom:50%;" /></p>
+<h3 id="卡诺图"><a href="#卡诺图" class="headerlink" title="卡诺图"></a>卡诺图</h3><p>根据触发器的功能表或状态表所得到的反映触发器次态和现态以及输入关系的卡诺图</p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220210111667.png" alt="image-20211220210111667" style="zoom:50%;" /></p>
+<h3 id="次态方程"><a href="#次态方程" class="headerlink" title="次态方程"></a>次态方程</h3><p>反应触发器次态和现态以及输入关系的表达式</p>
+<ul>
+<li><p>次态方程</p>
+<ul>
+<li>$Q^{n+1}=\overline{S}+RQ$</li>
+</ul>
+</li>
+<li><p>约束方程</p>
+<ul>
+<li>$R+S=1$</li>
+</ul>
+</li>
+</ul>
+<h2 id="基本R-S触发器"><a href="#基本R-S触发器" class="headerlink" title="基本R-S触发器"></a>基本R-S触发器</h2><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220211625159.png" alt="image-20211220211625159" style="zoom:50%;" /></p>
+<ul>
+<li>构成各种功能触发器的基本部件</li>
+<li>R：置0端或复位端</li>
+<li>S：置1端或置位端</li>
+</ul>
+<h3 id="功能表与状态表"><a href="#功能表与状态表" class="headerlink" title="功能表与状态表"></a>功能表与状态表</h3><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220211900696.png" alt="image-20211220211900696" style="zoom:50%;" /></p>
+<h3 id="状态表与激励表"><a href="#状态表与激励表" class="headerlink" title="状态表与激励表"></a>状态表与激励表</h3><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220211942876.png" alt="image-20211220211942876" style="zoom:50%;" /></p>
+<h3 id="状态表、状态图、卡诺图、次态方程、约束方程"><a href="#状态表、状态图、卡诺图、次态方程、约束方程" class="headerlink" title="状态表、状态图、卡诺图、次态方程、约束方程"></a>状态表、状态图、卡诺图、次态方程、约束方程</h3><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220212035910.png" alt="image-20211220212035910" style="zoom:50%;" /></p>
+
     </div>
 
     
@@ -255,7 +311,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag"># 图论</a>
+              <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/" rel="tag"># 数字电子技术</a>
           </div>
 
         
@@ -264,12 +320,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/12/15/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E5%AE%9E%E9%AA%8C%E4%B8%80/" rel="prev" title="离散数学实验一">
-      <i class="fa fa-chevron-left"></i> 离散数学实验一
+    <a href="/2021/12/18/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/" rel="prev" title="汇编指令">
+      <i class="fa fa-chevron-left"></i> 汇编指令
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/12/18/binary-bomb/" rel="next" title="binary bomb lab">
-      binary bomb lab <i class="fa fa-chevron-right"></i>
+    <a href="/2021/12/25/bufbomb/" rel="next" title="the Buffer Bomb">
+      the Buffer Bomb <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -334,7 +390,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.</span> <span class="nav-text">图的矩阵表示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E7%9F%A9%E9%98%B5-M-D-M-G"><span class="nav-number">1.1.</span> <span class="nav-text">关联矩阵 M(D) M(G)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E5%90%91%E5%9B%BE%E7%9A%84%E5%85%B3%E8%81%94%E7%9F%A9%E9%98%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">有向图的关联矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E5%90%91%E5%9B%BE%E7%9A%84%E5%85%B3%E8%81%94%E7%9F%A9%E9%98%B5"><span class="nav-number">1.1.2.</span> <span class="nav-text">无向图的关联矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E5%90%91%E5%9B%BE%E5%9F%BA%E6%9C%AC%E5%85%B3%E8%81%94%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9"><span class="nav-number">1.1.3.</span> <span class="nav-text">无向图基本关联矩阵的秩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E5%85%B3%E8%81%94%E7%9F%A9%E9%98%B5%E6%B1%82%E6%89%80%E6%9C%89%E7%94%9F%E6%88%90%E6%A0%91"><span class="nav-number">1.1.4.</span> <span class="nav-text">用关联矩阵求所有生成树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5-A-D-A-G"><span class="nav-number">1.2.</span> <span class="nav-text">邻接矩阵 A(D) A(G)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%BE%BE%E7%9F%A9%E9%98%B5-P-D-P-G"><span class="nav-number">1.3.</span> <span class="nav-text">可达矩阵 P(D) P(G)</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8%E5%B8%B8%E7%94%A8%E7%9A%84%E6%8F%8F%E8%BF%B0%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">触发器常用的描述方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E8%A1%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">功能表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%A1%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">状态表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BF%80%E5%8A%B1%E8%A1%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text">激励表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E5%9B%BE"><span class="nav-number">1.1.4.</span> <span class="nav-text">状态图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%A1%E8%AF%BA%E5%9B%BE"><span class="nav-number">1.1.5.</span> <span class="nav-text">卡诺图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AC%A1%E6%80%81%E6%96%B9%E7%A8%8B"><span class="nav-number">1.1.6.</span> <span class="nav-text">次态方程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%ACR-S%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">基本R-S触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E8%A1%A8%E4%B8%8E%E7%8A%B6%E6%80%81%E8%A1%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">功能表与状态表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%A1%A8%E4%B8%8E%E6%BF%80%E5%8A%B1%E8%A1%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">状态表与激励表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%A1%A8%E3%80%81%E7%8A%B6%E6%80%81%E5%9B%BE%E3%80%81%E5%8D%A1%E8%AF%BA%E5%9B%BE%E3%80%81%E6%AC%A1%E6%80%81%E6%96%B9%E7%A8%8B%E3%80%81%E7%BA%A6%E6%9D%9F%E6%96%B9%E7%A8%8B"><span class="nav-number">1.2.3.</span> <span class="nav-text">状态表、状态图、卡诺图、次态方程、约束方程</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
