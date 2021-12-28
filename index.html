@@ -173,6 +173,107 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/26/%E6%94%AF%E9%85%8D%E9%9B%86%E3%80%81%E8%A6%86%E7%9B%96%E9%9B%86%E3%80%81%E7%8B%AC%E7%AB%8B%E9%9B%86%E4%B8%8E%E5%8C%B9%E9%85%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Existo">
+      <meta itemprop="description" content="Hello Nerd">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Existo's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/26/%E6%94%AF%E9%85%8D%E9%9B%86%E3%80%81%E8%A6%86%E7%9B%96%E9%9B%86%E3%80%81%E7%8B%AC%E7%AB%8B%E9%9B%86%E4%B8%8E%E5%8C%B9%E9%85%8D/" class="post-title-link" itemprop="url">支配集、覆盖集、独立集与匹配</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-26 19:09:08 / 修改时间：23:53:36" itemprop="dateCreated datePublished" datetime="2021-12-26T19:09:08+08:00">2021-12-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="支配集"><a href="#支配集" class="headerlink" title="支配集"></a>支配集</h2><p>设图$G=<V,E>$是<strong>简单无向图</strong>，$S⊆V,S≠∅$，若对于$∀x∈V-S$，$x$都与$S$里至少一个顶点相邻，则称$S$是图$G$的<strong>支配集(dominating set)</strong>。</p>
+<p>$S$是图$G$的支配集，若S的任何真子集都不是支配集，则称$S$为图$G$的<strong>极小支配集(minimal dominating set)</strong>。</p>
+<p>$S$是图$G$的支配集，若不存在任何其它支配集$S’$，使得$|S’|＜|S|$，则称S是图G的<strong>最小支配集(smallest dominating set)</strong>。</p>
+<p>若$S$是图$G$的最小支配集，则称$|S|$为图G的<strong>支配数(dominating number)</strong>，记作$γ(G)$。</p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211226191028465.png" alt="image-20211226191028465" style="zoom:50%;" /></p>
+<p>例：在图中，$S_0=\{V_0\}，S=\{V_1,V_4,V_7\} ，S_2 =\{V_1,V_3,V_5,V_7\}$<br>都是G的<strong>支配集</strong>，且都是<strong>极小支配集</strong>，$S_0$是<strong>最小支配集</strong>， 因此$\gamma(G)=1$.</p>
+<h3 id="极小支配集求法"><a href="#极小支配集求法" class="headerlink" title="极小支配集求法"></a>极小支配集求法</h3><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211226234311068.png" alt="image-20211226234311068" style="zoom:80%;" /></p>
+<h2 id="独立集"><a href="#独立集" class="headerlink" title="独立集"></a>独立集</h2><p>无向图$G=<V,E>$, $S⊆V$</p>
+<p>独立集: $∀u,v∈S, (u,v)∉E$</p>
+<p>极大独立集: $S$是独立集, 其真母集都不是</p>
+<p>最大独立集: $|V*|$最大的独立集</p>
+<p>独立数: $\beta_0(G)=|S|$, $S$是最大独立集</p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211226225521311.png" alt="image-20211226225521311" style="zoom:80%;" /></p>
+<h3 id="极大独立集求法"><a href="#极大独立集求法" class="headerlink" title="极大独立集求法"></a>极大独立集求法</h3><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211226235205099.png" alt="image-20211226235205099" style="zoom:80%;" /></p>
+<h2 id="点覆盖"><a href="#点覆盖" class="headerlink" title="点覆盖"></a>点覆盖</h2><p>无向图$G=<V,E>$, $S⊆V$</p>
+<p>点覆盖: $∀e∈E$,$ ∃v∈S$, $v$关联$e$</p>
+<p>极小点覆盖: $S$是点覆盖, 其真子集都不是</p>
+<p>最小点覆盖: $|S|$最小的点覆盖</p>
+<p>点覆盖数: $\alpha_0(G)=|S|$, $S$是最小点覆盖</p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211226225543340.png" alt="image-20211226225543340" style="zoom:80%;" /></p>
+<h3 id="极小点覆盖集求法"><a href="#极小点覆盖集求法" class="headerlink" title="极小点覆盖集求法"></a>极小点覆盖集求法</h3><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211226234826049.png" alt="image-20211226234826049" style="zoom:50%;" /></p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211226234810049.png" alt="image-20211226234810049" style="zoom:80%;" /></p>
+<h2 id="边覆盖"><a href="#边覆盖" class="headerlink" title="边覆盖"></a>边覆盖</h2><p>n 无向图$G=<V,E>, E^*⊆E$</p>
+<p>边覆盖: $∀v∈V, ∃e∈E^*, e$关联$v$</p>
+<p>极小边覆盖: $E^*$是边覆盖, 其真子集都不是</p>
+<p>最小边覆盖: $|E^*|$最小的边覆盖</p>
+<p>边覆盖数: $\alpha_1(G)=|E^<em>|, E^</em>$是最小边覆盖</p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211226225904855.png" alt="image-20211226225904855" style="zoom:80%;" /></p>
+<h2 id="匹配"><a href="#匹配" class="headerlink" title="匹配"></a>匹配</h2><p>无向图$G=<V,E>, E^*⊆E$</p>
+<p>匹配(边独立集): $∀e,f ∈E^*, e,f$ 不相邻</p>
+<p>极大匹配: $E^*$是匹配, 其真母集都不是</p>
+<p>最大匹配: $|E^*|$最大的匹配</p>
+<p>匹配数: $\beta_1(G)=|E^<em>|, E^</em>$是最大匹配</p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211226230137975.png" alt="image-20211226230137975" style="zoom:80%;" /></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/25/bufbomb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -332,10 +433,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-12-20 20:35:22 / 修改时间：21:56:09" itemprop="dateCreated datePublished" datetime="2021-12-20T20:35:22+08:00">2021-12-20</time>
+              <time title="创建时间：2021-12-20 20:35:22" itemprop="dateCreated datePublished" datetime="2021-12-20T20:35:22+08:00">2021-12-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-26 19:08:14" itemprop="dateModified" datetime="2021-12-26T19:08:14+08:00">2021-12-26</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -385,11 +492,11 @@
 <li>卡诺图</li>
 </ul>
 <h3 id="功能表"><a href="#功能表" class="headerlink" title="功能表"></a>功能表</h3><p>反映了触发器在不同输入下对应功能的表格</p>
-<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220205402667.png" alt="image-20211220205402667" style="zoom:50%;" /></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261908957.png" alt="image-20211220205402667" style="zoom:50%;" /></p>
 <h3 id="状态表"><a href="#状态表" class="headerlink" title="状态表"></a>状态表</h3><p>反映了触发器在输入作用下现态和次态之间的转移关系</p>
-<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220205511950.png" alt="image-20211220205511950" style="zoom:50%;" /></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261908958.png" alt="image-20211220205511950" style="zoom:50%;" /></p>
 <h3 id="激励表"><a href="#激励表" class="headerlink" title="激励表"></a>激励表</h3><p>反映了触发器从现态 $Q$ 转移到某种次态 $Q^{n+1}$ 时，对输入信号的要求</p>
-<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220205633985.png" alt="image-20211220205633985" style="zoom:50%;" /></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261908959.png" alt="image-20211220205633985" style="zoom:50%;" /></p>
 <h3 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h3><p>反应触发器两种状态之间转移关系的有向图</p>
 <ul>
 <li>圆圈表示稳定状态</li>
@@ -400,9 +507,9 @@
 </ul>
 </li>
 </ul>
-<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220205923424.png" alt="image-20211220205923424" style="zoom:50%;" /></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261908960.png" alt="image-20211220205923424" style="zoom:50%;" /></p>
 <h3 id="卡诺图"><a href="#卡诺图" class="headerlink" title="卡诺图"></a>卡诺图</h3><p>根据触发器的功能表或状态表所得到的反映触发器次态和现态以及输入关系的卡诺图</p>
-<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220210111667.png" alt="image-20211220210111667" style="zoom:50%;" /></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261908961.png" alt="image-20211220210111667" style="zoom:50%;" /></p>
 <h3 id="次态方程"><a href="#次态方程" class="headerlink" title="次态方程"></a>次态方程</h3><p>反应触发器次态和现态以及输入关系的表达式</p>
 <ul>
 <li><p>次态方程</p>
@@ -416,15 +523,15 @@
 </ul>
 </li>
 </ul>
-<h2 id="基本R-S触发器"><a href="#基本R-S触发器" class="headerlink" title="基本R-S触发器"></a>基本R-S触发器</h2><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220211625159.png" alt="image-20211220211625159" style="zoom:50%;" /></p>
+<h2 id="基本R-S触发器"><a href="#基本R-S触发器" class="headerlink" title="基本R-S触发器"></a>基本R-S触发器</h2><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261908962.png" alt="image-20211220211625159" style="zoom:50%;" /></p>
 <ul>
 <li>构成各种功能触发器的基本部件</li>
 <li>R：置0端或复位端</li>
 <li>S：置1端或置位端</li>
 </ul>
-<h3 id="功能表与状态表"><a href="#功能表与状态表" class="headerlink" title="功能表与状态表"></a>功能表与状态表</h3><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220211900696.png" alt="image-20211220211900696" style="zoom:50%;" /></p>
-<h3 id="状态表与激励表"><a href="#状态表与激励表" class="headerlink" title="状态表与激励表"></a>状态表与激励表</h3><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220211942876.png" alt="image-20211220211942876" style="zoom:50%;" /></p>
-<h3 id="状态表、状态图、卡诺图、次态方程、约束方程"><a href="#状态表、状态图、卡诺图、次态方程、约束方程" class="headerlink" title="状态表、状态图、卡诺图、次态方程、约束方程"></a>状态表、状态图、卡诺图、次态方程、约束方程</h3><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20211220212035910.png" alt="image-20211220212035910" style="zoom:50%;" /></p>
+<h3 id="功能表与状态表"><a href="#功能表与状态表" class="headerlink" title="功能表与状态表"></a>功能表与状态表</h3><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261908963.png" alt="image-20211220211900696" style="zoom:50%;" /></p>
+<h3 id="状态表与激励表"><a href="#状态表与激励表" class="headerlink" title="状态表与激励表"></a>状态表与激励表</h3><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261908964.png" alt="image-20211220211942876" style="zoom:50%;" /></p>
+<h3 id="状态表、状态图、卡诺图、次态方程、约束方程"><a href="#状态表、状态图、卡诺图、次态方程、约束方程" class="headerlink" title="状态表、状态图、卡诺图、次态方程、约束方程"></a>状态表、状态图、卡诺图、次态方程、约束方程</h3><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261908965.png" alt="image-20211220212035910" style="zoom:50%;" /></p>
 
       
     </div>
@@ -1443,139 +1550,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/06/%E5%AF%84%E5%AD%98%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Existo">
-      <meta itemprop="description" content="Hello Nerd">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Existo's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/06/%E5%AF%84%E5%AD%98%E5%99%A8/" class="post-title-link" itemprop="url">寄存器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-12-06 17:05:09" itemprop="dateCreated datePublished" datetime="2021-12-06T17:05:09+08:00">2021-12-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-07 00:06:20" itemprop="dateModified" datetime="2021-12-07T00:06:20+08:00">2021-12-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h1><p>在Debug命令中我查了一些寄存器的相关知识，这篇文章仔细分析一下部分寄存器</p>
-<h2 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h2><p>AX BX CX DX</p>
-<p>用于存放数据</p>
-<p><img src="https://s2.loli.net/2021/12/07/iZ8Wo146ucUtgvV.png" alt="image-20211207000546422"></p>
-<p>可见有2个字节byte</p>
-<p>2byte = 16bit ，所以都为<strong>16位寄存器</strong></p>
-<p>范围 <code>0 ~ 65535</code></p>
-<p>它们可以各自分割为 <strong>2个8位寄存器</strong></p>
-<p><code>AX = AH + AL</code></p>
-<p><code>BX = BH + BL</code></p>
-<p><code>CX = CH + CL</code></p>
-<p><code>DX = DH + DL</code></p>
-<p>高低位寄存器运算是<strong>互相独立</strong>的，也就是说<strong>低位寄存器运算的溢出结果不会进入到高位</strong></p>
-<h2 id="地址寄存器"><a href="#地址寄存器" class="headerlink" title="地址寄存器"></a>地址寄存器</h2><p>DS ES SS CS</p>
-<p><img src="https://s2.loli.net/2021/12/07/cDkRY5UEpfn7X3g.png" alt="image-20211207000610319"></p>
-<p>左为 <strong>段地址</strong>，右为 <strong>偏移地址</strong></p>
-<p><code>段地址 : 偏移地址</code></p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">段地址寄存器</th>
-<th style="text-align:center">偏移地址寄存器</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">DS</td>
-<td style="text-align:center">SP</td>
-</tr>
-<tr>
-<td style="text-align:center">ES</td>
-<td style="text-align:center">BP</td>
-</tr>
-<tr>
-<td style="text-align:center">SS</td>
-<td style="text-align:center">SI</td>
-</tr>
-<tr>
-<td style="text-align:center">CS</td>
-<td style="text-align:center">DI</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">IP</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center">BX</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><em>物理地址 = 基础地址 + 偏移地址</em></p>
-<p><em>物理地址 = 段地址 × 16(10H) + 偏移地址</em></p>
-<h2 id="不同尺寸的数据"><a href="#不同尺寸的数据" class="headerlink" title="不同尺寸的数据"></a>不同尺寸的数据</h2><h3 id="字节型数据"><a href="#字节型数据" class="headerlink" title="字节型数据"></a>字节型数据</h3><p>1 byte  8bit - 8位寄存器中</p>
-<h3 id="字型数据"><a href="#字型数据" class="headerlink" title="字型数据"></a>字型数据</h3><p>2 byte 16bit - 16位寄存器中</p>
-<h2 id="CPU-区分指令和数据"><a href="#CPU-区分指令和数据" class="headerlink" title="CPU 区分指令和数据"></a>CPU 区分指令和数据</h2><p>我们都知道，指令和数据在根本上没有任何区别</p>
-<p>U命令 将某个内存地址开始的的字节全部当作<strong>指令</strong><br>D命令 将某个内存地址开始的的字节全部当作<strong>数据</strong></p>
-<p>在任意时刻，CPU将 <code>CS : IP</code> 所指向的内容全部当作<strong>指令</strong>来执行</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1647,7 +1621,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
