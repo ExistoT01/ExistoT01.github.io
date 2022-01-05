@@ -173,6 +173,256 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/15/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E5%AE%9E%E9%AA%8C%E4%B8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Existo">
+      <meta itemprop="description" content="Hello Nerd">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Existo's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/15/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E5%AE%9E%E9%AA%8C%E4%B8%80/" class="post-title-link" itemprop="url">离散数学实验一</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-15 13:33:03 / 修改时间：13:34:05" itemprop="dateCreated datePublished" datetime="2021-12-15T13:33:03+08:00">2021-12-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="离散数学-II-实验一（实验报告）"><a href="#离散数学-II-实验一（实验报告）" class="headerlink" title="离散数学 II 实验一（实验报告）"></a>离散数学 II 实验一（实验报告）</h1><p>20020007095-叶鹏</p>
+<p>盛艳秀-老师</p>
+<h2 id="实验题目"><a href="#实验题目" class="headerlink" title="实验题目"></a>实验题目</h2><p>可简单图化、连通图、欧拉图和哈密顿图的判断</p>
+<h2 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h2><ol>
+<li>掌握可简单图化的定义及判断方法；</li>
+<li>掌握连通图、欧拉图的判断方法；</li>
+<li>掌握欧拉回路的搜索方法；</li>
+<li>了解欧拉图的实际应用。</li>
+</ol>
+<h2 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求"></a>实验要求</h2><ol>
+<li>给定一非负整数序列（例如：(4,2,2,2,2)）。</li>
+<li>判断此非负整数序列是否是可图化的，是否是可简单图化的。</li>
+<li>如果是可简单图化的，根据 Havel 定理过程求出对应的简单图，并输出此图。</li>
+<li>判断此简单图是否是连通的。</li>
+<li>如果是连通图，判断此图是否是欧拉图。如果是欧拉图，请输出一条欧拉回路（输出形式如：v2-&gt;v1-&gt;v5-&gt;v3-&gt;v4-&gt;v5-&gt;v2）。<br>*说明：要求学生设计的程序不仅对给定非负整数序列得出正确结果，还要对教师测试数据集得出正确结果。</li>
+</ol>
+<h2 id="实验内容和实验步骤"><a href="#实验内容和实验步骤" class="headerlink" title="实验内容和实验步骤"></a>实验内容和实验步骤</h2><ol>
+<li>考虑到要读入度数序列，每个节点有相应的索引值，因此定义一个结构体 <em>node</em> 来储存对应内容</li>
+</ol>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132109991.png" alt="image-20211213200627796" style="zoom:50%;" /></p>
+<ol>
+<li>所有函数，成员皆在类内定义，因此创建 <em>solution</em> 类</li>
+</ol>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132109972.png" alt="image-20211213200830276" style="zoom:50%;" /></p>
+<ol>
+<li><em>main</em> 函数中实例化类，读入并初始化度数序列</li>
+</ol>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132109370.png" alt="image-20211213200945729" style="zoom:50%;" /></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132128152.png" alt="image-20211213211727191" style="zoom: 80%;" /></p>
+<ol>
+<li>判断此度数列是否可图化、可简单图化，如果度数和为基数，则不可图化，也不能简单图化。如果可图化，继续判断是否可简单图化，先判断最大度是否小于等于n-1，不满足则不可简单图化，</li>
+</ol>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132110568.png" alt="image-20211213201252178" style="zoom:50%;" /></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132128186.png" alt="image-20211213211759825" style="zoom:80%;" /></p>
+<p>接着使用<strong>Havel的等价定理</strong></p>
+<ul>
+<li><code>d1 + d2 + … + dn = 0 (mod 2)</code></li>
+<li><code>d1 + d2 + … + dr ≤ r(r-1) + min(r,dr+1) + min(r,dr+2) + … + min(r,dn)</code></li>
+</ul>
+<p>满足以上二条件，则可简单图化</p>
+<ol>
+<li>Havel定理分步求简单图</li>
+</ol>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132110586.png" alt="image-20211213203334582" style="zoom:50%;" /></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132128323.png" alt="image-20211213211824476" style="zoom:80%;" /></p>
+<ol>
+<li>Havel定理构造简单图，用邻接矩阵表示，采用贪心思想构造出最简的简单图</li>
+</ol>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132120857.png" alt="image-20211213211943636" style="zoom:50%;" /></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132128343.png" alt="image-20211213211959581" style="zoom:80%;" /></p>
+<ol>
+<li>求从1 ~ n-1的邻接矩阵幂之和B~n-1~，若B~n-1~中不存在0，则说明n个节点都<strong>至少存在一条长度为1 ~ n-1的通路到另一节点</strong>，说明图连通，反之说明不连通</li>
+</ol>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132130615.png" alt="image-20211213213037009" style="zoom:50%;" /></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132129151.png" alt="image-20211213212951285" style="zoom:80%;" /></p>
+<ol>
+<li>如果图连通，检查度数列，记录奇数顶点数，若存在奇数顶点，则说明不存在欧拉回路，若没有奇数顶点，再进行下一步判断</li>
+</ol>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132132669.png" alt="image-20211213213128768" style="zoom:50%;" /></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132132566.png" alt="image-20211213213235140" style="zoom:80%;" /></p>
+<ol>
+<li>Fleury算法求欧拉回路，如非不要不走割边，搜索不是割边的边并扩展，如果没有点可以扩展，输出并出栈，否则 dfs 继续搜索欧拉路径</li>
+</ol>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132135603.png" alt="image-20211213213408892" style="zoom:50%;" /></p>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132135491.png" alt="image-20211213213541720" style="zoom:80%;" /></p>
+<ol>
+<li>程序结束</li>
+</ol>
+<h2 id="实验测试数据、代码及相关结果分析"><a href="#实验测试数据、代码及相关结果分析" class="headerlink" title="实验测试数据、代码及相关结果分析"></a>实验测试数据、代码及相关结果分析</h2><h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><p>程序代码如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> id, degree;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(Node a, Node b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.degree &gt; b.degree;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> tem[maxn][maxn];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">bool</span> canSimpleGraphRealization;</span><br><span class="line">	<span class="keyword">bool</span> isConnected;</span><br><span class="line"></span><br><span class="line">	Node* node = <span class="keyword">new</span> Node[maxn];</span><br><span class="line">	<span class="keyword">int</span> stk[maxn];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="keyword">int</span> top;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> adjMatrix[maxn][maxn];</span><br><span class="line">	<span class="keyword">int</span> sumLink[maxn][maxn];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">//constructor</span></span><br><span class="line">	<span class="built_in">solution</span>(<span class="keyword">int</span> n) &#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;n = n;</span><br><span class="line">		<span class="keyword">this</span>-&gt;canSimpleGraphRealization = <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">this</span>-&gt;isConnected = <span class="literal">true</span>;</span><br><span class="line">		<span class="built_in">memset</span>(adjMatrix, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(adjMatrix));</span><br><span class="line">		<span class="built_in">memset</span>(sumLink, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(sumLink));</span><br><span class="line">		<span class="built_in">memset</span>(tem, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(tem));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	~<span class="built_in">solution</span>() &#123;</span><br><span class="line">		<span class="keyword">delete</span>[] node;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">(Node* node)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">initialList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;#==========读入度数序列&quot;</span> &lt;&lt; endl;</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin &gt;&gt; node[i].degree;</span><br><span class="line">			node[i].id = i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">copyList</span><span class="params">(Node* targetNode)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			targetNode[i].degree = node[i].degree;</span><br><span class="line">			targetNode[i].id = node[i].id;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">checkGraphRealization</span><span class="params">(Node* node, <span class="keyword">int</span> n)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Havel</span><span class="params">(Node* node, <span class="keyword">int</span> n)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">allZERO</span><span class="params">(Node* node, <span class="keyword">int</span> s, <span class="keyword">int</span> n)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">buildSimpleGraph</span><span class="params">(Node* node, <span class="keyword">int</span> n)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">checkConnected</span><span class="params">(Node* node, <span class="keyword">int</span> n)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">clearTemLink</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fleury</span><span class="params">(<span class="keyword">int</span> startIndex)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//displaydegree</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solution::display</span><span class="params">(Node* node)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;degree[&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;]&quot;</span> &lt;&lt; <span class="string">&quot;= &quot;</span> &lt;&lt; node[i].degree &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solution::checkGraphRealization</span><span class="params">(Node* node, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;#==========判断是否可图化/可简单图化&quot;</span> &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//先判断是否可图化</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		sum += node[i].degree;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (sum % <span class="number">2</span>) &#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;不可图化，亦不可简单图化&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">//如果可图化，继续判断是否可简单图化</span></span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;可图化&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">sort</span>(node + <span class="number">1</span>, node + n + <span class="number">1</span>, cmp);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//先判断最大度是否小于等于n-1</span></span><br><span class="line">	<span class="keyword">if</span> (node[<span class="number">0</span>].degree &gt; n - <span class="number">1</span>) &#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;,不可简单图化&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> r = <span class="number">1</span>; r &lt;= n; r++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">1</span>; index &lt;= r; index++)</span><br><span class="line">			&#123;</span><br><span class="line">				left += node[index].degree;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">int</span> right = r * (r - <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> index = r + <span class="number">1</span>; index &lt;= n; index++)</span><br><span class="line">			&#123;</span><br><span class="line">				right += <span class="built_in">min</span>(r, node[index].degree);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="comment">//如果不满足</span></span><br><span class="line">			<span class="keyword">if</span> (left &gt; right) &#123;</span><br><span class="line">				cout &lt;&lt; <span class="string">&quot;,不可简单图化&quot;</span> &lt;&lt; endl;</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//如果都没问题，则可以简单图化</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;,可简单图化&quot;</span> &lt;&lt; endl;</span><br><span class="line">	canSimpleGraphRealization = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solution::Havel</span><span class="params">(Node* node, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;#==========Havel定理求对应简单图&quot;</span> &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	Node* fakeNode = <span class="keyword">new</span> Node[n+<span class="number">1</span>];</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">copyList</span>(fakeNode);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> lptr, rptr;</span><br><span class="line">	lptr = <span class="number">1</span>;</span><br><span class="line">	rptr = n;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;(&quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = lptr; i &lt;= rptr; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; fakeNode[i].degree;</span><br><span class="line">		<span class="keyword">if</span> (i != rptr) cout &lt;&lt; <span class="string">&quot;, &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;)&quot;</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;可简单图化&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (!<span class="built_in">allZERO</span>(fakeNode, lptr, rptr))</span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//cout &lt;&lt; endl &lt;&lt; &quot;lptr=&quot; &lt;&lt; lptr &lt;&lt; endl;</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = lptr + <span class="number">1</span>; i &lt;= lptr + fakeNode[lptr].degree; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			fakeNode[i].degree -= <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment">//cout &lt;&lt; &quot;before &quot;;</span></span><br><span class="line">		<span class="comment">//display();</span></span><br><span class="line"></span><br><span class="line">		<span class="built_in">sort</span>(fakeNode+<span class="number">1</span>+lptr, fakeNode+<span class="number">1</span>+n, cmp);</span><br><span class="line"></span><br><span class="line">		lptr++;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//cout &lt;&lt; &quot;after &quot;;</span></span><br><span class="line">		<span class="comment">//display();</span></span><br><span class="line"></span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;&lt;=&gt;&quot;</span>;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;(&quot;</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = lptr; i &lt;= rptr; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cout &lt;&lt; fakeNode[i].degree;</span><br><span class="line">			<span class="keyword">if</span> (i != rptr) cout &lt;&lt; <span class="string">&quot;, &quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;)&quot;</span>;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;可简单图化&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] fakeNode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">solution::allZERO</span><span class="params">(Node* node, <span class="keyword">int</span> s, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = s; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		sum += node[i].degree;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (!sum)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">solution::buildSimpleGraph</span><span class="params">(Node* node, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;#==========Havel定理构造对应简单图(邻接矩阵)&quot;</span> &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	Node* fakeNode = <span class="keyword">new</span> Node[n + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">	<span class="built_in">copyList</span>(fakeNode);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//display(fakeNode);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">sort</span>(fakeNode + i, fakeNode + n + <span class="number">1</span>, cmp);</span><br><span class="line">		<span class="keyword">if</span> (fakeNode[i].degree &gt; n - i) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= i + fakeNode[i].degree; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (!fakeNode[j].degree) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">			fakeNode[j].degree--;</span><br><span class="line">			adjMatrix[fakeNode[i].id][fakeNode[j].id] = <span class="number">1</span>;</span><br><span class="line">			adjMatrix[fakeNode[j].id][fakeNode[i].id] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		fakeNode[i].degree = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;index&quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%5d&quot;</span>, i);</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%5d&quot;</span>, i);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%5d&quot;</span>, adjMatrix[i][j]);</span><br><span class="line">		&#125;			</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span>[] fakeNode;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solution::clearTemLink</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">			tem[i][j] = adjMatrix[i][j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solution::checkConnected</span><span class="params">(Node* node, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;#==========检查图是否连通&quot;</span> &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">1</span>; t &lt; n; t++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">clearTemLink</span>();</span><br><span class="line">		<span class="keyword">int</span> tt = t;</span><br><span class="line">		<span class="keyword">while</span> (tt<span class="number">-1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> ans[maxn][maxn];</span><br><span class="line">			<span class="built_in">memset</span>(ans, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(ans));</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">					<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k++) &#123;</span><br><span class="line">						ans[i][j] += adjMatrix[i][k] * tem[k][j];</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">				&#123;</span><br><span class="line">					tem[i][j] = ans[i][j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			tt--;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;A^&quot;</span> &lt;&lt; t &lt;&lt; <span class="string">&quot; = &quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%5d&quot;</span>, tem[i][j]);</span><br><span class="line">			&#125;</span><br><span class="line">			cout &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">				sumLink[i][j] += tem[i][j];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;B^&quot;</span> &lt;&lt; n - <span class="number">1</span> &lt;&lt; <span class="string">&quot; = &quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%5d&quot;</span>, sumLink[i][j]);</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n &amp;&amp; isConnected; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n &amp;&amp; isConnected; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (i != j) &#123;</span><br><span class="line">				<span class="keyword">if</span> (sumLink[i][j] == <span class="number">0</span>) &#123;</span><br><span class="line">					cout &lt;&lt; endl &lt;&lt; <span class="string">&quot;不连通&quot;</span> &lt;&lt; endl;</span><br><span class="line">					isConnected = <span class="literal">false</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (isConnected) &#123;</span><br><span class="line">		cout &lt;&lt; endl &lt;&lt; <span class="string">&quot;连通&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solution::dfs</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	stk[top++] = x;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span> (adjMatrix[x][i]) &#123;</span><br><span class="line">			adjMatrix[x][i] = adjMatrix[i][x] = <span class="number">0</span>; <span class="comment">// 删除此边</span></span><br><span class="line">			<span class="built_in">dfs</span>(i);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solution::fleury</span><span class="params">(<span class="keyword">int</span> startIndex)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;#==========搜索欧拉回路&quot;</span> &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//cout &lt;&lt; &quot;start = &quot; &lt;&lt; startIndex &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> brige;</span><br><span class="line">	top = <span class="number">0</span>;</span><br><span class="line">	stk[top++] = startIndex; <span class="comment">// 将起点放入Euler路径中</span></span><br><span class="line">	<span class="keyword">while</span> (top &gt; <span class="number">0</span>) &#123;</span><br><span class="line">		brige = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123; <span class="comment">// 试图搜索一条边不是割边（桥） </span></span><br><span class="line">			<span class="keyword">if</span> (adjMatrix[stk[top - <span class="number">1</span>]][i]) &#123;</span><br><span class="line">				brige = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (brige) &#123; <span class="comment">// 如果没有点可以扩展，输出并出栈</span></span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;v&quot;</span> &lt;&lt; stk[--top] &lt;&lt; <span class="string">&quot; -&gt; &quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123; <span class="comment">// 否则继续搜索欧拉路径</span></span><br><span class="line">			<span class="built_in">dfs</span>(stk[--top]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;done.&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;#==========读入序列长度&quot;</span> &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="keyword">int</span> oddNum = <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;n = &quot;</span>;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line"></span><br><span class="line">	<span class="function">solution <span class="title">method</span><span class="params">(n)</span></span>;</span><br><span class="line"></span><br><span class="line">	method.<span class="built_in">initialList</span>();</span><br><span class="line"></span><br><span class="line">	method.<span class="built_in">checkGraphRealization</span>(method.node, n);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//如果可简单图化，根据 Havel 定理过程求出对应的简单图，并输出此图</span></span><br><span class="line">	<span class="keyword">if</span> (method.canSimpleGraphRealization) &#123;</span><br><span class="line">		method.<span class="built_in">Havel</span>(method.node, n);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//如果可简单图化，根据 Havel 定理构造对应简单图</span></span><br><span class="line">		<span class="keyword">if</span> (method.canSimpleGraphRealization)method.<span class="built_in">buildSimpleGraph</span>(method.node, n);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//检查是否连通</span></span><br><span class="line">		method.<span class="built_in">checkConnected</span>(method.node, n);</span><br><span class="line">	</span><br><span class="line">		<span class="comment">//连通，求欧拉回路</span></span><br><span class="line">		<span class="keyword">int</span> startIndex = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//method.display();</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (method.isConnected) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (method.node[i].degree % <span class="number">2</span>) &#123;</span><br><span class="line">					oddNum++;</span><br><span class="line">					startIndex = i;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			cout &lt;&lt; endl;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;#==========检查是否有欧拉回路&quot;</span> &lt;&lt; endl;</span><br><span class="line">			cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (oddNum == <span class="number">0</span>) &#123;</span><br><span class="line">				cout &lt;&lt; <span class="string">&quot;有欧拉回路！&quot;</span> &lt;&lt; endl;</span><br><span class="line">				method.<span class="built_in">fleury</span>(startIndex);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				cout &lt;&lt; <span class="string">&quot;没有欧拉回路！&quot;</span> &lt;&lt; endl;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h3><p>从民间收集了5个具有代表性的测试数据</p>
+<h4 id="case-1"><a href="#case-1" class="headerlink" title="case 1"></a>case 1</h4><ul>
+<li><p>input<br><code>3, 3, 2, 2, 1</code></p>
+</li>
+<li><p>output</p>
+</li>
+</ul>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132142652.png" alt="image-20211213214226816" style="zoom:80%;" /></p>
+<h4 id="case-2"><a href="#case-2" class="headerlink" title="case 2"></a>case 2</h4><ul>
+<li>input<br><code>3, 3, 2</code></li>
+<li>output</li>
+</ul>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132148896.png" alt="image-20211213214336710" style="zoom:80%;" /></p>
+<h4 id="case-3"><a href="#case-3" class="headerlink" title="case 3"></a>case 3</h4><ul>
+<li>input<br><code>1, 1, 1, 1</code></li>
+<li>output</li>
+</ul>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132148766.png" alt="image-20211213214604678" style="zoom: 80%;" /></p>
+<h4 id="case-4"><a href="#case-4" class="headerlink" title="case 4"></a>case 4</h4><ul>
+<li>input<br><code>3, 2, 2, 1</code></li>
+<li>output</li>
+</ul>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132149966.png" alt="image-20211213214730768" style="zoom:80%;" /></p>
+<h4 id="case-5"><a href="#case-5" class="headerlink" title="case 5"></a>case 5</h4><ul>
+<li>input<br><code>3, 2, 2, 1</code></li>
+<li>output</li>
+</ul>
+<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112132149362.png" alt="image-20211213214843142" style="zoom:80%;" /></p>
+<h2 id="实验总结"><a href="#实验总结" class="headerlink" title="实验总结"></a>实验总结</h2><p>本次实验，通过动手编写程序，掌握了可简单图化的定义，连通图、欧拉图的判断方法，欧拉回路的搜索方法，熟悉了Havel定理以及Fleury算法，首次系统地将离散数学的理论知识应用到程序实践上，加深对图论知识的印象，锻炼了代码能力。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/08/%E5%8F%AF%E7%AE%80%E5%8D%95%E5%9B%BE%E5%8C%96%E3%80%81%E8%BF%9E%E9%80%9A%E5%9B%BE%E3%80%81%E6%AC%A7%E6%8B%89%E5%9B%BE%E5%92%8C%E5%93%88%E5%AF%86%E9%A1%BF%E5%9B%BE%E7%9A%84%E5%88%A4%E6%96%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Existo">
+      <meta itemprop="description" content="Hello Nerd">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Existo's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/08/%E5%8F%AF%E7%AE%80%E5%8D%95%E5%9B%BE%E5%8C%96%E3%80%81%E8%BF%9E%E9%80%9A%E5%9B%BE%E3%80%81%E6%AC%A7%E6%8B%89%E5%9B%BE%E5%92%8C%E5%93%88%E5%AF%86%E9%A1%BF%E5%9B%BE%E7%9A%84%E5%88%A4%E6%96%AD/" class="post-title-link" itemprop="url">可简单图化、连通图、欧拉图和哈密顿图的判断</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-08 22:34:03 / 修改时间：23:16:29" itemprop="dateCreated datePublished" datetime="2021-12-08T22:34:03+08:00">2021-12-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="可图化"><a href="#可图化" class="headerlink" title="可图化"></a>可图化</h2><p>设非负整数数列d=( d1,d2, …, dn ),若存在无向图G, 使得G的度数列是d, 则称d为可图化的.</p>
+<h3 id="可简单图化"><a href="#可简单图化" class="headerlink" title="可简单图化"></a>可简单图化</h3><p>设非负整数列d=( d1,d2, …, dn ),若存在无向简单图G, 使得G的度数列是d,则称d为可简单图化的.</p>
+<h3 id="可图化充要条件"><a href="#可图化充要条件" class="headerlink" title="可图化充要条件"></a>可图化充要条件</h3><p>非负整数列d=(d1,d2,…,dn)是可图化的, 当且仅当<strong><code>d1 + d2 + … + dn = 0(mod 2)</code></strong> <em>握手定理</em></p>
+<h3 id="可简单图化充要条件（Havel定理）"><a href="#可简单图化充要条件（Havel定理）" class="headerlink" title="可简单图化充要条件（Havel定理）"></a>可简单图化充要条件（Havel定理）</h3><p>设非负整数列d=(d1,d2,…,dn)满足:</p>
+<p>$\begin{cases}{d1+d2+…+dn=0(mod 2)}\\{n-1≥d1≥d2≥…≥dn≥0}\end{cases}$</p>
+<p>则d可简单图化当且仅当<br>d’=(d2-1,d3-1,…,dd1+1-1, dd1+2,…,dn)可简单图化</p>
+<p>该定理的两个条件：</p>
+<ol>
+<li><strong>可图化</strong>；</li>
+<li><strong>最大度小于等于n-1</strong></li>
+</ol>
+<p>例: d=(4,<strong>4,3,3,2</strong>,2)可简单图化 &lt;=&gt; d’=(<strong>3,2,2,1</strong>,2)可简单图化</p>
+<p>d’中注释数也就是<strong>第一个数个</strong>后续的数减一</p>
+<h4 id="Havel定理等价形式"><a href="#Havel定理等价形式" class="headerlink" title="Havel定理等价形式"></a>Havel定理等价形式</h4><p>非负整数<br>d=(d1,d2,…,dn) 可简单图化当且仅当</p>
+<p>$d1+d2+…+dn=0(mod 2)$</p>
+<p>并且对r=1,2,…,n有</p>
+<p>$d1+d2+…+dr ≤ r(r-1)+min(r,dr+1)+min(r,dr+2)+…+min(r,dn)$</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/07/%E5%87%A0%E7%A7%8D%E9%87%8D%E8%A6%81%E7%9A%84%E5%88%86%E5%B8%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -880,235 +1130,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/24/DEBUG%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Existo">
-      <meta itemprop="description" content="Hello Nerd">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Existo's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/24/DEBUG%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">DEBUG命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-24 10:28:37" itemprop="dateCreated datePublished" datetime="2021-11-24T10:28:37+08:00">2021-11-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-07 00:12:57" itemprop="dateModified" datetime="2021-12-07T00:12:57+08:00">2021-12-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h1><p>cpu中寄存器用于存储内存中数据的物理地址</p>
-<h2 id="CS"><a href="#CS" class="headerlink" title="CS"></a>CS</h2><p>CS 为代码段寄存器，一般用于存放代码<br>通常和IP使用用于处理下一条执行的代码<br><code>cs:IP // 基地址：偏移地址</code><br>CS地址对应的数据，相当于c语言中的代码语句</p>
-<h2 id="DS"><a href="#DS" class="headerlink" title="DS"></a>DS</h2><p>DS 为数据段寄存器，一般用于存放数据<br>DS地址对应的数据，相当于c语言中的全局变量</p>
-<h2 id="SS"><a href="#SS" class="headerlink" title="SS"></a>SS</h2><h2 id="ES"><a href="#ES" class="headerlink" title="ES"></a>ES</h2><h1 id="DEBUG各命令"><a href="#DEBUG各命令" class="headerlink" title="DEBUG各命令"></a>DEBUG各命令</h1><h2 id="R命令"><a href="#R命令" class="headerlink" title="R命令"></a>R命令</h2><p>作用：观看和修改寄存器的值</p>
-<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202111241430794.png" alt="image-20211124112252095"></p>
-<p>可以使用R命令修改寄存器的值</p>
-<p>例如：将DS值改为000</p>
-<p>输入<code>R DS</code>，先返回DS当前地址，在“：”后输入新地址</p>
-<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202111241431867.png" alt="image-20211124112408187"></p>
-<h2 id="D命令"><a href="#D命令" class="headerlink" title="D命令"></a>D命令</h2><p>作用：显示内存区域的内容</p>
-<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202111241431599.png" alt="image-20211124104946980"></p>
-<p>最左边是内存的起始地址，中间以十六进制的形式显示内存值，最右边是以ASCII码的形式显示内存值。每行最多显示16个字节的内容</p>
-<h2 id="E命令"><a href="#E命令" class="headerlink" title="E命令"></a>E命令</h2><p>作用：改变内存单位的内容</p>
-<p>使用方式：<code>E [起始位置]</code></p>
-<p>在提示符“-”下输入以下命令：<code>E 1AF5:100</code></p>
-<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202111241431740.png" alt="image-20211124105356502"></p>
-<p>DEBUG首先显示[1AF5:0000]的内容00.，这时可以修改该字节的值。如果还要修改后续的内容，可以按空格键继续。当要跳过某个字节时，可以按连续的两个空格跳到后一个字节去</p>
-<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202111241431539.png" alt="image-20211124105526930"></p>
-<p><img src="https://raw.githubusercontent.com/ExistoT01/myImage/main/blog_img/202111241431795.png" alt="image-20211124105536540"></p>
-<h2 id="T命令"><a href="#T命令" class="headerlink" title="T命令"></a>T命令</h2><p>作用：执行汇编程序，单步跟踪</p>
-<p>使用方式：T命令的使用方式是T <code>[=地址] [指令数]</code>。如果忽略“地址”的话，T命令从CS:IP处开始运行。“指令数”是要单步执行的指令的数量。</p>
-<h2 id="U命令"><a href="#U命令" class="headerlink" title="U命令"></a>U命令</h2><p>作用：对机器代码反汇编显示</p>
-<p>使用方式：<code>U [范围]</code></p>
-<p>如果范围参数只输入了起始地址，则只对20H个字节的机器代码反汇编</p>
-<h2 id="G命令"><a href="#G命令" class="headerlink" title="G命令"></a>G命令</h2><p>作用：执行汇编指令</p>
-<p>使用方式：<code>G [=起始地址] [断点地址]</code></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/21/%E6%9C%BA%E5%99%A8%E6%95%B0%20%E7%9C%9F%E5%80%BC%20%E5%8E%9F%E7%A0%81%20%E5%8F%8D%E7%A0%81%20%E8%A1%A5%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Existo">
-      <meta itemprop="description" content="Hello Nerd">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Existo's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/21/%E6%9C%BA%E5%99%A8%E6%95%B0%20%E7%9C%9F%E5%80%BC%20%E5%8E%9F%E7%A0%81%20%E5%8F%8D%E7%A0%81%20%E8%A1%A5%E7%A0%81/" class="post-title-link" itemprop="url">机器数 真值 原码 反码 补码</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-11-21 11:35:25" itemprop="dateCreated datePublished" datetime="2021-11-21T11:35:25+08:00">2021-11-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-22 22:52:46" itemprop="dateModified" datetime="2021-11-22T22:52:46+08:00">2021-11-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="机器数-真值-原码-反码-补码"><a href="#机器数-真值-原码-反码-补码" class="headerlink" title="机器数 真值 原码 反码 补码"></a>机器数 真值 原码 反码 补码</h1><h2 id="各个进制的英文"><a href="#各个进制的英文" class="headerlink" title="各个进制的英文"></a>各个进制的英文</h2><ul>
-<li>十六进制（<strong>Hex</strong>adecimal）<ul>
-<li>1 2 3 4 5 6 7 8 9 <strong>A B C D E F</strong>    </li>
-</ul>
-</li>
-<li>十进制（<strong>Dec</strong>imal）</li>
-<li>八进制（<strong>Oct</strong>al）</li>
-<li>二进制（<strong>Bin</strong>ary）</li>
-</ul>
-<p>通常在数后面跟上各进制的<strong>英文首字母</strong>来表示这个数是哪个进制。</p>
-<h2 id="机器数与真值"><a href="#机器数与真值" class="headerlink" title="机器数与真值"></a>机器数与真值</h2><p><strong>机器数</strong>：通常将数值数据在计算机内部编码表示后的数称为机器数</p>
-<p><strong>真值</strong>：机器数真正的值（即现实世界中带有正负号的数）称为机器数的真值</p>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>原码就是符号位加上真值的绝对值, 即用第一位表示符号, 其余位表示值. 比如如果是8位二进制<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[+1] = 0000 0001 //+1的源码</span><br><span class="line"></span><br><span class="line">[-1] = 1000 0001 //-1的源码</span><br></pre></td></tr></table></figure><br>第一位是<strong>符号位</strong></p>
-<p>因为第一位是符号位, 所以8位二进制数的取值范围就是:</p>
-<p><code>[1111 1111 , 0111 1111]</code></p>
-<p>即</p>
-<p><code>[-127 , 127]</code></p>
-<p>原码是人脑最容易理解和计算的表示方式</p>
-<h3 id="源码定点小数"><a href="#源码定点小数" class="headerlink" title="源码定点小数"></a>源码定点小数</h3><p>表示范围：<strong>- ( 1 - 2^-n^ ) ~ + ( 1 - 2^-n^ )</strong></p>
-<p>8位字长原码表示的有符号定点小数真值范围：</p>
-<p><code>1.1111111b～0.1111111b</code></p>
-<p>即：</p>
-<p><code>-(127d/128)d～+(127/128）d</code></p>
-<h2 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h2><p>反码的表示方法是:</p>
-<p>正数的反码是其本身</p>
-<p>负数的反码是在其原码的基础上, <strong>符号位不变，其余各个位取反</strong>.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[+1] = [00000001]原 = [00000001]反</span><br><span class="line"></span><br><span class="line">[-1] = [10000001]原 = [11111110]反</span><br></pre></td></tr></table></figure>
-<p>可见如果一个反码表示的是负数, 人脑无法直观的看出来它的数值. 通常要将其转换成原码再计算.</p>
-<h2 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h2><p>补码的表示方法是:</p>
-<p>正数的补码就是其本身</p>
-<p>负数的补码是在其原码的基础上, 符号位不变, 其余各位取反, 最后+1. (即在反码的基础上+1)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[+1] = [00000001]原 = [00000001]反 = [00000001]补</span><br><span class="line"></span><br><span class="line">[-1] = [10000001]原 = [11111110]反 = [11111111]补</span><br></pre></td></tr></table></figure>
-<p>对于负数, 补码表示方式也是人脑无法直观看出其数值的. 通常也需要转换成原码在计算其数值.</p>
-<h3 id="移码"><a href="#移码" class="headerlink" title="移码"></a>移码</h3><p>定义：移码（又叫增码或偏置码）通常用于表示浮点数的阶码，其表示形式与补码相似，<strong>只是其符号位用“1”表示正数，用“0”表示负数</strong>，数值部分与补码相同。</p>
-<p>缘由：用补码表示阶码的时候，当阶码无限小，产生了下溢的时候，阶码变成了0，那么这个浮点数的值变为了1。而实际上这个数是无限接近于零的。那么我们就需要取出其中的 “-0“ 值作为机器零。</p>
-<h2 id="源码、反码、补码的意义"><a href="#源码、反码、补码的意义" class="headerlink" title="源码、反码、补码的意义"></a>源码、反码、补码的意义</h2><p>在开始深入学习前, 我的学习建议是先”死记硬背”上面的原码, 反码和补码的表示方式以及计算方法.</p>
-<p>现在我们知道了计算机可以有三种编码方式表示一个数. 对于正数因为三种编码方式的结果都相同:</p>
-<p><code>[+1] = [00000001]原 = [00000001]反 = [00000001]补</code></p>
-<p>所以不需要过多解释. 但是对于负数:</p>
-<p><code>[-1] = [10000001]原 = [11111110]反 = [11111111]补</code></p>
-<p>可见原码, 反码和补码是完全不同的. 既然原码才是被人脑直接识别并用于计算表示方式, 为何还会有反码和补码呢?</p>
-<p>首先, 因为人脑可以知道第一位是符号位, 在计算的时候我们会根据符号位, 选择对真值区域的加减. (真值的概念在本文最开头). 但是对于计算机, 加减乘数已经是最基础的运算, 要设计的尽量简单. 计算机辨别”符号位”显然会让计算机的基础电路设计变得十分复杂! 于是人们想出了将符号位也参与运算的方法. 我们知道, 根据运算法则减去一个正数等于加上一个负数, 即: <code>1-1 = 1 + (-1) = 0</code>, 所以机器可以只有加法而没有减法, 这样计算机运算的设计就更简单了.</p>
-<p>于是人们开始探索 将符号位参与运算, 并且只保留加法的方法. 首先来看原码:</p>
-<p>计算十进制的表达式:<code>1-1=0</code></p>
-<p><code>1 - 1 = 1 + (-1) = [00000001]原 + [10000001]原 = [10000010]原 = -2</code></p>
-<p>如果用原码表示, 让符号位也参与计算, 显然对于减法来说, 结果是不正确的.这也就是为何计算机内部不使用原码表示一个数.</p>
-<p>为了解决原码做减法的问题, 出现了反码:</p>
-<p>计算十进制的表达式: <code>1-1=0</code></p>
-<p><code>1 - 1 = 1 + (-1) = [0000 0001]原 + [1000 0001]原= [0000 0001]反 + [1111 1110]反 = [1111 1111]反 = [1000 0000]原 = -0</code></p>
-<p>发现用反码计算减法, 结果的真值部分是正确的. 而唯一的问题其实就出现在”0”这个特殊的数值上. 虽然人们理解上 +0 和 -0 是一样的, 但是0带符号是没有任何意义的. 而且会有<code>[0000 0000]原</code>和<code>[1000 0000]原</code>两个编码表示0.</p>
-<p>于是补码的出现, 解决了0的符号以及两个编码的问题:</p>
-<p><code>1-1 = 1 + (-1) = [0000 0001]原 + [1000 0001]原 = [0000 0001]补 + [1111 1111]补 = [0000 0000]补=[0000 0000]原</code></p>
-<p>这样0用[0000 0000]表示, 而以前出现问题的-0则不存在了.而且可以用[1000 0000]表示-128:</p>
-<p><code>(-1) + (-127) = [1000 0001]原 + [1111 1111]原 = [1111 1111]补 + [1000 0001]补 = [1000 0000]补</code></p>
-<p>-1-127的结果应该是-128, 在用补码运算的结果中,<code>[1000 0000]补</code> 就是-128. 但是注意因为实际上是使用以前的-0的补码来表示-128, 所以-128并没有原码和反码表示.(对-128的补码表示<code>[1000 0000]补</code>算出来的原码是<code>[0000 0000]原</code>, 这是不正确的)</p>
-<p>使用补码, 不仅仅修复了0的符号以及存在两个编码的问题, 而且还能够多表示一个最低数. 这就是为什么8位二进制, 使用原码或反码表示的范围为<code>[-127, +127]</code>, 而使用补码表示的范围为<code>[-128, 127]</code>.</p>
-<p>因为机器使用补码, 所以对于编程中常用到的32位int类型, 可以表示范围是: <code>[-231, 231-1]</code> 因为第一位表示的是符号位.而使用补码表示时又可以多保存一个最小值.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1180,7 +1201,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1193,7 +1214,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
