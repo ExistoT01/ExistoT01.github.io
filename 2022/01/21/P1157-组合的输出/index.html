@@ -22,20 +22,24 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="C#委托（Delegate）委托的声明声明委托的语法delegate &lt;return type&gt; &lt;delegate-name&gt; &lt;parameter list&gt;  parameter list : 参数列表  例如 :public delegate int MyDelegate (string s); 该委托可被用于引用任何一个带有一个单一的 string 参">
+  <meta name="description" content="题目链接 组合的输出，不论是在算法题目中，还是日常编程中都十分常遇到 题目题目描述 输入格式输出格式 输入输出样例输入 #1 15 3  输出 #1 123456789101  2  31  2  41  2  51  3  41  3  51  4  52  3  42  3  52  4  53  4  5 代码12345678910111213141516171819202122232425">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C#委托">
-<meta property="og:url" content="http://example.com/2021/11/12/C-%E5%A7%94%E6%89%98/index.html">
+<meta property="og:title" content="P1157-组合的输出">
+<meta property="og:url" content="http://example.com/2022/01/21/P1157-%E7%BB%84%E5%90%88%E7%9A%84%E8%BE%93%E5%87%BA/index.html">
 <meta property="og:site_name" content="Existo&#39;s Blog">
-<meta property="og:description" content="C#委托（Delegate）委托的声明声明委托的语法delegate &lt;return type&gt; &lt;delegate-name&gt; &lt;parameter list&gt;  parameter list : 参数列表  例如 :public delegate int MyDelegate (string s); 该委托可被用于引用任何一个带有一个单一的 string 参">
+<meta property="og:description" content="题目链接 组合的输出，不论是在算法题目中，还是日常编程中都十分常遇到 题目题目描述 输入格式输出格式 输入输出样例输入 #1 15 3  输出 #1 123456789101  2  31  2  41  2  51  3  41  3  51  4  52  3  42  3  52  4  53  4  5 代码12345678910111213141516171819202122232425">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-11-12T08:31:22.000Z">
-<meta property="article:modified_time" content="2022-01-18T15:02:52.826Z">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220121220339699.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220121220401490.png">
+<meta property="og:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220121220415978.png">
+<meta property="article:published_time" content="2022-01-21T13:32:17.000Z">
+<meta property="article:modified_time" content="2022-01-21T14:07:03.182Z">
 <meta property="article:author" content="Existo">
-<meta property="article:tag" content="C#">
+<meta property="article:tag" content="ACM">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/ASUS/AppData/Roaming/Typora/typora-user-images/image-20220121220339699.png">
 
-<link rel="canonical" href="http://example.com/2021/11/12/C-%E5%A7%94%E6%89%98/">
+<link rel="canonical" href="http://example.com/2022/01/21/P1157-%E7%BB%84%E5%90%88%E7%9A%84%E8%BE%93%E5%87%BA/">
 
 
 <script id="page-configurations">
@@ -48,7 +52,7 @@
   };
 </script>
 
-  <title>C#委托 | Existo's Blog</title>
+  <title>P1157-组合的输出 | Existo's Blog</title>
   
 
 
@@ -176,7 +180,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/12/C-%E5%A7%94%E6%89%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/21/P1157-%E7%BB%84%E5%90%88%E7%9A%84%E8%BE%93%E5%87%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -189,7 +193,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          C#委托
+          P1157-组合的输出
         </h1>
 
         <div class="post-meta">
@@ -198,23 +202,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-11-12 16:31:22" itemprop="dateCreated datePublished" datetime="2021-11-12T16:31:22+08:00">2021-11-12</time>
+              <time title="创建时间：2022-01-21 21:32:17 / 修改时间：22:07:03" itemprop="dateCreated datePublished" datetime="2022-01-21T21:32:17+08:00">2022-01-21</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-18 23:02:52" itemprop="dateModified" datetime="2022-01-18T23:02:52+08:00">2022-01-18</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
                 </span>
             </span>
 
@@ -236,16 +234,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="C-委托（Delegate）"><a href="#C-委托（Delegate）" class="headerlink" title="C#委托（Delegate）"></a>C#委托（Delegate）</h1><h2 id="委托的声明"><a href="#委托的声明" class="headerlink" title="委托的声明"></a>委托的声明</h2><p>声明委托的语法<br><code>delegate &lt;return type&gt; &lt;delegate-name&gt; &lt;parameter list&gt;</code></p>
-<ul>
-<li>parameter list : 参数列表</li>
-</ul>
-<p>例如 :<br><code>public delegate int MyDelegate (string s);</code></p>
-<p>该委托可被用于引用任何一个<strong>带有一个单一的 <em>string</em> 参数的方法</strong>，并返回一个 <strong><em>int</em></strong> 类型变量。</p>
-<span id="more"></span>
-<h2 id="委托的实例化"><a href="#委托的实例化" class="headerlink" title="委托的实例化"></a>委托的实例化</h2><p>委托对象使用 <strong>new</strong> 关键字来创建，创建时<strong>委托的参数是一个特定的函数</strong>，这个特定的函数<strong>不用写参数</strong></p>
-<p>例如 : </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public delegate int MyDelegate (string s);</span><br><span class="line">...</span><br><span class="line">MyDelegate md1 = new MyDelegate(function1);</span><br><span class="line">MyDelegate md2 = new MyDelegate(function2);</span><br></pre></td></tr></table></figure>
+        <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1157">题目链接</a></p>
+<p>组合的输出，不论是在算法题目中，还是日常编程中都十分常遇到</p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220121220339699.png" alt="image-20220121220339699" style="zoom:80%;" /></p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220121220401490.png" alt="image-20220121220401490" style="zoom:80%;" />输出格式</h2><p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20220121220415978.png" alt="image-20220121220415978" style="zoom:80%;" /></p>
+<h2 id="输入输出样例"><a href="#输入输出样例" class="headerlink" title="输入输出样例"></a>输入输出样例</h2><p><strong>输入 #1</strong></p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">5 </span><span class="number">3</span> </span><br></pre></td></tr></table></figure>
+<p><strong>输出 #1</strong></p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span> <span class="number">2</span>  <span class="number">3</span></span><br><span class="line"><span class="symbol">1 </span> <span class="number">2</span>  <span class="number">4</span></span><br><span class="line"><span class="symbol">1 </span> <span class="number">2</span>  <span class="number">5</span></span><br><span class="line"><span class="symbol">1 </span> <span class="number">3</span>  <span class="number">4</span></span><br><span class="line"><span class="symbol">1 </span> <span class="number">3</span>  <span class="number">5</span></span><br><span class="line"><span class="symbol">1 </span> <span class="number">4</span>  <span class="number">5</span></span><br><span class="line"><span class="symbol">2 </span> <span class="number">3</span>  <span class="number">4</span></span><br><span class="line"><span class="symbol">2 </span> <span class="number">3</span>  <span class="number">5</span></span><br><span class="line"><span class="symbol">2 </span> <span class="number">4</span>  <span class="number">5</span></span><br><span class="line"><span class="symbol">3 </span> <span class="number">4</span>  <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, r;</span><br><span class="line"><span class="keyword">int</span> num[<span class="number">100</span>]; <span class="comment">//满足100位元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//k表示当前正在计算第k位</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//如果k超过了元素数</span></span><br><span class="line">    <span class="keyword">if</span> (k &gt; r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//输出当前组合</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= r; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">3</span>) &lt;&lt; num[i];</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果没超过元素数，则从k+1位开始搜索</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = num[k - <span class="number">1</span>] + <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        num[k] = i;</span><br><span class="line">        <span class="built_in">dfs</span>(k + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; r;</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>从<code>n</code>个数获得<code>r</code>个元素的组合，采用<code>dfs</code>深度优先搜索，从第<code>1</code>位搜到第<code>r</code>位，每一位都不超过<code>n</code>，一旦超过了所需元素数，便输出当前组合，接着从上一位开始，加<code>1</code>后继续搜索</p>
 
     </div>
 
@@ -276,7 +274,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C#</a>
+              <a href="/tags/ACM/" rel="tag"><i class="fa fa-tag"></i> ACM</a>
           </div>
 
         
@@ -285,13 +283,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/11/12/C-%E6%8E%A5%E5%8F%A3/" rel="prev" title="C#接口">
-      <i class="fa fa-chevron-left"></i> C#接口
+    <a href="/2022/01/12/%E6%95%B0%E5%AD%97%E9%80%BB%E8%BE%91%E5%A4%8D%E4%B9%A0/" rel="prev" title="数字逻辑复习">
+      <i class="fa fa-chevron-left"></i> 数字逻辑复习
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/11/19/C-%E4%BA%8B%E4%BB%B6/" rel="next" title="C#事件">
-      C#事件 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -355,7 +350,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E5%A7%94%E6%89%98%EF%BC%88Delegate%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">C#委托（Delegate）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E7%9A%84%E5%A3%B0%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">委托的声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A7%94%E6%89%98%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">委托的实例化</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B"><span class="nav-number">1.4.</span> <span class="nav-text">输入输出样例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">题目分析</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
