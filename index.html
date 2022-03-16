@@ -197,7 +197,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-03-16 10:56:22 / 修改时间：11:43:14" itemprop="dateCreated datePublished" datetime="2022-03-16T10:56:22+08:00">2022-03-16</time>
+              <time title="创建时间：2022-03-16 10:56:22 / 修改时间：11:44:48" itemprop="dateCreated datePublished" datetime="2022-03-16T10:56:22+08:00">2022-03-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -241,65 +241,14 @@
 <li>拷贝另一个<code>vector</code>的一部分</li>
 </ul>
 <p><code>vector&lt;T&gt; arr(anotherArr.start(), anotherArr.end())</code></p>
-<!-- Read more -->
-<h2 id="vector增加元素"><a href="#vector增加元素" class="headerlink" title="vector增加元素"></a>vector增加元素</h2><ul>
-<li>添加一个元素</li>
-</ul>
-<p><code>arr.push_back(T val)</code></p>
-<p>在<code>C++11</code>新增了一个函数<code>emplace_back</code>效率比<code>push_back</code>要高，所以尽量用<code>emplace_back</code>。</p>
-<p><code>arr.emplace_back(T val)</code></p>
-<h2 id="vector删除元素"><a href="#vector删除元素" class="headerlink" title="vector删除元素"></a>vector删除元素</h2><ul>
-<li>删除一个元素</li>
-</ul>
-<p><code>arr.erase(iterator first, iterator last)</code></p>
-<ul>
-<li>清空所有元素</li>
-</ul>
-<p><code>arr.clear()</code></p>
-<p><strong>注意：</strong><code>clear</code>函数不会把元素清零，只是把<code>size</code>设置为<code>0</code>，<code>capacity</code>不变</p>
-<ul>
-<li>清空内存</li>
-</ul>
-<p><code>vector&lt;T&gt;().swap(arr)</code></p>
-<h2 id="vector判断是否为空"><a href="#vector判断是否为空" class="headerlink" title="vector判断是否为空"></a>vector判断是否为空</h2><ul>
-<li>判断是否为空</li>
-</ul>
-<p><code>arr.empty()</code></p>
-<p>空返回<strong>true</strong>，否则返回<strong>false</strong></p>
-<h2 id="vector大小"><a href="#vector大小" class="headerlink" title="vector大小"></a>vector大小</h2><ul>
-<li>返回元素个数</li>
-</ul>
-<p><code>arr.size()</code></p>
-<h2 id="vector遍历"><a href="#vector遍历" class="headerlink" title="vector遍历"></a>vector遍历</h2><h3 id="一维vector遍历"><a href="#一维vector遍历" class="headerlink" title="一维vector遍历"></a>一维vector遍历</h3><ol>
-<li>下标遍历</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.<span class="built_in">size</span>(); ++i)&#123;</span><br><span class="line">	cout &lt;&lt; arr[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>迭代器遍历</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it = arr.<span class="built_in">begin</span>(); it != arr.<span class="built_in">end</span>(); ++it)&#123;</span><br><span class="line">	cout &lt;&lt; (*it);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>我也不知道是什么遍历，但是很方便</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(T element : arr)&#123;</span><br><span class="line">	cout &lt;&lt; element;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="二维vector遍历"><a href="#二维vector遍历" class="headerlink" title="二维vector遍历"></a>二维vector遍历</h3><ol>
-<li>下标遍历</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.<span class="built_in">size</span>(); ++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr[i].<span class="built_in">size</span>(); ++i)&#123;</span><br><span class="line">		cout &lt;&lt; arr[i][j];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>迭代器遍历</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it = arr.<span class="built_in">begin</span>(); it != arr.<span class="built_in">end</span>(); ++it)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; it &lt; (*it).<span class="built_in">size</span>(); ++i)&#123;</span><br><span class="line">		cout &lt;&lt; (*it)[i];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="返回最大值、最小值"><a href="#返回最大值、最小值" class="headerlink" title="返回最大值、最小值"></a>返回最大值、最小值</h2><ul>
-<li>返回最大值</li>
-</ul>
-<p><code>max_element(iterator first, iterator last)</code></p>
-<p><strong>注意返回的是迭代器</strong></p>
-<ul>
-<li>返回最小值</li>
-</ul>
-<p><code>min_element(iterator first, iterator last)</code></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/16/Vector%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
