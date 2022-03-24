@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="jump指令用作跳转  je  jmp equal 相等时跳转  jne  jmp not equal 不等时跳转  jz">
+  <meta name="description" content="KMP 字符串匹配普通的字符串匹配算法十分直观易懂，但是遇到特殊情况效率极低，因此KMP算法是一种高效的字符串匹配算法 算法的核心思路是减少重复匹配的次数从而降低时间复杂度  普通匹配算法的时间复杂度 O(mn)  KMP算法的时间复杂度 O(m+n)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="汇编指令">
-<meta property="og:url" content="http://example.com/2021/12/18/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:title" content="KMP">
+<meta property="og:url" content="http://example.com/2022/03/24/KMP/index.html">
 <meta property="og:site_name" content="Existo&#39;s Blog">
-<meta property="og:description" content="jump指令用作跳转  je  jmp equal 相等时跳转  jne  jmp not equal 不等时跳转  jz">
+<meta property="og:description" content="KMP 字符串匹配普通的字符串匹配算法十分直观易懂，但是遇到特殊情况效率极低，因此KMP算法是一种高效的字符串匹配算法 算法的核心思路是减少重复匹配的次数从而降低时间复杂度  普通匹配算法的时间复杂度 O(mn)  KMP算法的时间复杂度 O(m+n)">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-18T13:15:50.000Z">
-<meta property="article:modified_time" content="2022-01-18T15:00:31.714Z">
+<meta property="article:published_time" content="2022-03-24T05:34:18.000Z">
+<meta property="article:modified_time" content="2022-03-24T06:00:40.661Z">
 <meta property="article:author" content="Existo">
-<meta property="article:tag" content="汇编语言">
+<meta property="article:tag" content="algorithm">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/12/18/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/">
+<link rel="canonical" href="http://example.com/2022/03/24/KMP/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>汇编指令 | Existo's Blog</title>
+  <title>KMP | Existo's Blog</title>
   
 
 
@@ -176,7 +176,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/18/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/24/KMP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -189,7 +189,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          汇编指令
+          KMP
         </h1>
 
         <div class="post-meta">
@@ -198,16 +198,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-12-18 21:15:50" itemprop="dateCreated datePublished" datetime="2021-12-18T21:15:50+08:00">2021-12-18</time>
+              <time title="创建时间：2022-03-24 13:34:18 / 修改时间：14:00:40" itemprop="dateCreated datePublished" datetime="2022-03-24T13:34:18+08:00">2022-03-24</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-18 23:00:31" itemprop="dateModified" datetime="2022-01-18T23:00:31+08:00">2022-01-18</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -236,114 +230,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="jump指令"><a href="#jump指令" class="headerlink" title="jump指令"></a>jump指令</h2><p>用作跳转</p>
+        <h1 id="KMP-字符串匹配"><a href="#KMP-字符串匹配" class="headerlink" title="KMP 字符串匹配"></a>KMP 字符串匹配</h1><p>普通的字符串匹配算法十分直观易懂，但是遇到特殊情况效率极低，因此<code>KMP</code>算法是一种高效的字符串匹配算法</p>
+<p>算法的核心思路是减少重复匹配的次数从而降低时间复杂度</p>
 <ul>
-<li>je</li>
-</ul>
-<p>jmp equal 相等时跳转</p>
-<ul>
-<li>jne</li>
-</ul>
-<p>jmp not equal 不等时跳转</p>
-<ul>
-<li>jz</li>
+<li><p><strong>普通匹配算法的时间复杂度 <em>O</em>(<em>mn</em>)</strong></p>
+</li>
+<li><p><strong>KMP算法的时间复杂度 <em>O</em>(<em>m+n</em>)</strong></p>
+</li>
 </ul>
 <span id="more"></span>
-<p>jmp (when) zf(1) zf为1时跳转</p>
-<p>ZF（zero flag）:零标志，最近操作结果为0（列如 逻辑操作 等）<br>ZF=0（结果为0，ZF就置1）</p>
+<h2 id="算法的实现-cpp"><a href="#算法的实现-cpp" class="headerlink" title="算法的实现(cpp)"></a>算法的实现(cpp)</h2><ul>
+<li>获取<code>next</code>数组</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*get Next*/</span></span><br><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">buildNext</span><span class="params">(string patten)</span></span>&#123;</span><br><span class="line">       <span class="keyword">int</span> j = <span class="number">0</span>, m = patten.<span class="built_in">length</span>();<span class="comment">// j-&gt;“主”串指针</span></span><br><span class="line">       <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">next</span><span class="params">(m, <span class="number">0</span>)</span></span>;</span><br><span class="line">       <span class="keyword">int</span> t = <span class="number">-1</span>;<span class="comment">//t-&gt;模式串指针</span></span><br><span class="line">       next[<span class="number">0</span>] = <span class="number">-1</span>;<span class="comment">//next数组第一位初始化为-1</span></span><br><span class="line">       <span class="keyword">while</span>(j &lt; m - <span class="number">1</span>)&#123;</span><br><span class="line">           <span class="keyword">if</span>(t &lt; <span class="number">0</span> || patten[t] == patten[j])&#123;<span class="comment">//匹配</span></span><br><span class="line">               t++;</span><br><span class="line">               j++;</span><br><span class="line">               next[j] = t;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">else</span></span><br><span class="line">               t = next[t];</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> next;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>jnz</li>
+<li>匹配算法</li>
 </ul>
-<p>jmp zf=0 zf为0时跳转</p>
-<ul>
-<li>jg</li>
-</ul>
-<p>jmp if  greater 前 &gt; 后</p>
-<ul>
-<li>jge</li>
-</ul>
-<p>jmp if greater or equal 前 &gt;= 后</p>
-<ul>
-<li>ja</li>
-</ul>
-<p>jmp above 大于转移</p>
-<ul>
-<li>jb</li>
-</ul>
-<p>jmp below 小于转移</p>
-<ul>
-<li>jl</li>
-</ul>
-<p>jmp low 小于转移</p>
-<h2 id="cmp指令"><a href="#cmp指令" class="headerlink" title="cmp指令"></a>cmp指令</h2><p>CMP（比较）指令执行从<strong>目的操作数中减去源操作数</strong>的隐含减法操作，并且不修改任何操作数</p>
-<p><code>CMP destination,source</code></p>
-<p>当实际的减法发生时，CMP 指令按照计算结果修改溢出、符号、零、进位、辅助进位和奇偶标志位。</p>
-<p>如果比较的是两个无符号数，则零标志位和进位标志位表示的两个操作数之间的关系如右表所示：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>CMP结果</th>
-<th>ZF</th>
-<th>CF</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>目的操作数 &lt; 源操作数</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>目的操作数 &gt; 源操作数</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>目的操作数 = 源操作数</td>
-<td>1</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>如果比较的是两个有符号数，则符号标志位、零标志位和溢出标志位表示的两个操作数之间的关系如右表所示：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>CMP结果</th>
-<th>标志位</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>目的操作数 &lt; 源操作数</td>
-<td>SF ≠ OF</td>
-</tr>
-<tr>
-<td>目的操作数 &gt; 源操作数</td>
-<td>SF=OF</td>
-</tr>
-<tr>
-<td>目的操作数 = 源操作数</td>
-<td>ZF=1</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="地址传送指令"><a href="#地址传送指令" class="headerlink" title="地址传送指令"></a>地址传送指令</h2><ul>
-<li>lea</li>
-</ul>
-<p>装入有效地址</p>
-<h2 id="移位指令"><a href="#移位指令" class="headerlink" title="移位指令"></a>移位指令</h2><ul>
-<li>sar</li>
-</ul>
-<p>算术右移 (每位右移，低位进 CF，高位不变)</p>
-<ul>
-<li>shr</li>
-</ul>
-<p>逻辑右移（每位右移，低位进 CF，高位补 0）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*KMP*/</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">KMP</span><span class="params">(string haystack, string needle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n = haystack.<span class="built_in">length</span>(), m = needle.<span class="built_in">length</span>();</span><br><span class="line">        <span class="keyword">if</span>(m == <span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//边界情况判断</span></span><br><span class="line">    </span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; next = <span class="built_in">getNext</span>(needle);<span class="comment">//获取next数组</span></span><br><span class="line">    </span><br><span class="line">        <span class="keyword">while</span>(i &lt; n &amp;&amp; j &lt; m)&#123;</span><br><span class="line">            <span class="keyword">if</span>(j &lt; <span class="number">0</span> || haystack[i] == needle[j])&#123;</span><br><span class="line">                i++;</span><br><span class="line">                j++;</span><br><span class="line">                <span class="keyword">if</span>(j == m) <span class="keyword">return</span> i-j;<span class="comment">//如果到了模式串末尾且匹配，返回其在主串中的位置</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                j = next[j];<span class="comment">//模式串右移</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;<span class="comment">//未找到返回-1</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -374,7 +277,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" rel="tag"><i class="fa fa-tag"></i> 汇编语言</a>
+              <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
           </div>
 
         
@@ -383,13 +286,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/12/18/binary-bomb/" rel="prev" title="binary bomb lab">
-      <i class="fa fa-chevron-left"></i> binary bomb lab
+    <a href="/2022/03/16/Vector%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/" rel="prev" title="Vector用法总结">
+      <i class="fa fa-chevron-left"></i> Vector用法总结
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/12/20/%E8%A7%A6%E5%8F%91%E5%99%A8/" rel="next" title="触发器">
-      触发器 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -453,7 +353,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jump%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">jump指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cmp%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">cmp指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">地址传送指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">移位指令</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KMP-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D"><span class="nav-number">1.</span> <span class="nav-text">KMP 字符串匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0-cpp"><span class="nav-number">1.1.</span> <span class="nav-text">算法的实现(cpp)</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -615,6 +515,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
