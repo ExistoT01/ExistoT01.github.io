@@ -22,17 +22,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Hello Nerd">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Existo&#39;s Blog">
-<meta property="og:url" content="http://example.com/categories/%E5%AD%A6%E4%B9%A0/page/2/index.html">
+  <meta name="description" content="Deque 双端队列295场周赛T4，01BFS用到双端队列，之前很少接触这个数据结构  Double-ended queues are sequence containers with the feature of expansion and contraction on both ends.  由此可见，双端队列也就是一个可以在front-end和back-end两端插入或删除的数据罢了 用法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deque">
+<meta property="og:url" content="http://example.com/2022/05/29/deque/index.html">
 <meta property="og:site_name" content="Existo&#39;s Blog">
-<meta property="og:description" content="Hello Nerd">
+<meta property="og:description" content="Deque 双端队列295场周赛T4，01BFS用到双端队列，之前很少接触这个数据结构  Double-ended queues are sequence containers with the feature of expansion and contraction on both ends.  由此可见，双端队列也就是一个可以在front-end和back-end两端插入或删除的数据罢了 用法">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-29T07:17:23.000Z">
+<meta property="article:modified_time" content="2022-05-29T07:23:11.084Z">
 <meta property="article:author" content="Existo">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/categories/%E5%AD%A6%E4%B9%A0/page/2/">
+<link rel="canonical" href="http://example.com/2022/05/29/deque/">
 
 
 <script id="page-configurations">
@@ -40,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>分类: 学习 | Existo's Blog</title>
+  <title>deque | Existo's Blog</title>
   
 
 
@@ -166,240 +169,138 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">学习
-          <small>分类</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/29/deque/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Existo">
+      <meta itemprop="description" content="Hello Nerd">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Existo's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          deque
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-05-29 15:17:23 / 修改时间：15:23:11" itemprop="dateCreated datePublished" datetime="2022-05-29T15:17:23+08:00">2022-05-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-20T20:35:22+08:00"
-              content="2021-12-20">
-          12-20
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/20/%E8%A7%A6%E5%8F%91%E5%99%A8/" itemprop="url">
-            <span itemprop="name">触发器</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-18T21:15:50+08:00"
-              content="2021-12-18">
-          12-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/18/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/" itemprop="url">
-            <span itemprop="name">汇编指令</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-18T20:20:41+08:00"
-              content="2021-12-18">
-          12-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/18/binary-bomb/" itemprop="url">
-            <span itemprop="name">binary bomb lab</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-15T13:37:03+08:00"
-              content="2021-12-15">
-          12-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/15/%E5%9B%BE%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA/" itemprop="url">
-            <span itemprop="name">图的矩阵表示</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-15T13:33:03+08:00"
-              content="2021-12-15">
-          12-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/15/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%E5%AE%9E%E9%AA%8C%E4%B8%80/" itemprop="url">
-            <span itemprop="name">离散数学实验一</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-08T22:34:03+08:00"
-              content="2021-12-08">
-          12-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/08/%E5%8F%AF%E7%AE%80%E5%8D%95%E5%9B%BE%E5%8C%96%E3%80%81%E8%BF%9E%E9%80%9A%E5%9B%BE%E3%80%81%E6%AC%A7%E6%8B%89%E5%9B%BE%E5%92%8C%E5%93%88%E5%AF%86%E9%A1%BF%E5%9B%BE%E7%9A%84%E5%88%A4%E6%96%AD/" itemprop="url">
-            <span itemprop="name">可简单图化、连通图、欧拉图和哈密顿图的判断</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-07T20:44:59+08:00"
-              content="2021-12-07">
-          12-07
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/07/%E5%87%A0%E7%A7%8D%E9%87%8D%E8%A6%81%E7%9A%84%E5%88%86%E5%B8%83/" itemprop="url">
-            <span itemprop="name">几种重要的分布</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-06T17:05:09+08:00"
-              content="2021-12-06">
-          12-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/06/%E5%AF%84%E5%AD%98%E5%99%A8/" itemprop="url">
-            <span itemprop="name">寄存器</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-12-05T16:41:28+08:00"
-              content="2021-12-05">
-          12-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/05/%E5%B9%B3%E9%9D%A2%E5%9B%BE/" itemprop="url">
-            <span itemprop="name">平面图</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-11-24T10:28:37+08:00"
-              content="2021-11-24">
-          11-24
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/11/24/DEBUG%E5%91%BD%E4%BB%A4/" itemprop="url">
-            <span itemprop="name">DEBUG命令</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
+        <h1 id="Deque-双端队列"><a href="#Deque-双端队列" class="headerlink" title="Deque 双端队列"></a>Deque 双端队列</h1><p>295场周赛T4，01BFS用到双端队列，之前很少接触这个数据结构</p>
+<blockquote>
+<p>Double-ended queues are sequence containers with the feature of expansion and contraction on both ends.</p>
+</blockquote>
+<p>由此可见，双端队列也就是一个可以在front-end和back-end两端插入或删除的数据罢了</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><ul>
+<li>例子：</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CPP Program to implement Deque in STL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">showdq</span><span class="params">(deque&lt;<span class="keyword">int</span>&gt; g)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	deque&lt;<span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line">	<span class="keyword">for</span> (it = g.<span class="built_in">begin</span>(); it != g.<span class="built_in">end</span>(); ++it)</span><br><span class="line">		cout &lt;&lt; <span class="string">&#x27;\t&#x27;</span> &lt;&lt; *it;</span><br><span class="line">	cout &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	deque&lt;<span class="keyword">int</span>&gt; gquiz;</span><br><span class="line">	gquiz.<span class="built_in">push_back</span>(<span class="number">10</span>);</span><br><span class="line">	gquiz.<span class="built_in">push_front</span>(<span class="number">20</span>);</span><br><span class="line">	gquiz.<span class="built_in">push_back</span>(<span class="number">30</span>);</span><br><span class="line">	gquiz.<span class="built_in">push_front</span>(<span class="number">15</span>);</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;The deque gquiz is : &quot;</span>;</span><br><span class="line">	<span class="built_in">showdq</span>(gquiz);</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;\ngquiz.size() : &quot;</span> &lt;&lt; gquiz.<span class="built_in">size</span>();</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;\ngquiz.max_size() : &quot;</span> &lt;&lt; gquiz.<span class="built_in">max_size</span>();</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;\ngquiz.at(2) : &quot;</span> &lt;&lt; gquiz.<span class="built_in">at</span>(<span class="number">2</span>);</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;\ngquiz.front() : &quot;</span> &lt;&lt; gquiz.<span class="built_in">front</span>();</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;\ngquiz.back() : &quot;</span> &lt;&lt; gquiz.<span class="built_in">back</span>();</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;\ngquiz.pop_front() : &quot;</span>;</span><br><span class="line">	gquiz.<span class="built_in">pop_front</span>();</span><br><span class="line">	<span class="built_in">showdq</span>(gquiz);</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;\ngquiz.pop_back() : &quot;</span>;</span><br><span class="line">	gquiz.<span class="built_in">pop_back</span>();</span><br><span class="line">	<span class="built_in">showdq</span>(gquiz);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Output</strong></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">The</span> deque gquiz is :     <span class="number">15</span>    <span class="number">20</span>    <span class="number">10</span>    <span class="number">30</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">gquiz</span>.size() : <span class="number">4</span></span><br><span class="line"><span class="attribute">gquiz</span>.max_size() : <span class="number">4611686018427387903</span></span><br><span class="line"><span class="attribute">gquiz</span>.at(<span class="number">2</span>) : <span class="number">10</span></span><br><span class="line"><span class="attribute">gquiz</span>.front() : <span class="number">15</span></span><br><span class="line"><span class="attribute">gquiz</span>.back() : <span class="number">30</span></span><br><span class="line"><span class="attribute">gquiz</span>.pop_front() :     <span class="number">20</span>    <span class="number">10</span>    <span class="number">30</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">gquiz</span>.pop_back() :     <span class="number">20</span>    <span class="number">10</span></span><br></pre></td></tr></table></figure>
 
     </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>谨防新型互联网乞丐</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="Existo 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Existo 支付宝">
+        <p>支付宝</p>
+      </div>
+
   </div>
-  
-  
-  
+</div>
 
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/20/200%E9%A2%98%E7%BA%AA%E5%BF%B5/" rel="prev" title="200题纪念">
+      <i class="fa fa-chevron-left"></i> 200题纪念
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/categories/%E5%AD%A6%E4%B9%A0/">1</a><span class="page-number current">2</span><a class="page-number" href="/categories/%E5%AD%A6%E4%B9%A0/page/3/">3</a><a class="extend next" rel="next" href="/categories/%E5%AD%A6%E4%B9%A0/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  
+  
 
 
 
           </div>
           
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDg0NC8zMTMxMw=="></div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -446,6 +347,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Deque-%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="nav-number">1.</span> <span class="nav-text">Deque 双端队列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">用法</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -610,6 +512,21 @@
 
   
 
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
 
 
  
