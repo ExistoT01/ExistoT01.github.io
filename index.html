@@ -197,7 +197,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-09-06 17:15:19 / 修改时间：17:22:32" itemprop="dateCreated datePublished" datetime="2022-09-06T17:15:19+08:00">2022-09-06</time>
+              <time title="创建时间：2022-09-06 17:15:19 / 修改时间：17:24:14" itemprop="dateCreated datePublished" datetime="2022-09-06T17:15:19+08:00">2022-09-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -222,25 +222,14 @@
       
           <p>遇到poweshell 不识别 <code>nodemon</code> 命令的问题</p>
 <figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The term <span class="string">&#x27;nodemon&#x27;</span> <span class="literal">is</span><span class="built_in"> not</span> recognized <span class="keyword">as</span> a<span class="built_in"> name</span> <span class="keyword">of</span> a cmdlet</span><br></pre></td></tr></table></figure>
-<!-- read more -->
-<p>【解决办法】：</p>
-<ul>
-<li><p>把<code>npm prefix</code>添加到环境变量</p>
-<ul>
-<li><p><code>npm config get prefix</code></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202209061722718.png" alt="image-20220906172008493"></p>
-</li>
-<li><p>添加用户环境变量</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202209061722720.png" alt="image-20220906172058520"></p>
-<p>变量名: <code>path</code></p>
-<p>变量值: 得到的<code>prefix</code></p>
-</li>
-</ul>
-</li>
-<li><p><code>npx nodemon (packageName)</code></p>
-</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/09/06/nodemon/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -350,10 +339,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-08-26 10:05:28 / 修改时间：10:06:06" itemprop="dateCreated datePublished" datetime="2022-08-26T10:05:28+08:00">2022-08-26</time>
+              <time title="创建时间：2022-08-26 10:05:28" itemprop="dateCreated datePublished" datetime="2022-08-26T10:05:28+08:00">2022-08-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-09-06 17:24:25" itemprop="dateModified" datetime="2022-09-06T17:24:25+08:00">2022-09-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -411,52 +406,14 @@
 <li>RelativeLayout 使用</li>
 <li>插件之间的穿插使用</li>
 </ul>
-<!-- read more -->
-<h2 id="二、实验步骤"><a href="#二、实验步骤" class="headerlink" title="二、实验步骤"></a>二、实验步骤</h2><p>列出实验的关键步骤、代码解析、截图。</p>
-<ol>
-<li><p>项目创建</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208261003088.png" alt="image-20220825231548836" style="zoom:80%;" /></p>
-</li>
-<li><p>新建<code>ScrollView</code>，确定内部父布局</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208261003090.png" alt="image-20220825231733462" style="zoom:80%;" /></p>
-</li>
-<li><p>创建顶部首页显示栏，调整相关参数</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208261003091.png" alt="image-20220825232046151" style="zoom:80%;" /></p>
-</li>
-<li><p>创建顶部图片，修改相关参数</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208261003092.png" alt="image-20220825232316896" style="zoom:80%;" /></p>
-</li>
-<li><p>实现菜单栏模块</p>
-<ol>
-<li><p>先实现一个横向的<code>LinearLayout</code>作为父布局</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208261003093.png" alt="image-20220825232828332" style="zoom:80%;" /></p>
-</li>
-<li><p>写4个子布局</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208261003094.png" alt="image-20220825233545402" style="zoom:80%;" /></p>
-</li>
-</ol>
-</li>
-<li><p>消息模块</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208261003095.png" alt="image-20220826002317977" style="zoom:80%;" /></p>
-</li>
-<li><p>两条消息内容</p>
-<ol>
-<li><p>新建一些颜色圆角形状备用</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208261003096.png" alt="image-20220826095841639" style="zoom:80%;" /></p>
-</li>
-<li><p>创建消息卡片</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208261003097.png" alt="image-20220826095959566" style="zoom:80%;" /></p>
-</li>
-</ol>
-</li>
-<li><p>底部Tab模块，采用相对布局</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208261003098.png" alt="image-20220826100024508" style="zoom:80%;" /></p>
-</li>
-</ol>
-<h2 id="三、程序运行结果"><a href="#三、程序运行结果" class="headerlink" title="三、程序运行结果"></a>三、程序运行结果</h2><p>列出程序的最终运行结果及截图。</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208261003099.png" alt="image-20220826100100506" style="zoom:80%;" /></p>
-<h2 id="四、问题总结与体会"><a href="#四、问题总结与体会" class="headerlink" title="四、问题总结与体会"></a>四、问题总结与体会</h2><p>本次实验仿照其他安卓app简单写了一个首页界面，练习了相对布局的用法，<code>ScrollView</code>的作用在本实验体现出来的地方不大，而且<code>tabBar</code>也不具有吸底的效果，安卓的开发在很大程度上要比小程序的开发复杂得多</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/26/mobileProgram-lab6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -506,7 +463,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-26 10:05:48" itemprop="dateModified" datetime="2022-08-26T10:05:48+08:00">2022-08-26</time>
+                <time title="修改时间：2022-09-06 17:24:33" itemprop="dateModified" datetime="2022-09-06T17:24:33+08:00">2022-09-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -564,35 +521,14 @@
 <li>Textview imageview 使用</li>
 <li>LinearLayout 使用</li>
 </ul>
-<!-- read more -->
-<h2 id="二、实验步骤"><a href="#二、实验步骤" class="headerlink" title="二、实验步骤"></a>二、实验步骤</h2><p>列出实验的关键步骤、代码解析、截图。</p>
-<ol>
-<li><p>项目创建</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208252035825.png" alt="image-20220825193754310" style="zoom:80%;" /></p>
-</li>
-<li><p>确定外层大的<code>LinearLayout</code>布局</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208252035826.png" alt="image-20220825193917301"></p>
-</li>
-<li><p>设置背景色与垂直方向</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208252035827.png" alt="image-20220825194029777" style="zoom:80%;" /></p>
-</li>
-<li><p>构建第一个组，设置颜色，垂直方向与高度</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208252035828.png" alt="image-20220825194226812" style="zoom:80%;" /></p>
-</li>
-<li><p>创建组内图标，设置宽高，垂直居中，图标素材</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208252035829.png" alt="image-20220825195246910" style="zoom:80%;" /></p>
-</li>
-<li><p>设置右箭头</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208252035830.png" alt="image-20220825201011404" style="zoom:80%;" /></p>
-</li>
-<li><p>之后的分组都如法炮制，这里我使用1dp的<code>IamgeView</code>表示分割线</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208252035831.png" alt="image-20220825202639754" style="zoom:80%;" /></p>
-</li>
-</ol>
-<h2 id="三、程序运行结果"><a href="#三、程序运行结果" class="headerlink" title="三、程序运行结果"></a>三、程序运行结果</h2><p>列出程序的最终运行结果及截图。</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208252035832.png" alt="image-20220825202745191" style="zoom:80%;" /></p>
-<h2 id="四、问题总结与体会"><a href="#四、问题总结与体会" class="headerlink" title="四、问题总结与体会"></a>四、问题总结与体会</h2><p>本次实验是安卓程序的入门，简单掌握了基础控件的使用，模拟完成了微信的「发现」界面</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/25/mobileProgram-lab5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -634,10 +570,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-08-22 20:05:18 / 修改时间：20:05:45" itemprop="dateCreated datePublished" datetime="2022-08-22T20:05:18+08:00">2022-08-22</time>
+              <time title="创建时间：2022-08-22 20:05:18" itemprop="dateCreated datePublished" datetime="2022-08-22T20:05:18+08:00">2022-08-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-09-06 17:24:47" itemprop="dateModified" datetime="2022-09-06T17:24:47+08:00">2022-09-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -694,100 +636,14 @@
 <li>综合应用所学知识创建完整的前端新闻小程序项目</li>
 <li>能够在开发过程中数量掌握真机预览，调试等操作</li>
 </ul>
-<h2 id="二、实验步骤"><a href="#二、实验步骤" class="headerlink" title="二、实验步骤"></a>二、实验步骤</h2><p>列出实验的关键步骤、代码解析、截图。</p>
-<ol>
-<li><p>项目创建</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002530.png" alt="image-20220821120324600" style="zoom:80%;" /></p>
-</li>
-<li><p>页面配置</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002531.png" alt="image-20220821120920387" style="zoom:80%;" /></p>
-</li>
-<li><p>视图设计</p>
-<ol>
-<li><p>导航栏设计</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002533.png" alt="image-20220821121016337" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002534.png" alt="image-20220821121024425" style="zoom:80%;" /></p>
-</li>
-<li><p>tabBar设计</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002535.png" alt="image-20220821121627300" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002536.png" alt="image-20220821121638094" style="zoom:80%;" /></p>
-</li>
-<li><p>页面设计</p>
-<ol>
-<li><p>首页设计</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002537.png" alt="image-20220821122503762" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002538.png" alt="image-20220821235456172" style="zoom:80%;" /></p>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<pre><code>  2. 个人中心设计
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002539.png&quot; alt=&quot;image-20220822002820411&quot; style=&quot;zoom:80%;&quot; /&gt;
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002540.png&quot; alt=&quot;image-20220822002831578&quot; style=&quot;zoom:80%;&quot; /&gt;
-
-  3. 新闻页设计
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002541.png&quot; alt=&quot;image-20220822172633610&quot; style=&quot;zoom:80%;&quot; /&gt;
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002542.png&quot; alt=&quot;image-20220822172642340&quot; style=&quot;zoom:80%;&quot; /&gt;
-</code></pre><ol>
-<li>逻辑实现</li>
-</ol>
-<ol>
-<li><p>公共逻辑</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002543.png" alt="image-20220822172838474" style="zoom:80%;" /></p>
-</li>
-<li><p>首页逻辑</p>
-</li>
-</ol>
-<pre><code>  1. 新闻列表展示
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002544.png&quot; alt=&quot;image-20220822173025865&quot; style=&quot;zoom:80%;&quot; /&gt;
-
-  2. 点击跳转新闻内容
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002545.png&quot; alt=&quot;image-20220822173135008&quot; style=&quot;zoom:80%;&quot; /&gt;
-</code></pre><ol>
-<li>新闻页逻辑</li>
-</ol>
-<pre><code>  1. 显示对应新闻
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002546.png&quot; alt=&quot;image-20220822173439070&quot; style=&quot;zoom:80%;&quot; /&gt;
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002547.png&quot; alt=&quot;image-20220822173452054&quot; style=&quot;zoom:80%;&quot; /&gt;
-
-  2. 添加/取消新闻收藏
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002548.png&quot; alt=&quot;image-20220822174753008&quot; style=&quot;zoom:80%;&quot; /&gt;
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002549.png&quot; alt=&quot;image-20220822174805660&quot; style=&quot;zoom:80%;&quot; /&gt;
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002550.png&quot; alt=&quot;image-20220822174817897&quot; style=&quot;zoom:80%;&quot; /&gt;
-</code></pre><ol>
-<li>个人中心页逻辑</li>
-</ol>
-<pre><code>  1. 获取微信用户信息
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002551.png&quot; alt=&quot;image-20220822175631231&quot; style=&quot;zoom:80%;&quot; /&gt;
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002552.png&quot; alt=&quot;image-20220822175640375&quot; style=&quot;zoom:80%;&quot; /&gt;
-
-  2. 获取收藏列表
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002553.png&quot; alt=&quot;image-20220822195727007&quot; style=&quot;zoom:80%;&quot; /&gt;
-
-     &lt;img src=&quot;https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002554.png&quot; alt=&quot;image-20220822195748571&quot; style=&quot;zoom:80%;&quot; /&gt;
-</code></pre><h2 id="三、程序运行结果"><a href="#三、程序运行结果" class="headerlink" title="三、程序运行结果"></a>三、程序运行结果</h2><p>列出程序的最终运行结果及截图。</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002555.png" alt="image-20220822195808069" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002556.png" alt="image-20220822195818778" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002557.png" alt="image-20220822195830758" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208222002558.png" alt="image-20220822195955353" style="zoom:80%;" /></p>
-<h2 id="四、问题总结与体会"><a href="#四、问题总结与体会" class="headerlink" title="四、问题总结与体会"></a>四、问题总结与体会</h2><p>本次实验综合了许多基础开发内容，如：<code>tabbar</code>的使用，页面的跳转，用户信息的获取，程序内部储存的应用，轮播器的使用，是一次非常良好的学习机会</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/22/miniProgram-lab4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -829,10 +685,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-08-20 15:14:46 / 修改时间：15:16:20" itemprop="dateCreated datePublished" datetime="2022-08-20T15:14:46+08:00">2022-08-20</time>
+              <time title="创建时间：2022-08-20 15:14:46" itemprop="dateCreated datePublished" datetime="2022-08-20T15:14:46+08:00">2022-08-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-09-06 17:25:03" itemprop="dateModified" datetime="2022-09-06T17:25:03+08:00">2022-09-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -890,73 +752,14 @@
 <li>掌握视频自动播放方法</li>
 <li>掌握视频随机颜色弹幕效果</li>
 </ul>
-<h2 id="二、实验步骤"><a href="#二、实验步骤" class="headerlink" title="二、实验步骤"></a>二、实验步骤</h2><p>列出实验的关键步骤、代码解析、截图。</p>
-<ol>
-<li><p>项目创建</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513107.png" alt="image-20220819204135596" style="zoom:80%;" /></p>
-</li>
-<li><p>页面配置</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513109.png" alt="image-20220819204257141" style="zoom:80%;" /></p>
-</li>
-<li><p>视图设计</p>
-<ol>
-<li><p>导航栏设计</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513110.png" alt="image-20220819204529523" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513111.png" alt="image-20220819204540151" style="zoom:80%;" /></p>
-</li>
-<li><p>页面设计</p>
-<ol>
-<li><p>区域1：视频播放器</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513112.png" alt="image-20220819205937346" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513113.png" alt="image-20220819205946243" style="zoom:80%;" /></p>
-</li>
-<li><p>区域2：弹幕发送区域</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513114.png" alt="image-20220819210001765" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513115.png" alt="image-20220819210009622" style="zoom:80%;" /></p>
-</li>
-<li><p>区域3：视频列表</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513116.png" alt="image-20220819211352742" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513117.png" alt="image-20220819211406321" style="zoom:80%;" /></p>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>逻辑实现</p>
-<ol>
-<li><p>更新播放列表</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513118.png" alt="image-20220819212349084" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513119.png" alt="image-20220819212357305" style="zoom:80%;" /></p>
-</li>
-<li><p>点击播放视频</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513120.png" alt="image-20220820143127802" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513121.png" alt="image-20220820143554348" style="zoom:80%;" /></p>
-</li>
-<li><p>发送弹幕</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513122.png" alt="image-20220820145602656" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513123.png" alt="image-20220820145630763" style="zoom:80%;" /></p>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="三、程序运行结果"><a href="#三、程序运行结果" class="headerlink" title="三、程序运行结果"></a>三、程序运行结果</h2><p>列出程序的最终运行结果及截图。</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513124.png" alt="image-20220820145647379" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513125.png" alt="image-20220820145713542" style="zoom:80%;" /></p>
-<h2 id="四、问题总结与体会"><a href="#四、问题总结与体会" class="headerlink" title="四、问题总结与体会"></a>四、问题总结与体会</h2><p>本次实验中学习到了视频播放器的一些使用，对于本实验我觉得存在一些不严谨的地方</p>
-<ul>
-<li><code>vx:key</code>元素指定不明确</li>
-</ul>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208201513126.png" alt="image-20220820145920418" style="zoom:80%;" /></p>
-<p>​    实验自始至终未指定<code>video&#123;&#123;index&#125;&#125;</code>到底指的是什么</p>
-<ul>
-<li>未介绍<code>videoContext</code>对象</li>
-</ul>
-<p>​    实验中只是展示但是没有解释<code>wx.createVideoContext</code>函数，这个函数是创建一个视频播放器对象，创建的对象我们取名未<code>videoCtx</code>，它自身包含有<code>Play()</code>和<code>Stop()</code>内置函数</p>
-<ul>
-<li>部分变量不包含在页面初始数据内</li>
-</ul>
-<p>​    如<code>src</code>，<code>videoCtx</code>，未在<code>Page</code>的<code>data</code>内声明，而是由一些别的函数生成，不知道是否严谨</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/20/miniProgram-lab3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -998,10 +801,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-08-18 21:18:17 / 修改时间：23:26:28" itemprop="dateCreated datePublished" datetime="2022-08-18T21:18:17+08:00">2022-08-18</time>
+              <time title="创建时间：2022-08-18 21:18:17" itemprop="dateCreated datePublished" datetime="2022-08-18T21:18:17+08:00">2022-08-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-09-06 17:25:12" itemprop="dateModified" datetime="2022-09-06T17:25:12+08:00">2022-09-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -1054,83 +863,15 @@
 </table>
 </div>
 <p>（备注：将实验报告发布在博客、代码公开至 github 是 <strong>加分项</strong>，不是必须做的）</p>
-<!-- read more -->
 <h2 id="一、实验目标"><a href="#一、实验目标" class="headerlink" title="一、实验目标"></a><strong>一、实验目标</strong></h2><p>1、学习使用快速启动模板创建小程序的方法；2、学习不使用模板手动创建小程序的方法。</p>
-<h2 id="二、实验步骤"><a href="#二、实验步骤" class="headerlink" title="二、实验步骤"></a>二、实验步骤</h2><ol>
-<li><p>准备工作</p>
-<ol>
-<li><p>API密钥申请</p>
-<p>申请账号，新建应用，获取<code>key</code>值</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115086.png" alt="image-20220818194138636" style="zoom:80%;" /></p>
-</li>
-<li><p>API调用方法</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115088.png" alt="image-20220818194626775" style="zoom:80%;" /></p>
-</li>
-<li><p>服务器域名配置</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115089.png" alt="image-20220818195244981" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115090.png" alt="image-20220818195358009" style="zoom:80%;" /></p>
-</li>
-</ol>
-</li>
-<li><p>项目创建</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115091.png" alt="image-20220818195829354" style="zoom:80%;" /></p>
-</li>
-<li><p>页面配置</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115092.png" alt="image-20220818200022805" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115093.png" alt="image-20220818200034134" style="zoom:80%;" /></p>
-</li>
-<li><p>视图设计</p>
-<ol>
-<li><p>导航栏设计</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115094.png" alt="image-20220818200206447" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115095.png" alt="image-20220818200218285" style="zoom:80%;" /></p>
-</li>
-<li><p>页面设计</p>
-<ol>
-<li><p>背景容器样式</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115096.png" alt="image-20220818200719429" style="zoom:80%;" /></p>
-</li>
-<li><p>地区选择器设计</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115097.png" alt="image-20220818200857750" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115098.png" alt="image-20220818200906783" style="zoom:80%;" /></p>
-</li>
-<li><p>文本设计</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115099.png" alt="image-20220818201507114" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115100.png" alt="image-20220818201516072" style="zoom:80%;" /></p>
-</li>
-<li><p>天气图标设计</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115101.png" alt="image-20220818201912070" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115102.png" alt="image-20220818201924786" style="zoom:80%;" /></p>
-</li>
-<li><p>多行天气信息设计</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115103.png" alt="image-20220818202759759" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115104.png" alt="image-20220818202808851" style="zoom:80%;" /></p>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>逻辑实现</p>
-<ol>
-<li><p>更新省市区信息</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115105.png" alt="image-20220818203603836" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115106.png" alt="image-20220818203616549" style="zoom:80%;" /></p>
-</li>
-<li><p>获取实况天气数据</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115107.png" alt="image-20220818210038510" style="zoom:80%;" /></p>
-</li>
-<li><p>更新页面天气信息</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115108.png" alt="image-20220818210710522" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115109.png" alt="image-20220818210729239" style="zoom:80%;" /></p>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="三、程序运行结果"><a href="#三、程序运行结果" class="headerlink" title="三、程序运行结果"></a>三、程序运行结果</h2><p>列出程序的最终运行结果及截图。</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115110.png" alt="image-20220818210739649" style="zoom:80%;" /></p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208182115111.png" alt="image-20220818210802847" style="zoom:80%;" /></p>
-<h2 id="四、问题总结与体会"><a href="#四、问题总结与体会" class="headerlink" title="四、问题总结与体会"></a>四、问题总结与体会</h2><p>本次实验制作了一个天气查询的小程序，在写程序的过程中学习到了<code>request</code>请求和<code>utils</code>模块的使用，了解到了<code>api</code>请求获取数据的过程，最终完成了一个可以查询全国城市天气的小程序，过程十分有趣。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/18/miniProgram-lab2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1180,7 +921,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-18 23:26:13" itemprop="dateModified" datetime="2022-08-18T23:26:13+08:00">2022-08-18</time>
+                <time title="修改时间：2022-09-06 17:25:20" itemprop="dateModified" datetime="2022-09-06T17:25:20+08:00">2022-09-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1234,34 +975,15 @@
 </table>
 </div>
 <p>（备注：将实验报告发布在博客、代码公开至 github 是 <strong>加分项</strong>，不是必须做的）</p>
-<!-- read more -->
 <h2 id="一、实验目标"><a href="#一、实验目标" class="headerlink" title="一、实验目标"></a><strong>一、实验目标</strong></h2><p>1、学习使用快速启动模板创建小程序的方法；2、学习不使用模板手动创建小程序的方法。</p>
-<h2 id="二、实验步骤"><a href="#二、实验步骤" class="headerlink" title="二、实验步骤"></a>二、实验步骤</h2><p>列出实验的关键步骤、代码解析、截图。</p>
-<ol>
-<li><p>创建项目</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208172035551.png" alt="image-20220817201107150" style="zoom:80%;" /></p>
-</li>
-<li><p>视图设计</p>
-<p>进行页面布局设计</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208172035552.png" alt="image-20220817201157807" style="zoom:80%;" /></p>
-</li>
-<li><p>逻辑实现</p>
-<p>【注意】：微信已更新获取用户信息的api，现在使用<code>wx.getUserProfile</code>方法</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208172035553.png" alt="image-20220817202218275" style="zoom:80%;" /></p>
-<p>获取到用户信息以后，动态设置<code>name</code>与<code>image</code>元素，实现目的效果</p>
-</li>
-</ol>
-<h2 id="三、程序运行结果"><a href="#三、程序运行结果" class="headerlink" title="三、程序运行结果"></a>三、程序运行结果</h2><p>列出程序的最终运行结果及截图。</p>
-<p>【点击前】</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208172035554.png" alt="image-20220817202337620" style="zoom:80%;" /></p>
-<p>【点击】</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208172035555.png" alt="image-20220817202353151" style="zoom:80%;" /></p>
-<p>【点击后】</p>
-<p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202208172035556.png" alt="image-20220817202407200" style="zoom:80%;" /></p>
-<h2 id="四、问题总结与体会"><a href="#四、问题总结与体会" class="headerlink" title="四、问题总结与体会"></a>四、问题总结与体会</h2><p>描述实验过程中所遇到的问题，以及是如何解决的。有哪些收获和体会，对于课程的安排有哪些建议。</p>
-<hr>
-<p>由于微信小程序社区更新换代频率很高，一些古早得教程并不适用，需要与时俱进的新的教材与教程，希望能提供一些可以使用在生活当中的课程。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/17/miniProgram-lab1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
