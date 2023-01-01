@@ -1,283 +1,39 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="Binary Bomb Lab这个实验很好玩，所以操你妈">
-<meta property="og:type" content="article">
-<meta property="og:title" content="binary bomb lab">
-<meta property="og:url" content="http://example.com/2021/12/18/binary-bomb/index.html">
-<meta property="og:site_name" content="Existo&#39;s Blog">
-<meta property="og:description" content="Binary Bomb Lab这个实验很好玩，所以操你妈">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182040076.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182056432.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182100276.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182108010.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182112325.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182137345.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191515015.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191523708.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191527194.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191541028.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191548285.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191549779.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191559116.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191610077.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191614328.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191615353.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191620554.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191621292.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192123145.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192130058.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192137488.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192256573.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192312084.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200000290.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200002486.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200003761.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200007147.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200020892.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200041168.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200044967.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200046518.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200049830.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200052050.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200052187.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200900218.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200901946.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200917163.png">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200917027.jpg">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112201044069.jpg">
-<meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112201046543.png">
-<meta property="article:published_time" content="2021-12-18T12:20:41.000Z">
-<meta property="article:modified_time" content="2022-01-18T15:00:45.085Z">
-<meta property="article:author" content="Existo">
-<meta property="article:tag" content="汇编语言">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182040076.png">
-
-<link rel="canonical" href="http://example.com/2021/12/18/binary-bomb/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>binary bomb lab | Existo's Blog</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<!-- hexo injector head_end start -->
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>binary bomb lab - Existo&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Existo&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Existo&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Binary Bomb Lab这个实验很好玩，所以操你妈"><meta property="og:type" content="blog"><meta property="og:title" content="binary bomb lab"><meta property="og:url" content="http://example.com/2021/12/18/binary-bomb/"><meta property="og:site_name" content="Existo&#039;s Blog"><meta property="og:description" content="Binary Bomb Lab这个实验很好玩，所以操你妈"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182040076.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182056432.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182100276.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182108010.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182112325.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182137345.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191515015.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191523708.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191527194.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191541028.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191548285.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191549779.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191559116.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191610077.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191614328.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191615353.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191620554.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191621292.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192123145.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192130058.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192137488.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192256573.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192312084.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200000290.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200002486.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200003761.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200007147.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200020892.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200041168.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200044967.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200046518.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200049830.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200052050.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200052187.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200900218.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200901946.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200917163.png"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200917027.jpg"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112201044069.jpg"><meta property="og:image" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112201046543.png"><meta property="article:published_time" content="2021-12-18T12:20:41.000Z"><meta property="article:modified_time" content="2022-01-18T15:00:45.085Z"><meta property="article:author" content="Existo"><meta property="article:tag" content="汇编语言"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182040076.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2021/12/18/binary-bomb/"},"headline":"binary bomb lab","image":["https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182040076.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182056432.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182100276.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182108010.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182112325.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112182137345.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191515015.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191523708.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191527194.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191541028.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191548285.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191549779.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191559116.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191610077.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191614328.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191615353.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191620554.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112191621292.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192123145.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192130058.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192137488.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192256573.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112192312084.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200000290.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200002486.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200003761.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200007147.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200020892.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200041168.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200044967.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200046518.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200049830.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200052050.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200052187.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200900218.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200901946.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200917163.png","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112200917027.jpg","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112201044069.jpg","https://expicture.oss-cn-beijing.aliyuncs.com/img/202112201046543.png"],"datePublished":"2021-12-18T12:20:41.000Z","dateModified":"2022-01-18T15:00:45.085Z","author":{"@type":"Person","name":"Existo"},"publisher":{"@type":"Organization","name":"Existo's Blog","logo":{"@type":"ImageObject","url":{"text":"Existo's Blog"}}},"description":"Binary Bomb Lab这个实验很好玩，所以操你妈"}</script><link rel="canonical" href="http://example.com/2021/12/18/binary-bomb/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600&amp;family=Roboto+Mono"><link rel="stylesheet" href="/css/cyberpunk.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --></head>
+<script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Existo's Blog</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-schedule">
-
-    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="reading-progress-bar"></div>
-
-  <a href="https://github.com/ExistoT01" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/18/binary-bomb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Existo">
-      <meta itemprop="description" content="Hello Nerd">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Existo's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          binary bomb lab
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-12-18 20:20:41" itemprop="dateCreated datePublished" datetime="2021-12-18T20:20:41+08:00">2021-12-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-18 23:00:45" itemprop="dateModified" datetime="2022-01-18T23:00:45+08:00">2022-01-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h1 id="Binary-Bomb-Lab"><a href="#Binary-Bomb-Lab" class="headerlink" title="Binary Bomb Lab"></a>Binary Bomb Lab</h1><p>这个实验很好玩，所以操你妈</p>
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Existo&#039;s Blog</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-12-18T12:20:41.000Z" title="2021/12/18 下午8:20:41">2021-12-18</time>发表</span><span class="level-item"><time dateTime="2022-01-18T15:00:45.085Z" title="2022/1/18 下午11:00:45">2022-01-18</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span><span class="level-item">1 小时读完 (大约7517个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">binary bomb lab</h1><div class="content"><h1 id="Binary-Bomb-Lab"><a href="#Binary-Bomb-Lab" class="headerlink" title="Binary Bomb Lab"></a>Binary Bomb Lab</h1><p>这个实验很好玩，所以操你妈</p>
 <span id="more"></span>
 <h2 id="phase-1"><a href="#phase-1" class="headerlink" title="phase_1"></a>phase_1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">08048b30 &lt;phase_1&gt;:</span><br><span class="line"> 8048b30:	55                   	push   %ebp</span><br><span class="line"> 8048b31:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8048b33:	83 ec 10             	sub    $0x10,%esp</span><br><span class="line"> 8048b36:	68 04 a1 04 08       	push   $0x804a104</span><br><span class="line"> 8048b3b:	ff 75 08             	pushl  0x8(%ebp)</span><br><span class="line"> 8048b3e:	e8 45 05 00 00       	call   8049088 &lt;strings_not_equal&gt;</span><br><span class="line"> 8048b43:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048b46:	85 c0                	test   %eax,%eax</span><br><span class="line"> 8048b48:	74 05                	je     8048b4f &lt;phase_1+0x1f&gt;</span><br><span class="line"> 8048b4a:	e8 3c 06 00 00       	call   804918b &lt;explode_bomb&gt;</span><br><span class="line"> 8048b4f:	c9                   	leave  </span><br><span class="line"> 8048b50:	c3                   	ret    </span><br></pre></td></tr></table></figure>
 <p>那么phase1很简单，我们看到调用了<code>&lt;strings_not_equal&gt;</code>函数，理性分析是个判断字符串是否相等的函数。哪两个字符串呢，我们注意到push了两个参数进去，分别是<code>$0x804a104</code>和<code>0x8(%ebp)</code>，那么<code>0x8(%ebp)</code>中的内容便是我们输入的结果，<code>$0x804a104</code>便是原本字符串的地址，查看即可</p>
@@ -354,7 +110,7 @@
 <p>与<code>phase_3</code>类似，第一个<code>cmp</code>是检查格式，第二个<code>cmp</code>要求<code>-0x14(%ebp) &lt;= 0xe</code>，就是第一个输入<code>&lt;= 14</code>，那我们就以<code>6</code>为例，执行到<code>8048d9a</code>时发现向栈中<code>push</code>了3个数，分别是<code>0xe</code>、<code>0x0</code>、<code>-0x14(%ebp)</code>，接着调用了<code>&lt;func4&gt;</code>，至于这个<code>&lt;func4&gt;</code>是什么牛鬼蛇神，我们来看函数定义</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">08048d02 &lt;func4&gt;:</span><br><span class="line"> 8048d02:	55                   	push   %ebp</span><br><span class="line"> 8048d03:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8048d05:	56                   	push   %esi</span><br><span class="line"> 8048d06:	53                   	push   %ebx</span><br><span class="line"> 8048d07:	8b 4d 08             	mov    0x8(%ebp),%ecx</span><br><span class="line"> 8048d0a:	8b 5d 0c             	mov    0xc(%ebp),%ebx</span><br><span class="line"> 8048d0d:	8b 75 10             	mov    0x10(%ebp),%esi</span><br><span class="line"> 8048d10:	89 f0                	mov    %esi,%eax</span><br><span class="line"> 8048d12:	29 d8                	sub    %ebx,%eax</span><br><span class="line"> 8048d14:	89 c2                	mov    %eax,%edx</span><br><span class="line"> 8048d16:	c1 ea 1f             	shr    $0x1f,%edx</span><br><span class="line"> 8048d19:	01 d0                	add    %edx,%eax</span><br><span class="line"> 8048d1b:	d1 f8                	sar    %eax</span><br><span class="line"> 8048d1d:	8d 14 18             	lea    (%eax,%ebx,1),%edx</span><br><span class="line"> 8048d20:	39 ca                	cmp    %ecx,%edx</span><br><span class="line"> 8048d22:	7e 15                	jle    8048d39 &lt;func4+0x37&gt;</span><br><span class="line"> 8048d24:	83 ec 04             	sub    $0x4,%esp</span><br><span class="line"> 8048d27:	83 ea 01             	sub    $0x1,%edx</span><br><span class="line"> 8048d2a:	52                   	push   %edx</span><br><span class="line"> 8048d2b:	53                   	push   %ebx</span><br><span class="line"> 8048d2c:	51                   	push   %ecx</span><br><span class="line"> 8048d2d:	e8 d0 ff ff ff       	call   8048d02 &lt;func4&gt;</span><br><span class="line"> 8048d32:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048d35:	01 c0                	add    %eax,%eax</span><br><span class="line"> 8048d37:	eb 1e                	jmp    8048d57 &lt;func4+0x55&gt;</span><br><span class="line"> 8048d39:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line"> 8048d3e:	39 ca                	cmp    %ecx,%edx</span><br><span class="line"> 8048d40:	7d 15                	jge    8048d57 &lt;func4+0x55&gt;</span><br><span class="line"> 8048d42:	83 ec 04             	sub    $0x4,%esp</span><br><span class="line"> 8048d45:	56                   	push   %esi</span><br><span class="line"> 8048d46:	83 c2 01             	add    $0x1,%edx</span><br><span class="line"> 8048d49:	52                   	push   %edx</span><br><span class="line"> 8048d4a:	51                   	push   %ecx</span><br><span class="line"> 8048d4b:	e8 b2 ff ff ff       	call   8048d02 &lt;func4&gt;</span><br><span class="line"> 8048d50:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048d53:	8d 44 00 01          	lea    0x1(%eax,%eax,1),%eax</span><br><span class="line"> 8048d57:	8d 65 f8             	lea    -0x8(%ebp),%esp</span><br><span class="line"> 8048d5a:	5b                   	pop    %ebx</span><br><span class="line"> 8048d5b:	5e                   	pop    %esi</span><br><span class="line"> 8048d5c:	5d                   	pop    %ebp</span><br><span class="line"> 8048d5d:	c3                   	ret</span><br></pre></td></tr></table></figure>
 <p>根据我三四个小时没日没夜的分析，这个函数我没看懂，不过我们可以把它用高级语言写一遍</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//fun4的c版本</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun4</span><span class="params">(<span class="keyword">int</span> ecx, <span class="keyword">int</span> ebx, <span class="keyword">int</span> esi)</span></span>&#123;</span><br><span class="line">	eax = esi;</span><br><span class="line">	eax -= ebx;</span><br><span class="line">	edx = eax;</span><br><span class="line">	edx &gt;&gt;= <span class="number">31</span>;</span><br><span class="line">	eax = edx + eax;</span><br><span class="line">	eax /= <span class="number">2</span>;</span><br><span class="line">	edx = eax + ebx;</span><br><span class="line">	<span class="keyword">if</span>(edx &lt;= ecx)&#123;</span><br><span class="line">		eax = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(edx &gt;= ecx)&#123;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		edx++;</span><br><span class="line">		<span class="built_in">fun4</span>(ecx, edx, esi);</span><br><span class="line">		eax = <span class="number">1</span> + eax*<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	edx--;</span><br><span class="line">	<span class="built_in">fun4</span>(ecx, ebx, edx);</span><br><span class="line">	eax *= <span class="number">2</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//fun4的c版本</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun4</span><span class="params">(<span class="type">int</span> ecx, <span class="type">int</span> ebx, <span class="type">int</span> esi)</span></span>&#123;</span><br><span class="line">	eax = esi;</span><br><span class="line">	eax -= ebx;</span><br><span class="line">	edx = eax;</span><br><span class="line">	edx &gt;&gt;= <span class="number">31</span>;</span><br><span class="line">	eax = edx + eax;</span><br><span class="line">	eax /= <span class="number">2</span>;</span><br><span class="line">	edx = eax + ebx;</span><br><span class="line">	<span class="keyword">if</span>(edx &lt;= ecx)&#123;</span><br><span class="line">		eax = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(edx &gt;= ecx)&#123;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		edx++;</span><br><span class="line">		<span class="built_in">fun4</span>(ecx, edx, esi);</span><br><span class="line">		eax = <span class="number">1</span> + eax*<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	edx--;</span><br><span class="line">	<span class="built_in">fun4</span>(ecx, ebx, edx);</span><br><span class="line">	eax *= <span class="number">2</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 <p>就算翻译成高级语言，还是说不上这个函数是个啥意思，不过它里面有多处递归，我们先往下分析汇编程序</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">8048da1:	e8 5c ff ff ff       	call   8048d02 &lt;func4&gt;</span><br><span class="line">8048da6:	83 c4 10             	add    $0x10,%esp</span><br><span class="line">8048da9:	83 f8 07             	cmp    $0x7,%eax</span><br><span class="line">8048dac:	75 06                	jne    8048db4 &lt;phase_4+0x56&gt;</span><br></pre></td></tr></table></figure>
 <p>注意到调用<code>&lt;func4&gt;</code>后，程序比较了<code>%eax</code>和<code>0x7</code>的值，说明<code>%eax</code>不为<code>0x7</code>就爆炸，那么输入数据是几<code>%eax</code>会变成<code>0x7</code>呢</p>
@@ -504,7 +260,7 @@
 <p>我们现在知道了<code>secret_phase</code>里的数据结构是一颗<strong>二叉搜索树</strong>，但是这题怎么解我们还是一筹莫展，关键是这个<code>&lt;fun7&gt;</code>函数</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">08048f34 &lt;fun7&gt;:</span><br><span class="line"> 8048f34:	55                   	push   %ebp</span><br><span class="line"> 8048f35:	89 e5                	mov    %esp,%ebp</span><br><span class="line"> 8048f37:	53                   	push   %ebx</span><br><span class="line"> 8048f38:	83 ec 04             	sub    $0x4,%esp</span><br><span class="line"> 8048f3b:	8b 55 08             	mov    0x8(%ebp),%edx</span><br><span class="line"> 8048f3e:	8b 4d 0c             	mov    0xc(%ebp),%ecx</span><br><span class="line"> 8048f41:	85 d2                	test   %edx,%edx</span><br><span class="line"> 8048f43:	74 37                	je     8048f7c &lt;fun7+0x48&gt;</span><br><span class="line"> 8048f45:	8b 1a                	mov    (%edx),%ebx</span><br><span class="line"> 8048f47:	39 cb                	cmp    %ecx,%ebx</span><br><span class="line"> 8048f49:	7e 13                	jle    8048f5e &lt;fun7+0x2a&gt;</span><br><span class="line"> 8048f4b:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048f4e:	51                   	push   %ecx</span><br><span class="line"> 8048f4f:	ff 72 04             	pushl  0x4(%edx)</span><br><span class="line"> 8048f52:	e8 dd ff ff ff       	call   8048f34 &lt;fun7&gt;</span><br><span class="line"> 8048f57:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048f5a:	01 c0                	add    %eax,%eax</span><br><span class="line"> 8048f5c:	eb 23                	jmp    8048f81 &lt;fun7+0x4d&gt;</span><br><span class="line"> 8048f5e:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line"> 8048f63:	39 cb                	cmp    %ecx,%ebx</span><br><span class="line"> 8048f65:	74 1a                	je     8048f81 &lt;fun7+0x4d&gt;</span><br><span class="line"> 8048f67:	83 ec 08             	sub    $0x8,%esp</span><br><span class="line"> 8048f6a:	51                   	push   %ecx</span><br><span class="line"> 8048f6b:	ff 72 08             	pushl  0x8(%edx)</span><br><span class="line"> 8048f6e:	e8 c1 ff ff ff       	call   8048f34 &lt;fun7&gt;</span><br><span class="line"> 8048f73:	83 c4 10             	add    $0x10,%esp</span><br><span class="line"> 8048f76:	8d 44 00 01          	lea    0x1(%eax,%eax,1),%eax</span><br><span class="line"> 8048f7a:	eb 05                	jmp    8048f81 &lt;fun7+0x4d&gt;</span><br><span class="line"> 8048f7c:	b8 ff ff ff ff       	mov    $0xffffffff,%eax</span><br><span class="line"> 8048f81:	8b 5d fc             	mov    -0x4(%ebp),%ebx</span><br><span class="line"> 8048f84:	c9                   	leave  </span><br><span class="line"> 8048f85:	c3                   	ret</span><br></pre></td></tr></table></figure>
 <p>照例看汇编看不出结果，我们翻译成高级语言</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ecx = ebx = input, edx = &amp;node esp = &amp;input</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun7</span><span class="params">(<span class="keyword">int</span>* edx, <span class="keyword">int</span> ecx)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(edx &amp; edx)&#123;</span><br><span class="line">        eax = <span class="number">0xffffffff</span>;</span><br><span class="line">        ebx = ebp - <span class="number">0x4</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ebx = *edx;</span><br><span class="line">    <span class="keyword">if</span>(ebx &lt;= ecx)&#123;</span><br><span class="line">        eax = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(ebx == ecx)&#123;</span><br><span class="line">            ebx = ebp - <span class="number">0x4</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        esp -= <span class="number">0x8</span>;</span><br><span class="line">        <span class="built_in">fun7</span>(edx<span class="number">-0x8</span>, ecx);</span><br><span class="line">        esp += <span class="number">0x10</span>;</span><br><span class="line">        eax = eax*<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        ebx = ebp - <span class="number">0x4</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    esp -= <span class="number">0x8</span>;</span><br><span class="line">    <span class="built_in">fun7</span>(edx+<span class="number">0x4</span>, ecx);</span><br><span class="line">    esp += <span class="number">0x10</span>;</span><br><span class="line">    eax *= <span class="number">2</span>;</span><br><span class="line">    ebx = ebp - <span class="number">0x4</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ecx = ebx = input, edx = &amp;node esp = &amp;input</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun7</span><span class="params">(<span class="type">int</span>* edx, <span class="type">int</span> ecx)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(edx &amp; edx)&#123;</span><br><span class="line">        eax = <span class="number">0xffffffff</span>;</span><br><span class="line">        ebx = ebp - <span class="number">0x4</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ebx = *edx;</span><br><span class="line">    <span class="keyword">if</span>(ebx &lt;= ecx)&#123;</span><br><span class="line">        eax = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(ebx == ecx)&#123;</span><br><span class="line">            ebx = ebp - <span class="number">0x4</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        esp -= <span class="number">0x8</span>;</span><br><span class="line">        <span class="built_in">fun7</span>(edx<span class="number">-0x8</span>, ecx);</span><br><span class="line">        esp += <span class="number">0x10</span>;</span><br><span class="line">        eax = eax*<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        ebx = ebp - <span class="number">0x4</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    esp -= <span class="number">0x8</span>;</span><br><span class="line">    <span class="built_in">fun7</span>(edx+<span class="number">0x4</span>, ecx);</span><br><span class="line">    esp += <span class="number">0x10</span>;</span><br><span class="line">    eax *= <span class="number">2</span>;</span><br><span class="line">    ebx = ebp - <span class="number">0x4</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>又是一个递归调用的函数，这里面<code>ecx</code>一直储存的是我们的输入值，<code>edx</code>则是变换的节点地址，读入后将<code>edx</code>地址里的数据给<code>ebx</code>，二者比大小</p>
 <ul>
 <li>如果<code>ebx &lt; ecx</code>，节点向右子树移动</li>
@@ -523,303 +279,48 @@
 <p><code>47</code></p>
 <p><img src="https://expicture.oss-cn-beijing.aliyuncs.com/img/202112201046543.png" alt="image-20211220104633341"></p>
 <p>至此，<code>Binary Bomb Lab</code>7个<code>phase</code>全部解完</p>
-
-    </div>
-
-    
-    
-    
-        <div class="reward-container">
-  <div>谨防新型互联网乞丐</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
-  </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/images/wechatpay.jpg" alt="Existo 微信支付">
-        <p>微信支付</p>
-      </div>
-      
-      <div style="display: inline-block;">
-        <img src="/images/alipay.jpg" alt="Existo 支付宝">
-        <p>支付宝</p>
-      </div>
-
-  </div>
-</div>
-
-
-      <footer class="post-footer">
-          
-          <div class="post-tags">
-              <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" rel="tag"><i class="fa fa-tag"></i> 汇编语言</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/12/15/%E5%9B%BE%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA/" rel="prev" title="图的矩阵表示">
-      <i class="fa fa-chevron-left"></i> 图的矩阵表示
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/12/18/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/" rel="next" title="汇编指令">
-      汇编指令 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-    
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDg0NC8zMTMxMw=="></div>
-  </div>
-  
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Binary-Bomb-Lab"><span class="nav-number">1.</span> <span class="nav-text">Binary Bomb Lab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#phase-1"><span class="nav-number">1.1.</span> <span class="nav-text">phase_1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#phase-2"><span class="nav-number">1.2.</span> <span class="nav-text">phase_2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#phase-3"><span class="nav-number">1.3.</span> <span class="nav-text">phase_3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#phase-4"><span class="nav-number">1.4.</span> <span class="nav-text">phase_4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#phase-5"><span class="nav-number">1.5.</span> <span class="nav-text">phase_5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#phase-6"><span class="nav-number">1.6.</span> <span class="nav-text">phase_6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#secret-phase"><span class="nav-number">1.7.</span> <span class="nav-text">secret_phase</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Existo"
-      src="/images/avatar.png">
-  <p class="site-author-name" itemprop="name">Existo</p>
-  <div class="site-description" itemprop="description">Hello Nerd</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">57</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">21</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/ExistoT01" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ExistoT01" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:1x6tot01@gmail.com" title="E-Mail → mailto:1x6tot01@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://twitter.com/FLATUBM" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;FLATUBM" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.facebook.com/profile.php?id=100041581604369" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100041581604369" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.youtube.com/channel/UCUvhZ-R8l3ydxTZbYlupxRQ" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UCUvhZ-R8l3ydxTZbYlupxRQ" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://qm.qq.com/cgi-bin/qm/qr?k=Cf0mAXjJZxgcIHCewDi3UHVkCkGVm2G4&noverify=0" title="QQ → https:&#x2F;&#x2F;qm.qq.com&#x2F;cgi-bin&#x2F;qm&#x2F;qr?k&#x3D;Cf0mAXjJZxgcIHCewDi3UHVkCkGVm2G4&amp;noverify&#x3D;0" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://u.wechat.com/EMK6P81EvYrsrQPVguXPj0A" title="WeChat → https:&#x2F;&#x2F;u.wechat.com&#x2F;EMK6P81EvYrsrQPVguXPj0A" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>WeChat</a>
-      </span>
-  </div>
-
-
-
-      </div>
-        <div class="back-to-top motion-element">
-          <i class="fa fa-arrow-up"></i>
-          <span>0%</span>
-        </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2021-11 – 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Existo</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
-  </div>
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-<script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
-  window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-});
-</script>
-
-
- 
-   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
-   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
-   <script type="text/javascript" src="/js/src/fireworks.js"></script>
-  
- 
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-</html>
+</div><div class="article-licensing box"><div class="licensing-title"><p>binary bomb lab</p><p><a href="http://example.com/2021/12/18/binary-bomb/">http://example.com/2021/12/18/binary-bomb/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Existo</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-12-18</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-01-18</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>爱发电</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2021/12/18/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">汇编指令</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2021/12/15/%E5%9B%BE%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA/"><span class="level-item">图的矩阵表示</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.png" alt="Existo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Existo</p><p class="is-size-6 is-block">Noob Deveolper</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>TsingTao, ShanDong</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">57</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">7</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">21</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ExistoT01" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/ExistoT01"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://www.facebook.com/profile.php?id=100041581604369"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/FLATUBM"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/SofrWareDesign-2022/"><span class="level-start"><span class="level-item">SofrWareDesign-2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/Study/"><span class="level-start"><span class="level-item">Study</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%AD%A6%E4%B9%A0/"><span class="level-start"><span class="level-item">学习</span></span><span class="level-end"><span class="level-item tag">30</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/"><span class="level-start"><span class="level-item">开发日志</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%BF%83%E5%BE%97/"><span class="level-start"><span class="level-item">心得</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%97%A5%E5%BF%97/"><span class="level-start"><span class="level-item">日志</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E9%A2%98%E8%A7%A3/"><span class="level-start"><span class="level-item">题解</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/10/"><span class="level-start"><span class="level-item">十月 2022</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/09/"><span class="level-start"><span class="level-item">九月 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/08/"><span class="level-start"><span class="level-item">八月 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">七月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/06/"><span class="level-start"><span class="level-item">六月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">四月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">三月 2022</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-10-27T03:37:56.000Z">2022-10-27</time></p><p class="title"><a href="/2022/10/27/1%E5%B9%B4%E4%BA%86/">1年了</a></p><p class="categories"><a href="/categories/%E6%97%A5%E5%BF%97/">日志</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-10-21T16:31:35.000Z">2022-10-22</time></p><p class="title"><a href="/2022/10/22/1024/">1024</a></p><p class="categories"><a href="/categories/%E6%97%A5%E5%BF%97/">日志</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-10-06T08:55:27.000Z">2022-10-06</time></p><p class="title"><a href="/2022/10/06/leetcode300%E9%A2%98/">leetcode300题</a></p><p class="categories"><a href="/categories/%E6%97%A5%E5%BF%97/">日志</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-09-16T04:42:53.000Z">2022-09-16</time></p><p class="title"><a href="/2022/09/16/Sep-16th/">Sep-16th</a></p><p class="categories"><a href="/categories/%E6%97%A5%E5%BF%97/">日志</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-09-10T18:21:02.000Z">2022-09-11</time></p><p class="title"><a href="/2022/09/11/OUCpass-log-3/">OUCpass-log-3</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/ACM/"><span class="tag">ACM</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Algorithm/"><span class="tag">Algorithm</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Android-Studio/"><span class="tag">Android Studio</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C#</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/English/"><span class="tag">English</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/OUCpass/"><span class="tag">OUCpass</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Program/"><span class="tag">Program</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/algorithm/"><span class="tag">algorithm</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/miniProgram/"><span class="tag">miniProgram</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/mobileProgram/"><span class="tag">mobileProgram</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/node/"><span class="tag">node</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9B%BE%E8%AE%BA/"><span class="tag">图论</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%A4%A7%E5%AD%A6%E7%89%A9%E7%90%86/"><span class="tag">大学物理</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E5%AD%90%E6%8A%80%E6%9C%AF/"><span class="tag">数字电子技术</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9D%82/"><span class="tag">杂</span><span class="tag">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/"><span class="tag">概率论</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"><span class="tag">汇编语言</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"><span class="tag">计算机系统基础</span><span class="tag">2</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Existo&#039;s Blog</a><p class="is-size-7"><span>&copy; 2023 Existo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
