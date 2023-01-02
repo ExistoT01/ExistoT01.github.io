@@ -33,11 +33,18 @@ if (screen.width >= 768) {
 	]).then(() => {
 		// 配置选项的具体用法见 README.md
 		initWidget({
-			waifuPath: live2d_path + "waifu-tips.json",
-			//apiPath: "https://live2d.fghrsh.net/api/",
-			cdnPath: "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/",
-			tools: ["hitokoto", "asteroids", "switch-model", "switch-texture", "photo", "info", "quit"]
-		});
+      waifuPath: live2d_path + "waifu-tips.json",
+      //apiPath: "https://live2d.fghrsh.net/api/",
+      cdnPath: "https://fastly.jsdelivr.net/gh/fghrsh/live2d_api/",
+      tools: [
+        "hitokoto",
+        "asteroids",
+        "switch-model",
+        "switch-texture",
+        "quit",
+      ],
+      // tools: ["hitokoto", "asteroids", "switch-model", "switch-texture", "photo", "info", "quit"]
+    });
 	});
 }
 
