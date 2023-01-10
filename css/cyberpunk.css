@@ -435,7 +435,7 @@ a strong {
   color: currentColor;
 }
 a:hover {
-  color: #fcee09;
+  color: #ff003c;
 }
 code {
   background-color: #f5f5f5;
@@ -1451,7 +1451,7 @@ a.has-text-grey-lightest:focus {
   padding: 0 0.75em;
 }
 .breadcrumb a:hover {
-  color: #fcee09;
+  color: #ff003c;
 }
 .breadcrumb li {
   align-items: center;
@@ -3279,7 +3279,7 @@ a.navbar-item.is-active,
 .pagination-next:hover,
 .pagination-link:hover {
   border-color: #b5b5b5;
-  color: #fcee09;
+  color: #ff003c;
 }
 .pagination-previous:focus,
 .pagination-next:focus,
@@ -3764,7 +3764,7 @@ a.box:active {
 .button:hover,
 .button.is-hovered {
   border-color: #b5b5b5;
-  color: #fcee09;
+  color: #ff003c;
 }
 .button:focus,
 .button.is-focused {
